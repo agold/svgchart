@@ -14,3 +14,8 @@ class Line(Path):
 	@property
 	def end(self):
 		return self.coordinates[1]
+
+	@property
+	def svg(self):
+		svg = u'<line x1="{begin.x:.{fp:d}f}" y1="{begin.y:.{fp:d}f}" x2="{end.x:.{fp:d}f}" y2="{end.y:.{fp:d}f}" />'
+		return svg.format(fp=self.precision, begin=self.begin, end=self.end)
