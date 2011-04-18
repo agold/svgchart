@@ -2,22 +2,53 @@ from Shape import Shape
 from Coordinate import Coordinate
 
 class Rectangle(Shape):
-	"""Defines a rectangle of a given height and width beginning at some coordinate"""
+	"""Defines a rectangle.
 
-	position = Coordinate()
-	width = 0
-	height = 0
+	Subclass of Shape
+
+	Public methods:
+	svg() -- extended from Shape.svg()
+
+	Examples:
+	>>> from Coordinate import Coordinate
+	>>> rect = Rectangle(position=Coordinate(1, 2), width=3, height=4)
+	>>> rect.position
+	(1, 2)
+	>>> rect.width
+	3
+	>>> rect.height
+	4
+	>>> print rect
+	<rect height="4.0000" width="3.0000" x="1.0000" y="2.0000" />
+	
+	"""
 
 	def __init__(self, position=Coordinate(), width=0, height=0):
+		"""Keyword arguments:
+		position -- a Coordinate defining the position in the SVG document
+		width -- the width of the rectangle
+		height -- the height of the rectangle
+
+		"""
+
 		if isinstance(position, Coordinate):
+			Shape.__init__(self, tag=u'rect')
 			self.position = position
 			self.width = width
 			self.height = height
 		else:
 			raise TypeError("position must be of type 'Coordinate'")
 
-	@property
 	def svg(self):
-		svg = u'<rect x="{pos.x:.{fp:d}f}" y="{pos.y:.{fp:d}f}" width="{width:.{fp:d}f}" height="{height:.{fp:d}f}" />'
-		return svg.format(	fp=self.precision, pos=self.position,
-							width=self.width, height=self.height)
+		"""Returns the SVG representation as an XML fragment.
+
+		Extends Shape.svg()
+
+		"""
+		
+		self.attrs['x'] = self.position.x
+		self.attrs['y'] = self.position.y
+		self.attrs['width'] = self.width
+		self.attrs['height'] = self.height
+
+		return Shape.svg(self)
