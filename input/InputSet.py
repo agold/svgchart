@@ -1,3 +1,5 @@
+import re;
+
 class InputSet(object):
 	"""Base class for types of data input."""
 	
@@ -19,13 +21,6 @@ class InputSet(object):
 					pertinent information
 
 		"""
-		#if (len(filename) > 0):
-		#	f = open(filename)
-		#	string = unicode(f.read())
-		opentag = u'<' + self.tagName
-		closetag = u'</' + self.tagName + u'>'
-		start = string.find(opentag)
-		end = string.find(closetag) + len(closetag)
-		string = string[start:end]
-		
-		self.textlist.append(string)
+		match = re.search(r'<'+self.tagName+r'( [^>]+)? *((\/>)|(>[^<]*<\/'+self.tagName+r'>))',string)
+		if (match):
+			self.textlist.append(match.group())
