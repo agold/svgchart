@@ -5,7 +5,7 @@ from Rectangle import Rectangle
 class Square(Rectangle):
 	"""Defines a square as a rectangle with equal height and width.
 
-	Subclass of Square
+	Subclass of Rectangle
 
 	Examples:
 	>>> from Coordinate import Coordinate
@@ -23,7 +23,7 @@ class Square(Rectangle):
 
 	"""
 
-	def __init__(self, position=Coordinate(), size=0):
+	def __init__(self, position=Coordinate(), size=1.0):
 		"""Keyword arguments:
 		position -- a Coordinate defining the position in the SVG document
 		size -- the size of the square, i.e. the length of each side
@@ -42,4 +42,5 @@ class Square(Rectangle):
 		# It's a square. Width and height are the same
 		return self.width
 
+	
 

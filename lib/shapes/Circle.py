@@ -26,7 +26,7 @@ class Circle(Ellipse):
 
 	"""
 
-	def __init__(self, position=Coordinate(), radius=0):
+	def __init__(self, position=Coordinate(), radius=1):
 		"""Keyword arguments:
 		position -- a Coordinate defining the position in the SVG document
 		radius -- the radius of the circle
