@@ -21,6 +21,6 @@ class InputSet(object):
 					pertinent information
 
 		"""
-		match = re.search(r'<'+self.tagName+r'( [^>]+)? *((\/>)|(>[^<]*<\/'+self.tagName+r'>))',string)
+		match = re.search(r'<'+self.tagName+r'( [^>]+)? *((\/>)|(>.*<\/'+self.tagName+r'>))',string,re.DOTALL)
 		if (match):
 			self.textlist.append(match.group())
