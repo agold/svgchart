@@ -1,15 +1,15 @@
 class FileInput:
 	"""Retrieves the contents of a file as a string."""
 
-	def __init__(self,rawInput,input = '',settings = '',data = '',scripts = ''):
-		"""Keyword arguments:
+	"""def __init__(self,rawInput,input = '',settings = '',data = '',scripts = ''):
+		Keyword arguments:
 		rawInput -- The target RawInput.
 		input -- Filename containing input for any/all of the categories.
 		settings -- Filename containing settings input.
 		data -- Filename containing data input.
 		scripts -- Filename containing scripts input.
 
-		"""
+		
 		if (input):
 			f = open(input,'rU')
 			text = f.read()
@@ -32,3 +32,10 @@ class FileInput:
 			text = f.read()
 			f.close()
 			rawInput.scripts.input(text)
+	"""
+	def __init__(self,inputSets,filename):
+		f = open(filename,'rU')
+		text = f.read()
+		f.close()
+		for i in inputSets:
+			i.input(text)

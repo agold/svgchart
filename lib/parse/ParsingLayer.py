@@ -1,4 +1,4 @@
-from parse.ParsedInput import ParsedInput
+from ParsedInput import ParsedInput
 
 class ParsingLayer(object):
 
