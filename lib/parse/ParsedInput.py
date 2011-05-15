@@ -24,33 +24,20 @@ def parseTree(dest,elem):
 	attrib = dict(elem.items())
 	for key in attrib:
 		dest[key] = attrib[key]
-	text = 0
+
 	if (elem.text):
-		text = elem.text.strip()
-	if (text):
-		dest.text = text
+		dest.text = elem.text.strip()
+	else:
+		dest.text = None
 	
 	for child in list(elem):
-		childAttrib = dict(child.items())
-		if ('id' in childAttrib):
-			childId = childAttrib['id']
-		else:
-			childId = ""
 		append = ('append' in attrib and attrib['append'] == 'append')
 		if (child.tag not in dest.keys()):
 			dest[child.tag] = IndexedDict()
-			if (childId):
-				dest[child.tag][childId] = IndexedDict()
-			else:
-				dest[child.tag].append(IndexedDict())
-		elif (childId and childId not in dest[child.tag].keys()):
-			dest[child.tag][childId] = IndexedDict()
-		elif (append):
 			dest[child.tag].append(IndexedDict())
 
-		if (childId):
-			parseTree(dest[child.tag][childId],child)
-		elif (append):
+		if (append):
+			dest[child.tag].append(IndexedDict())
 			parseTree(dest[child.tag][-1],child)
 		else:
 			parseTree(dest[child.tag][0],child)
