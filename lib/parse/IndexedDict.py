@@ -4,7 +4,6 @@ class IndexedDict(list):
 
 		list.__init__(self)
 		self.__map = dict()
-		self.text = None
 
 		try:
 			# Try using items as a dict first
@@ -44,6 +43,12 @@ class IndexedDict(list):
 			# Key is already in the map, so overwrite its mapped value
 			self.__setitem__(self.__map[key], value)
 
+	def __getattr__(self,name):
+		try:
+			return getattr(self[0],name)
+		except:
+			raise AttributeError("No attribute " + name)
+
 	def __str__(self):
 		"""
 		s = "{["
@@ -55,7 +60,7 @@ class IndexedDict(list):
 			s += str(i) + " : "
 			s += str(self[i]) + ","
 		s += "]} " """
-		s = "{"
+		s = "InD: {"
 		if (len(self.keys()) == 0):
 			for i in self:
 				s += str(i) + ","

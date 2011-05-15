@@ -25,16 +25,17 @@ def parseTree(dest,elem):
 	for key in attrib:
 		dest[key] = attrib[key]
 
-	if (elem.text):
+	if (elem.text and elem.text.strip()):
 		dest.text = elem.text.strip()
 	else:
 		dest.text = None
-	
+
+	append = ('append' in attrib and attrib['append'] == 'append')
 	for child in list(elem):
-		append = ('append' in attrib and attrib['append'] == 'append')
 		if (child.tag not in dest.keys()):
 			dest[child.tag] = IndexedDict()
-			dest[child.tag].append(IndexedDict())
+			if (not append):
+				dest[child.tag].append(IndexedDict())
 
 		if (append):
 			dest[child.tag].append(IndexedDict())
