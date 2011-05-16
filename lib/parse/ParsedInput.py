@@ -31,14 +31,10 @@ def parseTree(dest,elem):
 		dest.text = None
 
 	append = ('append' in attrib and attrib['append'] == 'append')
+	taglist = []
 	for child in list(elem):
-		if (child.tag not in dest.keys()):
+		if (child.tag not in taglist and not append):
 			dest[child.tag] = IndexedDict()
-			if (not append):
-				dest[child.tag].append(IndexedDict())
-
-		if (append):
-			dest[child.tag].append(IndexedDict())
-			parseTree(dest[child.tag][-1],child)
-		else:
-			parseTree(dest[child.tag][0],child)
+			taglist.append(child.tag)
+		dest[child.tag].append(IndexedDict())
+		parseTree(dest[child.tag][-1],child)

@@ -60,7 +60,7 @@ class IndexedDict(list):
 			s += str(i) + " : "
 			s += str(self[i]) + ","
 		s += "]} " """
-		s = "InD: {"
+		s = "InD{"
 		if (len(self.keys()) == 0):
 			for i in self:
 				s += str(i) + ","
