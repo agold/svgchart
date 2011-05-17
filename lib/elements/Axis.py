@@ -3,22 +3,41 @@ from Element import Element
 class Axis(Element):
 
 	def __init__(self, min=0.0, max=1.0, start=0.0, end=1.0,
-				 majorticks=5, minorticks=20):
-		Element.__init__(self)
+				 majorticks=5, minorticks=20,
+				 majorlength=10, minorlength=5,
+				 id=u'', classes=(),
+				 baseid=u'', baseclasses=(),
+				 labelidprefix=u'', labelclasses=(),
+				 majoridprefix=u'', majorclasses=(),
+				 minoridprefix=u'', minorclasses=()):
+
+		Element.__init__(self, id=id, classes=classes)
 
 		self.majorticks = int(majorticks)
 		self.minorticks = int(minorticks)
+
+		self.baseid = baseid
+		self.baseclasses = baseclasses
+
+		self.labelidprefix = labelidprefix
+		self.labelclasses = labelclasses
+
+		self.majoridprefix = majoridprefix
+		self.majorclasses = majorclasses
+
+		self.minoridprefix = minoridprefix
+		self.minorclasses = minorclasses
 
 		self.min = float(min)
 		self.max = float(max)
 		self.start = float(start)
 		self.end = float(end)
 
-		self.majorlength = 10
-		self.minorlength = 5
+		self.majorlength = majorlength
+		self.minorlength = minorlength
 
 	def valueToCoord(self, value):
-		return self.start + (self.end - self.start) * value / (self.max - self.min)
+		return self.start + (self.end - self.start) * (value - self.min) / (self.max - self.min)
 
 	def majorValues(self):
 		return [self.min + (self.max - self.min) / (self.majorticks + 1) * x for x in xrange(1, self.majorticks + 1)]
