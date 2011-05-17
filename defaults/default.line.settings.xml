@@ -1,0 +1,47 @@
+<settings>
+	<chart id="svgchart" class="chart" width="500" height="350" type="scatter" />
+	
+	<title id="title" class="title" x="0" y="0" width="500" height="50">
+		<title id="title-text" class="title">The title</title>
+		<subtitle id="subtitle-text" class="subtitle" /> <!-- The text is blank in the default so I can check for None to determine whether or not to include a title -->
+	</title>
+	
+	<x-axis id="x-axis" class="axis">
+		<majors count="5" size="10" id-prefix="x-axis-major" class="major tick" />
+		<minors count="20" size="5" id-prefix="x-axis-minor" class="minor tick" />
+		<base id="x-axis-base" class="axis-base" />
+		<labels id-prefix="x-axis-label" class="axis-label" format="%d" />
+		<grid id="x-grid" class="grid">
+			<lines id-prefix="x-grid-line" class="grid-line" />
+		</grid>
+		<range min="auto" max="auto" />
+	</x-axis>
+	
+	<y-axis id="y-axis" class="axis" baseid="y-axis-base" baseclass="axis-base">
+		<majors count="5" size="10" id-prefix="y-axis-major" class="major tick" />
+		<minors count="20" size="5" id-prefix="y-axis-minor" class="minor tick" />
+		<base id="y-axis-base" class="axis-base" />
+		<labels id-prefix="y-axis-label" class="axis-label" format="%d" />
+		<grid id="y-grid" class="grid">
+			<lines id-prefix="y-grid-line" class="grid-line" />
+		</grid>
+		<range min="auto" max="auto" />
+	</y-axis>
+	
+	<datafield width="500" height="300" id="data-field" class="data-field" />
+	
+	<datasets id="data-sets" class="data-sets">
+		<set id="set1" class="set1 dataset" label="Set 1">
+			<symbol shape="circle" size="5" id-prefix="set1-datapoint" class="set1 datapoint" />
+			<line id="set1-line" class="set1 dataline" style="" />
+		</set>
+	</datasets>
+	
+	<legend id="legend" class="legend" x="350" y="50" width="150">
+		<title size="12" id="legend-title" class="legend-title">Legend</title>
+		<entries height="12" id-prefix="legend-entry" class="legend-entry">
+			<shapes id-prefix="legend-entry-shape" class="legend-entry-shape" />
+			<labels id-prefix="legend-entry-label" class="legend-entry-label" />
+		</entries>
+	</legend>
+</settings>
