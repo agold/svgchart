@@ -11,33 +11,49 @@ class Ellipse(Shape):
 
 	Examples:
 	>>> from Coordinate import Coordinate
-	>>> ellipse = Ellipse(position=Coordinate(1, 2), rx=3, ry=4)
-	>>> ellipse.position
+	>>> ellipse = Ellipse(center=Coordinate(1, 2), rx=3.0, ry=4.0, id=u'id', classes=u'class')
+	>>> ellipse.center
 	(1, 2)
 	>>> ellipse.rx
-	3
+	3.0
 	>>> ellipse.ry
-	4
+	4.0
+	>>> ellipse.position
+	(-2.0, -2.0)
 	>>> print ellipse
-	<ellipse cx="1.0000" cy="2.0000" rx="3.0000" ry="4.0000" />
+	<ellipse class="class" cx="1.0000" cy="2.0000" id="id" rx="3.0000" ry="4.0000" />
 
 	"""
 	
-	def __init__(self, position=Coordinate(), rx=1.0, ry=1.0):
+	def __init__(self, center=Coordinate(), rx=1.0, ry=1.0, id=None, classes=None):
 		"""Keyword arguments:
-		position -- a Coordinate defining the position in the SVG document
+		center -- a Coordinate defining the center coordinate in the SVG document
 		rx -- the x-radius of the ellipse
 		ry -- the y-radius of the ellipse
+		id -- the unique ID to be used in the SVG document
+		classes -- classnames to be used in the SVG document - string or iterable of classnames
 
 		"""
 		
-		if isinstance(position, Coordinate):
-			Shape.__init__(self, tag=u'ellipse')
-			self.position = position
+		if isinstance(center, Coordinate):
+			Shape.__init__(self, tag=u'ellipse', id=id, classes=classes)
+			self.center = center
 			self.rx = float(rx)
 			self.ry = float(ry)
 		else:
-			raise TypeError("position must be of type 'Coordinate'")
+			raise TypeError("center must be of type 'Coordinate'")
+
+	@property
+	def position(self):
+		return Coordinate(self.center.x - self.rx, self.center.y - self.ry)
+
+	@property
+	def width(self):
+		return self.rx * 2.0
+
+	@property
+	def height(self):
+		return self.ry * 2.0
 
 	def fitToWidth(self, width=0.0):
 		"""Fits shape to given width maintaining scale."""
@@ -58,16 +74,14 @@ class Ellipse(Shape):
 		scalingFactor = 1.0 - ((self.ry - float(height)) / self.ry)
 		self.rx = (self.rx * scalingFactor) / 2.0
 		self.ry = height / 2.0
-		
-	def fit(self, width=0.0, height=0.0):
-		"""Fits shape to given width and height maintaining scale."""
-		if width <= 0 and height <= 0:
-			raise ValueError("width or height must be greater than 0")
 
-		if height < width and height > 0 or width <= 0:
-			self.fitToHeight(height)
-		else:
-			self.fitToWidth(width)
+	def translateTo(self, coord=Coordinate()):
+		oldx, oldy = self.center
+		self.translate(x=coord.x - oldx + self.rx, y=coord.y - oldy + self.ry)
+
+	def translate(self, x=0.0, y=0.0):
+		oldx, oldy = self.center
+		self.center = Coordinate(oldx + x, oldy + y)
 
 	def svg(self):
 		"""Returns the SVG representation as an XML fragment.
@@ -76,8 +90,8 @@ class Ellipse(Shape):
 
 		"""
 
-		self.attrs['cx'] = self.position.x
-		self.attrs['cy'] = self.position.y
+		self.attrs['cx'] = self.center.x
+		self.attrs['cy'] = self.center.y
 		self.attrs['rx'] = self.rx
 		self.attrs['ry'] = self.ry
 
