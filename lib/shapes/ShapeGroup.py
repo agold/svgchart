@@ -82,24 +82,20 @@ class ShapeGroup(Shape):
 		return Coordinate(x, y)
 
 	def fitToWidth(self, width=0.0):
-		# NOTE: both width and height fitting methods are currently wrong
-		# They should scale each shape and translate proportionally towards upper left
 		scalingfactor = 1.0 - ((self.width - float(width)) / self.width)
 		for shape in self.shapes:
 			distx = shape.position.x - self.position.x
 			disty = shape.position.y - self.position.y
 			shape.fitToWidth(shape.width * scalingfactor)
-			shape.translate(-distx * scalingfactor**2, -disty * scalingfactor**2)
+			shape.translate(-distx * (1.0 - scalingfactor), -disty * (1.0 - scalingfactor))
 
 	def fitToHeight(self, height=0.0):
-		# NOTE: both width and height fitting methods are currently wrong
-		# They should scale each shape and translate proportionally towards upper left
 		scalingfactor = 1.0 - ((self.height - float(height)) / self.height)
 		for shape in self.shapes:
 			distx = shape.position.x - self.position.x
 			disty = shape.position.y - self.position.y
 			shape.fitToHeight(shape.height * scalingfactor)
-			shape.translate(-distx * scalingfactor**2, -disty * scalingfactor**2)
+			shape.translate(-distx * (1.0 - scalingfactor), -disty * (1.0 - scalingfactor))
 
 	def translateTo(self, coord=Coordinate()):
 		oldx, oldy = self.position
