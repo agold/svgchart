@@ -62,7 +62,7 @@ class ShapeGroup(Shape):
 	@property
 	def height(self):
 		maxcoord = None
-		maxwidth = None
+		maxheight = None
 		mincoord = self.shapes[0].position.y
 		for shape in self.shapes:
 			if float(shape.position.y) < mincoord:
@@ -70,10 +70,10 @@ class ShapeGroup(Shape):
 
 			if float(shape.position.y) >= maxcoord:
 				maxcoord = float(shape.position.y)
-				if float(shape.height) > maxwidth:
-					maxwidth = float(shape.height)
+				if float(shape.height) > maxheight:
+					maxheight = float(shape.height)
 
-		return maxcoord + maxwidth - mincoord
+		return maxcoord + maxheight - mincoord
 
 	@property
 	def position(self):
@@ -90,7 +90,7 @@ class ShapeGroup(Shape):
 			disty = shape.position.y - self.position.y
 			shape.fitToWidth(shape.width * scalingfactor)
 			shape.translate(-distx * scalingfactor**2, -disty * scalingfactor**2)
-	
+
 	def fitToHeight(self, height=0.0):
 		# NOTE: both width and height fitting methods are currently wrong
 		# They should scale each shape and translate proportionally towards upper left
