@@ -8,6 +8,21 @@ class HorizontalGrid(Grid):
 	def __init__(self, points=(), left=0.0, right=1.0,
 				id=u'', classes=(),
 				lineidprefix=u'', lineclasses=()):
+		"""
+		@param points: A sequence of points to draw grid lines at
+		@param left: The leftmost coordinate to begin drawing grid lines at
+		@param right: The rightmost coordinate to stop drawing grid lines at
+
+		@param id: The unique ID to be used in the SVG document
+		@type id: string
+		@param classes: Classnames to be used in the SVG document
+		@type classes: string or sequence of strings
+
+		@param lineidprefix: The prefix for each grid line's ID
+		@type lineidprefix: string
+		@param lineclasses: Classnames to be applied to each grid line
+		@type lineclasses: string or sequence of strings
+		"""
 
 		Grid.__init__(self, points, id, classes, lineidprefix, lineclasses)
 
@@ -15,6 +30,7 @@ class HorizontalGrid(Grid):
 		self.right = right
 
 	def getElement(self):
+		"""Returns the shapes of the y axis."""
 		
 		lines = []
 		linecount = 0

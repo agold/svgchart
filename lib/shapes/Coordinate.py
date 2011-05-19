@@ -1,9 +1,6 @@
 class Coordinate(tuple):
 	"""Defines a Cartesian coordinate as a tuple of length 2.
 
-	Subclass of tuple
-
-	Examples:
 	>>> coord = Coordinate(1, 2)
 	>>> coord.x
 	1
@@ -15,9 +12,9 @@ class Coordinate(tuple):
 	"""
 	
 	def __new__(cls, x=0, y=0):
-		"""Keyword arguments:
-		x -- the x-coordinate
-		y -- the y-coordinate
+		"""
+		@param x: The x-coordinate
+		@param y: The y-coordinate
 
 		"""
 		

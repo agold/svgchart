@@ -8,11 +8,6 @@ from Coordinate import Coordinate
 class Shape(object):
 	"""Base class of a generic shape.
 
-	Public methods:
-	__str__() -- returns the SVG representation as a string
-	svg() -- returns the SVG representation as an XML fragment
-
-	Examples:
 	>>> shape = Shape(tag='foo', id='id', classes='class', text='bar', attrs={'spoons': 'forks'}, knives='sharp')
 	>>> shape.tag
 	'foo'
@@ -26,15 +21,20 @@ class Shape(object):
 	"""
 
 	def __init__(self, tag=u'', id=None, classes=None, text=None, subelements=None, precision=4, attrs={}, **kwargs):
-		"""Keyword arguments:
-		tag -- the SVG tag name
-		id -- the unique ID to be used in the SVG document
-		classes -- classnames to be used in the SVG document - string or iterable of classnames
-		text -- inner text of the SVG element
-		subelements -- a list of subelements of this shape
-		precision -- the decimal precision for numbers in SVG output
-		attrs -- dictionary of key-value pairs for the SVG element's attributes
-
+		"""
+		@param tag: the SVG tag name
+		@type tag: string
+		@param id: The unique ID to be used in the SVG document
+		@type id: string
+		@param classes: Classnames to be used in the SVG document
+		@type classes: string or sequence of strings
+		@param text: inner text of the SVG element
+		@type text: string
+		@param subelements: a list of subelements of this shape
+		@param precision: the decimal precision for numbers in SVG output
+		@type precision: integer
+		@param attrs: dictionary of key-value pairs for the SVG element's attributes
+		@type attrs: dict
 		"""
 
 		self.tag = tag
@@ -51,13 +51,22 @@ class Shape(object):
 		return etree.tostring(self.svg(), 'utf-8')
 
 	def fitToWidth(self, width=0.0):
+		"""Dummy method to fit to a given width."""
+
 		pass
 
 	def fitToHeight(self, height=0.0):
+		"""Dummy method to fit to a given height."""
+
 		pass
 
 	def fit(self, width=0.0, height=0.0):
-		"""Fits shape to given width and height maintaining scale."""
+		"""Fits shape to given width and height maintaining scale.
+
+		@param width: the width to fit to
+		@param height: the height to fit to
+		"""
+
 		if width <= 0 and height <= 0:
 			raise ValueError("width or height must be greater than 0")
 
@@ -67,9 +76,13 @@ class Shape(object):
 			self.fitToWidth(width)
 
 	def translateTo(self, coord=Coordinate()):
+		"""Dummy method to translate to a given coordinate."""
+
 		pass
 
 	def translate(self, x=0.0, y=0.0):
+		"""Dummy method to translate by a given amount."""
+		
 		pass
 	
 	def svg(self):

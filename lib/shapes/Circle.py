@@ -5,12 +5,6 @@ from Ellipse import Ellipse
 class Circle(Ellipse):
 	"""Defines a circle as an ellipse with equal radii.
 
-	Subclass of Ellipse
-
-	Public methods:
-	svg() -- extends Shape.svg()
-
-	Examples:
 	>>> from Coordinate import Coordinate
 	>>> circle = Circle(center=Coordinate(1, 2), radius=3.0, id=u'id', classes=u'class')
 	>>> circle.center
@@ -27,12 +21,14 @@ class Circle(Ellipse):
 	"""
 
 	def __init__(self, center=Coordinate(), radius=1.0, id=None, classes=None):
-		"""Keyword arguments:
-		center -- a Coordinate defining the center in the SVG document
-		radius -- the radius of the circle
-		id -- the unique ID to be used in the SVG document
-		classes -- classnames to be used in the SVG document - string or iterable of classnames
-
+		"""
+		@param center: A Coordinate defining the center in the SVG document
+		@type center: Coordinate
+		@param radius: The radius of the circle
+		@param id: The unique ID to be used in the SVG document
+		@type id: string
+		@param classes: Classnames to be used in the SVG document
+		@type classes: string or sequence of strings
 		"""
 		
 		if isinstance(center, Coordinate):
@@ -44,14 +40,11 @@ class Circle(Ellipse):
 	@property
 	def radius(self):
 		"""Returns the radius of the circle."""
+
 		return self.rx
 
 	def svg(self):
-		"""Returns the SVG representation as an XML fragment.
-
-		Extends Shape.svg()
-
-		"""
+		"""Returns the SVG representation as an XML fragment."""
 
 		self.attrs['cx'] = self.center.x
 		self.attrs['cy'] = self.center.y

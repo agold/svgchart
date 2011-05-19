@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>svgchart.lib.shapes.Ellipse</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="svgchart.lib-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >svgchart</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;svgchart ::
+        <a href="svgchart.lib-module.html">Package&nbsp;lib</a> ::
+        <a href="svgchart.lib.shapes-module.html">Package&nbsp;shapes</a> ::
+        Module&nbsp;Ellipse
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="svgchart.lib.shapes.Ellipse-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="svgchart.lib.shapes.Ellipse-module.html">Module svgchart.lib.shapes.Ellipse</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module svgchart.lib.shapes.Shape=svgchart.lib.shapes.Shape-module.html,Class svgchart.lib.shapes.Shape.Shape=svgchart.lib.shapes.Shape.Shape-class.html"><a title="svgchart.lib.shapes.Shape
+svgchart.lib.shapes.Shape.Shape" class="py-name" href="#" onclick="return doclink('link-0', 'Shape', 'link-0');">Shape</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name"><a title="svgchart.lib.shapes.Shape
+svgchart.lib.shapes.Shape.Shape" class="py-name" href="#" onclick="return doclink('link-1', 'Shape', 'link-0');">Shape</a></tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-2" class="py-name" targets="Module svgchart.lib.shapes.Coordinate=svgchart.lib.shapes.Coordinate-module.html,Class svgchart.lib.shapes.Coordinate.Coordinate=svgchart.lib.shapes.Coordinate.Coordinate-class.html"><a title="svgchart.lib.shapes.Coordinate
+svgchart.lib.shapes.Coordinate.Coordinate" class="py-name" href="#" onclick="return doclink('link-2', 'Coordinate', 'link-2');">Coordinate</a></tt> <tt class="py-keyword">import</tt> <tt id="link-3" class="py-name"><a title="svgchart.lib.shapes.Coordinate
+svgchart.lib.shapes.Coordinate.Coordinate" class="py-name" href="#" onclick="return doclink('link-3', 'Coordinate', 'link-2');">Coordinate</a></tt> </tt>
+<a name="Ellipse"></a><div id="Ellipse-def"><a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt> <a class="py-toggle" href="#" id="Ellipse-toggle" onclick="return toggle('Ellipse');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="svgchart.lib.shapes.Ellipse.Ellipse-class.html">Ellipse</a><tt class="py-op">(</tt><tt class="py-base-class">Shape</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Ellipse-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Ellipse-expanded"><a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line">        <tt class="py-docstring">"""Defines an ellipse at a center coordinate with x-radius and y-radius.</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; from Coordinate import Coordinate</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; ellipse = Ellipse(center=Coordinate(1, 2), rx=3.0, ry=4.0, id=u'id', classes=u'class')</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; ellipse.center</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">        (1, 2)</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; ellipse.rx</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">        3.0</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; ellipse.ry</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">        4.0</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; ellipse.position</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring">        (-2.0, -2.0)</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">        &gt;&gt;&gt; print ellipse</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">        &lt;ellipse class="class" cx="1.0000" cy="2.0000" id="id" rx="3.0000" ry="4.0000" /&gt;</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line">         </tt>
+<a name="Ellipse.__init__"></a><div id="Ellipse.__init__-def"><a name="L22"></a><tt class="py-lineno"> 22</tt> <a class="py-toggle" href="#" id="Ellipse.__init__-toggle" onclick="return toggle('Ellipse.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="svgchart.lib.shapes.Ellipse.Ellipse-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">center</tt><tt class="py-op">=</tt><tt id="link-4" class="py-name"><a title="svgchart.lib.shapes.Coordinate
+svgchart.lib.shapes.Coordinate.Coordinate" class="py-name" href="#" onclick="return doclink('link-4', 'Coordinate', 'link-2');">Coordinate</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-param">rx</tt><tt class="py-op">=</tt><tt class="py-number">1.0</tt><tt class="py-op">,</tt> <tt class="py-param">ry</tt><tt class="py-op">=</tt><tt class="py-number">1.0</tt><tt class="py-op">,</tt> <tt class="py-param">id</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">,</tt> <tt class="py-param">classes</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Ellipse.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="Ellipse.__init__-expanded"><a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line">                <tt class="py-docstring">"""</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-docstring">                @param center: -- a Coordinate defining the center coordinate in the SVG document</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-docstring">                @type center: Coordinate</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-docstring">                @param rx: -- the x-radius of the ellipse</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-docstring">                @param ry: -- the y-radius of the ellipse</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-docstring">                @param id: The unique ID to be used in the SVG document</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"><tt class="py-docstring">                @type id: string</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-docstring">                @param classes: Classnames to be used in the SVG document</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-docstring">                @type classes: string or sequence of strings</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line">                 </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">isinstance</tt><tt class="py-op">(</tt><tt class="py-name">center</tt><tt class="py-op">,</tt> <tt id="link-5" class="py-name"><a title="svgchart.lib.shapes.Coordinate
+svgchart.lib.shapes.Coordinate.Coordinate" class="py-name" href="#" onclick="return doclink('link-5', 'Coordinate', 'link-2');">Coordinate</a></tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line">                        <tt id="link-6" class="py-name"><a title="svgchart.lib.shapes.Shape
+svgchart.lib.shapes.Shape.Shape" class="py-name" href="#" onclick="return doclink('link-6', 'Shape', 'link-0');">Shape</a></tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Method svgchart.lib.elements.Axis.Axis.__init__()=svgchart.lib.elements.Axis.Axis-class.html#__init__,Method svgchart.lib.elements.Element.Element.__init__()=svgchart.lib.elements.Element.Element-class.html#__init__,Method svgchart.lib.elements.Grid.Grid.__init__()=svgchart.lib.elements.Grid.Grid-class.html#__init__,Method svgchart.lib.elements.HorizontalGrid.HorizontalGrid.__init__()=svgchart.lib.elements.HorizontalGrid.HorizontalGrid-class.html#__init__,Method svgchart.lib.elements.Legend.Legend.__init__()=svgchart.lib.elements.Legend.Legend-class.html#__init__,Method svgchart.lib.elements.Title.Title.__init__()=svgchart.lib.elements.Title.Title-class.html#__init__,Method svgchart.lib.elements.VerticalGrid.VerticalGrid.__init__()=svgchart.lib.elements.VerticalGrid.VerticalGrid-class.html#__init__,Method svgchart.lib.elements.XAxis.XAxis.__init__()=svgchart.lib.elements.XAxis.XAxis-class.html#__init__,Method svgchart.lib.elements.YAxis.YAxis.__init__()=svgchart.lib.elements.YAxis.YAxis-class.html#__init__,Method svgchart.lib.generators.Generator.Generator.__init__()=svgchart.lib.generators.Generator.Generator-class.html#__init__,Method svgchart.lib.generators.Scatter.Scatter.__init__()=svgchart.lib.generators.Scatter.Scatter-class.html#__init__,Method svgchart.lib.input.ConsoleInput.ConsoleInput.__init__()=svgchart.lib.input.ConsoleInput.ConsoleInput-class.html#__init__,Method svgchart.lib.input.FileInput.FileInput.__init__()=svgchart.lib.input.FileInput.FileInput-class.html#__init__,Method svgchart.lib.input.InputLayer.InputLayer.__init__()=svgchart.lib.input.InputLayer.InputLayer-class.html#__init__,Method svgchart.lib.input.InputSet.InputSet.__init__()=svgchart.lib.input.InputSet.InputSet-class.html#__init__,Method svgchart.lib.input.RawInput.RawInput.__init__()=svgchart.lib.input.RawInput.RawInput-class.html#__init__,Method svgchart.lib.parse.IndexedDict.IndexedDict.__init__()=svgchart.lib.parse.IndexedDict.IndexedDict-class.html#__init__,Method svgchart.lib.parse.ParsedInput.ParsedInput.__init__()=svgchart.lib.parse.ParsedInput.ParsedInput-class.html#__init__,Method svgchart.lib.parse.ParsingLayer.ParsingLayer.__init__()=svgchart.lib.parse.ParsingLayer.ParsingLayer-class.html#__init__,Method svgchart.lib.shapes.Circle.Circle.__init__()=svgchart.lib.shapes.Circle.Circle-class.html#__init__,Method svgchart.lib.shapes.Ellipse.Ellipse.__init__()=svgchart.lib.shapes.Ellipse.Ellipse-class.html#__init__,Method svgchart.lib.shapes.Line.Line.__init__()=svgchart.lib.shapes.Line.Line-class.html#__init__,Method svgchart.lib.shapes.Path.Path.__init__()=svgchart.lib.shapes.Path.Path-class.html#__init__,Method svgchart.lib.shapes.Rectangle.Rectangle.__init__()=svgchart.lib.shapes.Rectangle.Rectangle-class.html#__init__,Method svgchart.lib.shapes.Shape.Shape.__init__()=svgchart.lib.shapes.Shape.Shape-class.html#__init__,Method svgchart.lib.shapes.ShapeGroup.ShapeGroup.__init__()=svgchart.lib.shapes.ShapeGroup.ShapeGroup-class.html#__init__,Method svgchart.lib.shapes.Square.Square.__init__()=svgchart.lib.shapes.Square.Square-class.html#__init__,Method svgchart.lib.shapes.Text.Text.__init__()=svgchart.lib.shapes.Text.Text-class.html#__init__"><a title="svgchart.lib.elements.Axis.Axis.__init__
+svgchart.lib.elements.Element.Element.__init__
+svgchart.lib.elements.Grid.Grid.__init__
+svgchart.lib.elements.HorizontalGrid.HorizontalGrid.__init__
+svgchart.lib.elements.Legend.Legend.__init__
+svgchart.lib.elements.Title.Title.__init__
+svgchart.lib.elements.VerticalGrid.VerticalGrid.__init__
+svgchart.lib.elements.XAxis.XAxis.__init__
+svgchart.lib.elements.YAxis.YAxis.__init__
+svgchart.lib.generators.Generator.Generator.__init__
+svgchart.lib.generators.Scatter.Scatter.__init__
+svgchart.lib.input.ConsoleInput.ConsoleInput.__init__
+svgchart.lib.input.FileInput.FileInput.__init__
+svgchart.lib.input.InputLayer.InputLayer.__init__
+svgchart.lib.input.InputSet.InputSet.__init__
+svgchart.lib.input.RawInput.RawInput.__init__
+svgchart.lib.parse.IndexedDict.IndexedDict.__init__
+svgchart.lib.parse.ParsedInput.ParsedInput.__init__
+svgchart.lib.parse.ParsingLayer.ParsingLayer.__init__
+svgchart.lib.shapes.Circle.Circle.__init__
+svgchart.lib.shapes.Ellipse.Ellipse.__init__
+svgchart.lib.shapes.Line.Line.__init__
+svgchart.lib.shapes.Path.Path.__init__
+svgchart.lib.shapes.Rectangle.Rectangle.__init__
+svgchart.lib.shapes.Shape.Shape.__init__
+svgchart.lib.shapes.ShapeGroup.ShapeGroup.__init__
+svgchart.lib.shapes.Square.Square.__init__
+svgchart.lib.shapes.Text.Text.__init__" class="py-name" href="#" onclick="return doclink('link-7', '__init__', 'link-7');">__init__</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">,</tt> <tt class="py-name">tag</tt><tt class="py-op">=</tt><tt class="py-string">u'ellipse'</tt><tt class="py-op">,</tt> <tt class="py-name">id</tt><tt class="py-op">=</tt><tt class="py-name">id</tt><tt class="py-op">,</tt> <tt class="py-name">classes</tt><tt class="py-op">=</tt><tt class="py-name">classes</tt><tt class="py-op">)</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">center</tt> <tt class="py-op">=</tt> <tt class="py-name">center</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">rx</tt> <tt class="py-op">=</tt> <tt class="py-name">float</tt><tt class="py-op">(</tt><tt class="py-name">rx</tt><tt class="py-op">)</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ry</tt> <tt class="py-op">=</tt> <tt class="py-name">float</tt><tt class="py-op">(</tt><tt class="py-name">ry</tt><tt class="py-op">)</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">                <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">                        <tt class="py-keyword">raise</tt> <tt class="py-name">TypeError</tt><tt class="py-op">(</tt><tt class="py-string">"center must be of type 'Coordinate'"</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Ellipse.position"></a><div id="Ellipse.position-def"><a name="L43"></a><tt class="py-lineno"> 43</tt> <a class="py-toggle" href="#" id="Ellipse.position-toggle" onclick="return toggle('Ellipse.position');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="svgchart.lib.shapes.Ellipse.Ellipse-class.html#position">position</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Ellipse.position-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="Ellipse.position-expanded"><a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">                <tt class="py-docstring">"""The top-left coordinate of the top-left corner of the ellipse's bounding rectangle."""</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt id="link-8" class="py-name"><a title="svgchart.lib.shapes.Coordinate
+svgchart.lib.shapes.Coordinate.Coordinate" class="py-name" href="#" onclick="return doclink('link-8', 'Coordinate', 'link-2');">Coordinate</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">center</tt><tt class="py-op">.</tt><tt id="link-9" class="py-name" targets="Variable svgchart.lib.shapes.Coordinate.Coordinate.x=svgchart.lib.shapes.Coordinate.Coordinate-class.html#x"><a title="svgchart.lib.shapes.Coordinate.Coordinate.x" class="py-name" href="#" onclick="return doclink('link-9', 'x', 'link-9');">x</a></tt> <tt class="py-op">-</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">rx</tt><tt class="py-op">,</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">center</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name" targets="Variable svgchart.lib.shapes.Coordinate.Coordinate.y=svgchart.lib.shapes.Coordinate.Coordinate-class.html#y"><a title="svgchart.lib.shapes.Coordinate.Coordinate.y" class="py-name" href="#" onclick="return doclink('link-10', 'y', 'link-10');">y</a></tt> <tt class="py-op">-</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ry</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line"> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Ellipse.width"></a><div id="Ellipse.width-def"><a name="L49"></a><tt class="py-lineno"> 49</tt> <a class="py-toggle" href="#" id="Ellipse.width-toggle" onclick="return toggle('Ellipse.width');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="svgchart.lib.shapes.Ellipse.Ellipse-class.html#width">width</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Ellipse.width-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="Ellipse.width-expanded"><a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line">                <tt class="py-docstring">"""The width of the ellipse."""</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">rx</tt> <tt class="py-op">*</tt> <tt class="py-number">2.0</tt> </tt>
+</div><a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">        <tt class="py-decorator">@</tt><tt class="py-decorator">property</tt> </tt>
+<a name="Ellipse.height"></a><div id="Ellipse.height-def"><a name="L55"></a><tt class="py-lineno"> 55</tt> <a class="py-toggle" href="#" id="Ellipse.height-toggle" onclick="return toggle('Ellipse.height');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="svgchart.lib.shapes.Ellipse.Ellipse-class.html#height">height</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Ellipse.height-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="Ellipse.height-expanded"><a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">                <tt class="py-docstring">"""The height of the ellipse."""</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ry</tt> <tt class="py-op">*</tt> <tt class="py-number">2.0</tt> </tt>
+</div><a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="Ellipse.fitToWidth"></a><div id="Ellipse.fitToWidth-def"><a name="L59"></a><tt class="py-lineno"> 59</tt> <a class="py-toggle" href="#" id="Ellipse.fitToWidth-toggle" onclick="return toggle('Ellipse.fitToWidth');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="svgchart.lib.shapes.Ellipse.Ellipse-class.html#fitToWidth">fitToWidth</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">width</tt><tt class="py-op">=</tt><tt class="py-number">0.0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Ellipse.fitToWidth-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="Ellipse.fitToWidth-expanded"><a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">                <tt class="py-docstring">"""Fits shape to given width maintaining scale.</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line"><tt class="py-docstring">                @param width: The width to fit to</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line"> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-11" class="py-name" targets="Variable svgchart.lib.shapes.Ellipse.Ellipse.width=svgchart.lib.shapes.Ellipse.Ellipse-class.html#width,Variable svgchart.lib.shapes.Path.Path.width=svgchart.lib.shapes.Path.Path-class.html#width,Variable svgchart.lib.shapes.ShapeGroup.ShapeGroup.width=svgchart.lib.shapes.ShapeGroup.ShapeGroup-class.html#width,Variable svgchart.lib.shapes.Text.Text.width=svgchart.lib.shapes.Text.Text-class.html#width"><a title="svgchart.lib.shapes.Ellipse.Ellipse.width
+svgchart.lib.shapes.Path.Path.width
+svgchart.lib.shapes.ShapeGroup.ShapeGroup.width
+svgchart.lib.shapes.Text.Text.width" class="py-name" href="#" onclick="return doclink('link-11', 'width', 'link-11');">width</a></tt> <tt class="py-op">&lt;=</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">                        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">"width must be greater than 0"</tt><tt class="py-op">)</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line">                <tt class="py-comment"># Maintain scale. Divide by 2 since it's a radius</tt> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line">                <tt class="py-name">scalingFactor</tt> <tt class="py-op">=</tt> <tt class="py-number">1.0</tt> <tt class="py-op">-</tt> <tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">rx</tt> <tt class="py-op">-</tt> <tt class="py-name">float</tt><tt class="py-op">(</tt><tt id="link-12" class="py-name"><a title="svgchart.lib.shapes.Ellipse.Ellipse.width
+svgchart.lib.shapes.Path.Path.width
+svgchart.lib.shapes.ShapeGroup.ShapeGroup.width
+svgchart.lib.shapes.Text.Text.width" class="py-name" href="#" onclick="return doclink('link-12', 'width', 'link-11');">width</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">rx</tt><tt class="py-op">)</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">rx</tt> <tt class="py-op">=</tt> <tt id="link-13" class="py-name"><a title="svgchart.lib.shapes.Ellipse.Ellipse.width
+svgchart.lib.shapes.Path.Path.width
+svgchart.lib.shapes.ShapeGroup.ShapeGroup.width
+svgchart.lib.shapes.Text.Text.width" class="py-name" href="#" onclick="return doclink('link-13', 'width', 'link-11');">width</a></tt> <tt class="py-op">/</tt> <tt class="py-number">2.0</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ry</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ry</tt> <tt class="py-op">*</tt> <tt class="py-name">scalingFactor</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-number">2.0</tt> </tt>
+</div><a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line">                 </tt>
+<a name="Ellipse.fitToHeight"></a><div id="Ellipse.fitToHeight-def"><a name="L73"></a><tt class="py-lineno"> 73</tt> <a class="py-toggle" href="#" id="Ellipse.fitToHeight-toggle" onclick="return toggle('Ellipse.fitToHeight');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="svgchart.lib.shapes.Ellipse.Ellipse-class.html#fitToHeight">fitToHeight</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">height</tt><tt class="py-op">=</tt><tt class="py-number">0.0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Ellipse.fitToHeight-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="Ellipse.fitToHeight-expanded"><a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line">                <tt class="py-docstring">"""Fits shape to given height maintaining scale.</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"><tt class="py-docstring">                @param height: The height to fit to</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt id="link-14" class="py-name" targets="Variable svgchart.lib.shapes.Ellipse.Ellipse.height=svgchart.lib.shapes.Ellipse.Ellipse-class.html#height,Variable svgchart.lib.shapes.Path.Path.height=svgchart.lib.shapes.Path.Path-class.html#height,Variable svgchart.lib.shapes.ShapeGroup.ShapeGroup.height=svgchart.lib.shapes.ShapeGroup.ShapeGroup-class.html#height,Variable svgchart.lib.shapes.Text.Text.height=svgchart.lib.shapes.Text.Text-class.html#height"><a title="svgchart.lib.shapes.Ellipse.Ellipse.height
+svgchart.lib.shapes.Path.Path.height
+svgchart.lib.shapes.ShapeGroup.ShapeGroup.height
+svgchart.lib.shapes.Text.Text.height" class="py-name" href="#" onclick="return doclink('link-14', 'height', 'link-14');">height</a></tt> <tt class="py-op">&lt;=</tt> <tt class="py-number">0</tt><tt class="py-op">:</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                        <tt class="py-keyword">raise</tt> <tt class="py-name">ValueError</tt><tt class="py-op">(</tt><tt class="py-string">"height must be greater than 0"</tt><tt class="py-op">)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">                <tt class="py-comment"># Maintain scale. Divide by 2 since it's a radius</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">                <tt class="py-name">scalingFactor</tt> <tt class="py-op">=</tt> <tt class="py-number">1.0</tt> <tt class="py-op">-</tt> <tt class="py-op">(</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ry</tt> <tt class="py-op">-</tt> <tt class="py-name">float</tt><tt class="py-op">(</tt><tt id="link-15" class="py-name"><a title="svgchart.lib.shapes.Ellipse.Ellipse.height
+svgchart.lib.shapes.Path.Path.height
+svgchart.lib.shapes.ShapeGroup.ShapeGroup.height
+svgchart.lib.shapes.Text.Text.height" class="py-name" href="#" onclick="return doclink('link-15', 'height', 'link-14');">height</a></tt><tt class="py-op">)</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ry</tt><tt class="py-op">)</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">rx</tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">rx</tt> <tt class="py-op">*</tt> <tt class="py-name">scalingFactor</tt><tt class="py-op">)</tt> <tt class="py-op">/</tt> <tt class="py-number">2.0</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ry</tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name"><a title="svgchart.lib.shapes.Ellipse.Ellipse.height
+svgchart.lib.shapes.Path.Path.height
+svgchart.lib.shapes.ShapeGroup.ShapeGroup.height
+svgchart.lib.shapes.Text.Text.height" class="py-name" href="#" onclick="return doclink('link-16', 'height', 'link-14');">height</a></tt> <tt class="py-op">/</tt> <tt class="py-number">2.0</tt> </tt>
+</div><a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line"> </tt>
+<a name="Ellipse.translateTo"></a><div id="Ellipse.translateTo-def"><a name="L87"></a><tt class="py-lineno"> 87</tt> <a class="py-toggle" href="#" id="Ellipse.translateTo-toggle" onclick="return toggle('Ellipse.translateTo');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="svgchart.lib.shapes.Ellipse.Ellipse-class.html#translateTo">translateTo</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">coord</tt><tt class="py-op">=</tt><tt id="link-17" class="py-name"><a title="svgchart.lib.shapes.Coordinate
+svgchart.lib.shapes.Coordinate.Coordinate" class="py-name" href="#" onclick="return doclink('link-17', 'Coordinate', 'link-2');">Coordinate</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Ellipse.translateTo-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="Ellipse.translateTo-expanded"><a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                <tt class="py-docstring">"""Translates the ellipse to the given coordinate.</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line"><tt class="py-docstring">                @param coord: The new coordinate to translate to</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt class="py-docstring">                @type coord: Coordinate</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line"> </tt>
+<a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">                <tt class="py-name">oldx</tt><tt class="py-op">,</tt> <tt class="py-name">oldy</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">center</tt> </tt>
+<a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name" targets="Method svgchart.lib.shapes.Ellipse.Ellipse.translate()=svgchart.lib.shapes.Ellipse.Ellipse-class.html#translate,Method svgchart.lib.shapes.Path.Path.translate()=svgchart.lib.shapes.Path.Path-class.html#translate,Method svgchart.lib.shapes.Rectangle.Rectangle.translate()=svgchart.lib.shapes.Rectangle.Rectangle-class.html#translate,Method svgchart.lib.shapes.Shape.Shape.translate()=svgchart.lib.shapes.Shape.Shape-class.html#translate,Method svgchart.lib.shapes.ShapeGroup.ShapeGroup.translate()=svgchart.lib.shapes.ShapeGroup.ShapeGroup-class.html#translate,Method svgchart.lib.shapes.Text.Text.translate()=svgchart.lib.shapes.Text.Text-class.html#translate"><a title="svgchart.lib.shapes.Ellipse.Ellipse.translate
+svgchart.lib.shapes.Path.Path.translate
+svgchart.lib.shapes.Rectangle.Rectangle.translate
+svgchart.lib.shapes.Shape.Shape.translate
+svgchart.lib.shapes.ShapeGroup.ShapeGroup.translate
+svgchart.lib.shapes.Text.Text.translate" class="py-name" href="#" onclick="return doclink('link-18', 'translate', 'link-18');">translate</a></tt><tt class="py-op">(</tt><tt id="link-19" class="py-name"><a title="svgchart.lib.shapes.Coordinate.Coordinate.x" class="py-name" href="#" onclick="return doclink('link-19', 'x', 'link-9');">x</a></tt><tt class="py-op">=</tt><tt class="py-name">coord</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="svgchart.lib.shapes.Coordinate.Coordinate.x" class="py-name" href="#" onclick="return doclink('link-20', 'x', 'link-9');">x</a></tt> <tt class="py-op">-</tt> <tt class="py-name">oldx</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">rx</tt><tt class="py-op">,</tt> <tt id="link-21" class="py-name"><a title="svgchart.lib.shapes.Coordinate.Coordinate.y" class="py-name" href="#" onclick="return doclink('link-21', 'y', 'link-10');">y</a></tt><tt class="py-op">=</tt><tt class="py-name">coord</tt><tt class="py-op">.</tt><tt id="link-22" class="py-name"><a title="svgchart.lib.shapes.Coordinate.Coordinate.y" class="py-name" href="#" onclick="return doclink('link-22', 'y', 'link-10');">y</a></tt> <tt class="py-op">-</tt> <tt class="py-name">oldy</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ry</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"> </tt>
+<a name="Ellipse.translate"></a><div id="Ellipse.translate-def"><a name="L97"></a><tt class="py-lineno"> 97</tt> <a class="py-toggle" href="#" id="Ellipse.translate-toggle" onclick="return toggle('Ellipse.translate');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="svgchart.lib.shapes.Ellipse.Ellipse-class.html#translate">translate</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">x</tt><tt class="py-op">=</tt><tt class="py-number">0.0</tt><tt class="py-op">,</tt> <tt class="py-param">y</tt><tt class="py-op">=</tt><tt class="py-number">0.0</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Ellipse.translate-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="Ellipse.translate-expanded"><a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line">                <tt class="py-docstring">"""Translates the ellipse by the given amounts.</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"><tt class="py-docstring">                @param x: The amount to translate in the x-direction</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-docstring">                @param y: The amount to translate in the y-direction</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">                <tt class="py-name">oldx</tt><tt class="py-op">,</tt> <tt class="py-name">oldy</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">center</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">center</tt> <tt class="py-op">=</tt> <tt id="link-23" class="py-name"><a title="svgchart.lib.shapes.Coordinate
+svgchart.lib.shapes.Coordinate.Coordinate" class="py-name" href="#" onclick="return doclink('link-23', 'Coordinate', 'link-2');">Coordinate</a></tt><tt class="py-op">(</tt><tt class="py-name">oldx</tt> <tt class="py-op">+</tt> <tt id="link-24" class="py-name"><a title="svgchart.lib.shapes.Coordinate.Coordinate.x" class="py-name" href="#" onclick="return doclink('link-24', 'x', 'link-9');">x</a></tt><tt class="py-op">,</tt> <tt class="py-name">oldy</tt> <tt class="py-op">+</tt> <tt id="link-25" class="py-name"><a title="svgchart.lib.shapes.Coordinate.Coordinate.y" class="py-name" href="#" onclick="return doclink('link-25', 'y', 'link-10');">y</a></tt><tt class="py-op">)</tt> </tt>
+</div><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"> </tt>
+<a name="Ellipse.svg"></a><div id="Ellipse.svg-def"><a name="L107"></a><tt class="py-lineno">107</tt> <a class="py-toggle" href="#" id="Ellipse.svg-toggle" onclick="return toggle('Ellipse.svg');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="svgchart.lib.shapes.Ellipse.Ellipse-class.html#svg">svg</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Ellipse.svg-collapsed" style="display:none;" pad="+++" indent="++++++++++++"></div><div id="Ellipse.svg-expanded"><a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line">                <tt class="py-docstring">"""Returns the SVG representation as an XML fragment."""</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">attrs</tt><tt class="py-op">[</tt><tt class="py-string">'cx'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">center</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="svgchart.lib.shapes.Coordinate.Coordinate.x" class="py-name" href="#" onclick="return doclink('link-26', 'x', 'link-9');">x</a></tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">attrs</tt><tt class="py-op">[</tt><tt class="py-string">'cy'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">center</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name"><a title="svgchart.lib.shapes.Coordinate.Coordinate.y" class="py-name" href="#" onclick="return doclink('link-27', 'y', 'link-10');">y</a></tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">attrs</tt><tt class="py-op">[</tt><tt class="py-string">'rx'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">rx</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">attrs</tt><tt class="py-op">[</tt><tt class="py-string">'ry'</tt><tt class="py-op">]</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">ry</tt> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">                <tt class="py-keyword">return</tt> <tt id="link-28" class="py-name"><a title="svgchart.lib.shapes.Shape
+svgchart.lib.shapes.Shape.Shape" class="py-name" href="#" onclick="return doclink('link-28', 'Shape', 'link-0');">Shape</a></tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Method svgchart.lib.shapes.Circle.Circle.svg()=svgchart.lib.shapes.Circle.Circle-class.html#svg,Method svgchart.lib.shapes.Ellipse.Ellipse.svg()=svgchart.lib.shapes.Ellipse.Ellipse-class.html#svg,Method svgchart.lib.shapes.Line.Line.svg()=svgchart.lib.shapes.Line.Line-class.html#svg,Method svgchart.lib.shapes.Path.Path.svg()=svgchart.lib.shapes.Path.Path-class.html#svg,Method svgchart.lib.shapes.Rectangle.Rectangle.svg()=svgchart.lib.shapes.Rectangle.Rectangle-class.html#svg,Method svgchart.lib.shapes.Shape.Shape.svg()=svgchart.lib.shapes.Shape.Shape-class.html#svg,Method svgchart.lib.shapes.ShapeGroup.ShapeGroup.svg()=svgchart.lib.shapes.ShapeGroup.ShapeGroup-class.html#svg,Method svgchart.lib.shapes.Text.Text.svg()=svgchart.lib.shapes.Text.Text-class.html#svg"><a title="svgchart.lib.shapes.Circle.Circle.svg
+svgchart.lib.shapes.Ellipse.Ellipse.svg
+svgchart.lib.shapes.Line.Line.svg
+svgchart.lib.shapes.Path.Path.svg
+svgchart.lib.shapes.Rectangle.Rectangle.svg
+svgchart.lib.shapes.Shape.Shape.svg
+svgchart.lib.shapes.ShapeGroup.ShapeGroup.svg
+svgchart.lib.shapes.Text.Text.svg" class="py-name" href="#" onclick="return doclink('link-29', 'svg', 'link-29');">svg</a></tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="svgchart.lib-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >svgchart</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Wed May 18 22:56:19 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,6 +1,11 @@
 class IndexedDict(list):
-	
+	"""A data structure combining aspects of lists and dicts to provide flexible access to tree-type structures."""
+
 	def __init__(self, items=None):
+		"""
+		@param items: Items to initialize the structure with.
+		@type items: dict or sequence
+		"""
 
 		list.__init__(self)
 		self.__map = dict()
@@ -43,23 +48,15 @@ class IndexedDict(list):
 			# Key is already in the map, so overwrite its mapped value
 			self.__setitem__(self.__map[key], value)
 
-	def __getattr__(self,name):
+	def __getattr__(self, name):
 		try:
 			return getattr(self[0],name)
 		except:
 			raise AttributeError("No attribute " + name)
 
 	def __str__(self):
-		"""
-		s = "{["
-		for key in self.__map:
-			s += str(key) + " : "
-			s += str(self.__map[key]) + ","
-		s += "]; ["
-		for i in range(len(self)):
-			s += str(i) + " : "
-			s += str(self[i]) + ","
-		s += "]} " """
+		"""Returns a string representation of the data structure."""
+
 		s = "InD{"
 		if (len(self.keys()) == 0):
 			for i in self:
@@ -71,4 +68,6 @@ class IndexedDict(list):
 		return s
 
 	def keys(self):
+		"""Returns the dictionary keys of the data structure."""
+
 		return self.__map.keys()
