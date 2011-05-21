@@ -6,6 +6,7 @@ class Axis(Element):
 	def __init__(self, min=0.0, max=1.0, start=0.0, end=1.0,
 				 majorticks=5, minorticks=20,
 				 majorlength=10, minorlength=5,
+				 labelformat='%d',
 				 id=u'', classes=(),
 				 baseid=u'', baseclasses=(),
 				 labelidprefix=u'', labelclasses=(),
@@ -22,6 +23,7 @@ class Axis(Element):
 		@type minorticks: integer
 		@param majorlength: The length of the major tick marks
 		@param minorlength: The length of the minor tick marks
+		@param labelformat: The format string to apply to the label text
 
 		@param id: The unique ID to be used in the SVG document
 		@type id: string
@@ -74,6 +76,8 @@ class Axis(Element):
 		self.majorlength = majorlength
 		self.minorlength = minorlength
 
+		self.labelformat = labelformat
+
 	def valueToCoord(self, value):
 		"""Returns the coordinate from a value along the axis.
 
@@ -85,7 +89,7 @@ class Axis(Element):
 	def majorValues(self):
 		"""Returns a list of the values at major tick marks."""
 
-		return [self.min + (self.max - self.min) / (self.majorticks + 1) * x for x in xrange(1, self.majorticks + 1)]
+		return [self.min + (self.max - self.min) * x / (self.majorticks - 1) for x in xrange(0, self.majorticks )]
 
 	def majorTicks(self):
 		"""Returns a list of the coordinates of major tick marks."""
@@ -95,7 +99,7 @@ class Axis(Element):
 	def minorValues(self):
 		"""Returns a list of the values at minor tick marks."""
 
-		return [self.min + (self.max - self.min) / (self.minorticks + 1) * x for x in xrange(1, self.minorticks + 1)]
+		return [self.min + (self.max - self.min) * x / (self.minorticks - 1) for x in xrange(0, self.minorticks)]
 
 	def minorTicks(self):
 		"""Returns a list of the coordinates of minor tick marks."""
@@ -121,10 +125,12 @@ class Axis(Element):
 		"""
 		
 		ticklist = []
+		majors = self.majorValues()
 		for value, coord in zip(self.minorValues(), self.minorTicks()):
-			ticklist.append({'value': value, 'coord': coord, 'type': 'minor'})
+			if value not in majors:
+				ticklist.append({'value': value, 'coord': coord, 'type': 'minor'})
 
-		for value, coord in zip(self.majorValues(), self.majorTicks()):
+		for value, coord in zip(majors, self.majorTicks()):
 			ticklist.append({'value': value, 'coord': coord, 'type': 'major'})
 
 		return ticklist

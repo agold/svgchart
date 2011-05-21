@@ -10,7 +10,7 @@ class YAxis(Axis):
 	def __init__(self, min=0.0, max=1.0, start=0.0, end=1.0,
 				 majorticks=5, minorticks=20,
 				 majorlength=10, minorlength=5,
-				 x=0.0,
+				 x=0.0, labelformat='%d',
 				 id=u'', classes=(),
 				 baseid=u'', baseclasses=(),
 				 labelidprefix=u'', labelclasses=(),
@@ -29,6 +29,7 @@ class YAxis(Axis):
 		@param minorlength: The length of the minor tick marks
 
 		@param x: The x coordinate to draw the axis at
+		@param labelformat: The format string to apply to the label text
 
 		@param id: The unique ID to be used in the SVG document
 		@type id: string
@@ -59,6 +60,7 @@ class YAxis(Axis):
 		Axis.__init__(self, min=min, max=max, start=start, end=end,
 				 majorticks=majorticks, minorticks=minorticks,
 				 majorlength=majorlength, minorlength=minorlength,
+				 labelformat=labelformat,
 				 id=id, classes=classes,
 				 baseid=baseid, baseclasses=baseclasses,
 				 labelidprefix=labelidprefix, labelclasses=labelclasses,
@@ -66,33 +68,42 @@ class YAxis(Axis):
 				 minoridprefix=minoridprefix, minorclasses=minorclasses)
 
 		self.x = float(x)
-		self.width = float(majorlength if majorlength >= minorlength else minorlength)
-		self.labelmargin = 10
+		self.labelmargin = 2.0
+		self.labelsize = 12.0
 
 	def getElement(self):
 		"""Returns the shapes of the y axis."""
 
 		ticks = self.ticks()
-		lines = [Line(start=Coordinate(self.x + self.width, self.start),
-						end=Coordinate(self.x + self.width, self.end),
+		lines = [Line(start=Coordinate(self.x, self.start),
+						end=Coordinate(self.x, self.end),
 						id=self.baseid, classes=self.baseclasses)]
 		labels = []
 		majorcount, minorcount = (0, 0)
 		for tick in ticks:
 			if tick['type'] is 'major':
 				majorcount += 1
-				lines.append(Line(start=Coordinate(self.x + self.width, tick['coord']),
-							end=Coordinate(self.x  + self.width + self.majorlength, tick['coord']),
+
+				if tick['value'] == self.max:
+					labeladjustment = self.labelsize / 2
+				elif tick['value'] == self.min:
+					labeladjustment = -self.labelsize / 2
+				else:
+					labeladjustment = 0
+					
+				lines.append(Line(start=Coordinate(self.x, tick['coord']),
+							end=Coordinate(self.x + self.majorlength, tick['coord']),
 							id=u'{}-{:d}'.format(self.majoridprefix, majorcount),
 							classes=self.majorclasses))
-				labels.append(Text(position=Coordinate(self.x  + self.width - self.labelmargin, tick['coord']),
-							text=str(tick['value']),
+				labels.append(Text(position=Coordinate(self.x - self.labelmargin, tick['coord'] + labeladjustment + self.labelsize / 2),
+							text=self.labelformat % tick['value'],
+							fontsize=self.labelsize,
 							id=u'{}-{:d}'.format(self.labelidprefix, majorcount),
 							classes=self.labelclasses))
 			else:
 				minorcount += 1
-				lines.append(Line(start=Coordinate(self.x + self.width , tick['coord']),
-							end=Coordinate(self.x  + self.width + self.minorlength, tick['coord']),
+				lines.append(Line(start=Coordinate(self.x , tick['coord']),
+							end=Coordinate(self.x + self.minorlength, tick['coord']),
 							id=u'{}-{:d}'.format(self.minoridprefix, minorcount),
 							classes=self.minorclasses))
 
@@ -101,3 +112,10 @@ class YAxis(Axis):
 
 		return ShapeGroup([lines, labels], id=self.id, classes=self.classes)
 
+	def valueToCoord(self, value):
+		"""Returns the coordinate from a value along the axis.
+
+		@param value: A value along the axis
+		"""
+
+		return self.end + (self.start - self.end) * (value - self.min) / (self.max - self.min)

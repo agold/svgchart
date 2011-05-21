@@ -10,10 +10,7 @@ class Legend(Element):
 				width=1.0, entryheight=12.0,
 				title=u'Legend', titlesize=12.0,
 				id=u'', classes=(),
-				titleid=u'', titleclasses=(),
-				entryidprefix=u'', entryclasses=(),
-				entryshapeprefix=u'', entryshapeclasses=(),
-				entrytextprefix=u'', entrytextclasses=()):
+				titleid=u'', titleclasses=()):
 		"""
 		@param entries: The legend entries. A sequence of dictionaries in the format {'shape': Shape, 'text': string}
 		@param x: The x coordinate of the legend
@@ -33,21 +30,6 @@ class Legend(Element):
 		@type titleid: string
 		@param titleclasses: Classnames to be applied to the title element
 		@type titleclasses: string or sequence of strings
-
-		@param entryidprefix: The prefix for each legend entry's ID
-		@type entryidprefix: string
-		@param entryclasses: Classnames to be applied to each entry elements
-		@type entryclasses: string or sequence of strings
-
-		@param entryshapeprefix: The prefix for each legend entry shape's ID
-		@type entryshapeprefix: string
-		@param entryshapeclasses: Classnames to be applied to each entry shape
-		@type entryshapeclasses: string or sequence of strings
-
-		@param entrytextprefix: The prefix for each legend entry label ID
-		@type entrytextprefix: string
-		@param entrytextclasses: Classnames to be applied to each entry label
-		@type entrytextclasses: string or sequence of strings
 		"""
 
 		Element.__init__(self, id=id, classes=classes)
@@ -61,12 +43,6 @@ class Legend(Element):
 		self.entryheight = entryheight
 		self.titleid = titleid
 		self.titleclasses = titleclasses
-		self.entryidprefix = entryidprefix
-		self.entryclasses = entryclasses
-		self.entryshapeprefix = entryshapeprefix
-		self.entryshapeclasses = entryshapeclasses
-		self.entrytextprefix = entrytextprefix
-		self.entrytextclasses = entrytextclasses
 
 	def getElement(self):
 		"""Returns the shapes of the legend."""
@@ -80,22 +56,25 @@ class Legend(Element):
 		entrycount = 0
 		for entry in self.entries:
 			entrycount += 1
-			shape = entry["shape"]
-			text = entry["text"]
 
-			shape.id = u"{}-{:d}".format(self.entryshapeprefix, entrycount)
-			shape.classes = self.entryshapeclasses
+			shapename = entry["symbol"]["shape"].capitalize()
+			text = entry["label"]
+			shape = __import__('lib.shapes.' + shapename, globals(), locals(), [shapename])
+			shape = getattr(shape, shapename)()
+
+			shape.id = entry["legend-entry"]["symbol"]["id"]
+			shape.classes = entry["legend-entry"]["symbol"]["class"]
 			shape.fit(height=self.entryheight)
-			shape.translateTo(Coordinate(self.x, self.y + self.titlesize + entrycount * self.entryheight))
+			shape.translateTo(Coordinate(self.x, self.y + self.titlesize + (entrycount - 1) * self.entryheight))
 
-			textelem = Text(position=Coordinate(self.x + shape.width, shape.position.y),
+			textelem = Text(position=Coordinate(self.x + shape.width, shape.position.y + self.entryheight - 1),
 							text=text,
 							fontsize=self.entryheight,
-							id=u"{}-{:d}".format(self.entrytextprefix, entrycount),
-							classes=self.entrytextclasses)
+							id=entry["legend-entry"]["label"]["id"],
+							classes=entry["legend-entry"]["label"]["class"])
 			legendentry = ShapeGroup([shape, textelem],
-									id=u"{}-{:d}".format(self.entryidprefix, entrycount),
-									classes=self.entryclasses)
+									id=entry["legend-entry"]["id"],
+									classes=entry["legend-entry"]["class"])
 			legend.append(legendentry)
 
 		return ShapeGroup(legend, id=self.id, classes=self.classes)

@@ -10,7 +10,7 @@ class XAxis(Axis):
 	def __init__(self, min=0.0, max=1.0, start=0.0, end=1.0,
 				 majorticks=5, minorticks=20,
 				 majorlength=10, minorlength=5,
-				 y=0.0,
+				 y=0.0, labelformat='%d',
 				 id=u'', classes=(),
 				 baseid=u'', baseclasses=(),
 				 labelidprefix=u'', labelclasses=(),
@@ -29,6 +29,7 @@ class XAxis(Axis):
 		@param minorlength: The length of the minor tick marks
 
 		@param y: The y coordinate to draw the axis at
+		@param labelformat: The format string to apply to the label text
 
 		@param id: The unique ID to be used in the SVG document
 		@type id: string
@@ -59,6 +60,7 @@ class XAxis(Axis):
 		Axis.__init__(self, min=min, max=max, start=start, end=end,
 				 majorticks=majorticks, minorticks=minorticks,
 				 majorlength=majorlength, minorlength=minorlength,
+				 labelformat=labelformat,
 				 id=id, classes=classes,
 				 baseid=baseid, baseclasses=baseclasses,
 				 labelidprefix=labelidprefix, labelclasses=labelclasses,
@@ -66,33 +68,34 @@ class XAxis(Axis):
 				 minoridprefix=minoridprefix, minorclasses=minorclasses)
 
 		self.y = float(y)
-		self.height = float(majorlength if majorlength >= minorlength else minorlength)
-		self.labelmargin = 10
+		self.labelmargin = 2.0
+		self.labelsize = 12.0
 
 	def getElement(self):
 		"""Returns the shapes of the x axis."""
 
 		ticks = self.ticks()
-		lines = [Line(start=Coordinate(self.start, self.y + self.height),
-						end=Coordinate(self.end, self.y + self.height),
+		lines = [Line(start=Coordinate(self.start, self.y),
+						end=Coordinate(self.end, self.y),
 						id=self.baseid, classes=self.baseclasses)]
 		labels = []
-		majorcount, minorcount = (0, 0)
+		majorcount, minorcount = 0, 0
 		for tick in ticks:
 			if tick['type'] is 'major':
 				majorcount += 1
-				lines.append(Line(start=Coordinate(tick['coord'], self.y + self.height),
-							end=Coordinate(tick['coord'], self.y + self.height - self.majorlength),
+				lines.append(Line(start=Coordinate(tick['coord'], self.y),
+							end=Coordinate(tick['coord'], self.y - self.majorlength),
 							id=u'{}-{:d}'.format(self.majoridprefix, majorcount),
 							classes=self.majorclasses))
-				labels.append(Text(position=Coordinate(tick['coord'], self.y + self.height + self.labelmargin),
-							text=str(tick['value']),
+				labels.append(Text(position=Coordinate(tick['coord'], self.y + self.labelmargin + self.labelsize),
+							text=self.labelformat % tick['value'],
+							fontsize=self.labelsize,
 							id=u'{}-{:d}'.format(self.labelidprefix, majorcount),
 							classes=self.labelclasses))
 			else:
 				minorcount += 1
-				lines.append(Line(start=Coordinate(tick['coord'], self.y + self.height),
-							end=Coordinate(tick['coord'], self.y + self.height - self.minorlength),
+				lines.append(Line(start=Coordinate(tick['coord'], self.y),
+							end=Coordinate(tick['coord'], self.y - self.minorlength),
 							id=u'{}-{:d}'.format(self.minoridprefix, minorcount),
 							classes=self.minorclasses))
 

@@ -38,6 +38,7 @@ class Scatter(Generator):
 		version = u'1.1'
 
 		subelements = []
+		subelements.append(self.getCSS().svg())
 		subelements.append(self.getTitle().getElement().svg())
 		subelements.append(self.getXGrid().getElement().svg())
 		subelements.append(self.getYGrid().getElement().svg())
@@ -106,29 +107,31 @@ class Scatter(Generator):
 		majorlength = float(self.settings["x-axis"]["majors"]["size"])
 		minorlength = float(self.settings["x-axis"]["minors"]["size"])
 
-		start = 10.0 #the leftmost point. this can be made a setting somewhere to allow for some margins
+		start = float(self.settings["datafield"]["x"]) #the leftmost point. this can be made a setting somewhere to allow for some margins
 		end = float(self.settings["datafield"]["width"]) + start
 
-		ytop = 0.0 #the topmost point. this can be made a setting somewhere to allow for some margins
+		ytop = float(self.settings["datafield"]["y"]) #the topmost point. this can be made a setting somewhere to allow for some margins
 		y = float(self.settings["datafield"]["height"]) + ytop
+
+		labelformat = self.settings["y-axis"]["labels"]["format"]
 
 		min = self.settings["x-axis"]["range"]["min"]
 		max = self.settings["x-axis"]["range"]["max"]
 
 		if min == 'auto':
-			min = self.getMinValues()[0]
+			min = self.getMinValues()[0] - (self.getMaxValues()[0] - self.getMinValues()[0]) * 0.1
 		else:
 			min = float(min)
 
 		if max == 'auto':
-			max = self.getMaxValues()[0]
+			max = self.getMaxValues()[0] + (self.getMaxValues()[0] - self.getMinValues()[0]) * 0.1
 		else:
 			max = float(max)
 
 		self.__xaxis = XAxis(min=min, max=max, start=start, end=end,
 				 majorticks=majorticks, minorticks=minorticks,
 				 majorlength=majorlength, minorlength=minorlength,
-				 y=y,
+				 y=y, labelformat=labelformat,
 				 id=id, classes=classes,
 				 baseid=baseid, baseclasses=baseclasses,
 				 labelidprefix=labelidprefix, labelclasses=labelclasses,
@@ -158,21 +161,23 @@ class Scatter(Generator):
 		majorlength = float(self.settings["y-axis"]["majors"]["size"])
 		minorlength = float(self.settings["y-axis"]["minors"]["size"])
 
-		start = 0.0 #the topmost point. this can be made a setting somewhere to allow for some margins
+		start = float(self.settings["datafield"]["y"]) #the topmost point. this can be made a setting somewhere to allow for some margins
 		end = float(self.settings["datafield"]["height"]) + start
 
-		xleft = 0.0 #the leftmost point. this can be made a setting somewhere to allow for some margins
+		labelformat = self.settings["y-axis"]["labels"]["format"]
+
+		xleft = float(self.settings["datafield"]["x"]) #the leftmost point. this can be made a setting somewhere to allow for some margins
 
 		min = self.settings["y-axis"]["range"]["min"]
 		max = self.settings["y-axis"]["range"]["max"]
 
 		if min == 'auto':
-			min = self.getMinValues()[1]
+			min = self.getMinValues()[1] - (self.getMaxValues()[1] - self.getMinValues()[1]) * 0.1
 		else:
 			min = float(min)
 
 		if max == 'auto':
-			max = self.getMaxValues()[1]
+			max = self.getMaxValues()[1] + (self.getMaxValues()[1] - self.getMinValues()[1]) * 0.1
 		else:
 			max = float(max)
 
@@ -181,7 +186,7 @@ class Scatter(Generator):
 		self.__yaxis = YAxis(min=min, max=max, start=start, end=end,
 				 majorticks=majorticks, minorticks=minorticks,
 				 majorlength=majorlength, minorlength=minorlength,
-				 x=xleft,
+				 x=xleft, labelformat=labelformat,
 				 id=id, classes=classes,
 				 baseid=baseid, baseclasses=baseclasses,
 				 labelidprefix=labelidprefix, labelclasses=labelclasses,
@@ -198,7 +203,7 @@ class Scatter(Generator):
 			return self.__xgrid
 
 		points = self.getXAxis().majorTicks()
-		top = 0.0 #the topmost point. this can be made a setting somewhere to allow for some margins
+		top = float(self.settings["datafield"]["y"])
 		bottom = float(self.settings["datafield"]["height"]) + top
 		id = self.settings["x-axis"]["grid"]["id"]
 		classes = self.settings["x-axis"]["grid"]["class"]
@@ -216,7 +221,7 @@ class Scatter(Generator):
 			return self.__ygrid
 
 		points = self.getYAxis().majorTicks()
-		left = 0.0 #the leftmost point. this can be made a setting somewhere to allow for some margins
+		left = float(self.settings["datafield"]["x"])
 		right = float(self.settings["datafield"]["width"]) + left
 		id = self.settings["y-axis"]["grid"]["id"]
 		classes = self.settings["y-axis"]["grid"]["class"]
@@ -236,13 +241,8 @@ class Scatter(Generator):
 			# Cache the legend element
 			return self.__legend
 
-		entries = []
-		for dataset in self.settings["datasets"]["set"]:
-			shapename = dataset["symbol"]["shape"].capitalize()
-			label = dataset["label"]
-			shape = __import__('lib.shapes.' + shapename, globals(), locals(), [shapename])
-			entry = {'shape': getattr(shape, shapename)(), 'text': label}
-			entries.append(entry)
+		entries = self.settings["datasets"]["set"]
+
 
 		x = float(self.settings["legend"]["x"])
 		y = float(self.settings["legend"]["y"])
@@ -254,21 +254,12 @@ class Scatter(Generator):
 		classes = self.settings["legend"]["class"]
 		titleid = self.settings["legend"]["title"]["id"]
 		titleclasses = self.settings["legend"]["title"]["class"]
-		entryidprefix = self.settings["legend"]["entries"]["id-prefix"]
-		entryclasses = self.settings["legend"]["entries"]["class"]
-		entryshapeprefix = self.settings["legend"]["entries"]["shapes"]["id-prefix"]
-		entryshapeclasses = self.settings["legend"]["entries"]["shapes"]["class"]
-		entrytextprefix = self.settings["legend"]["entries"]["labels"]["id-prefix"]
-		entrytextclasses = self.settings["legend"]["entries"]["labels"]["class"]
-
+		
 		self.__legend = Legend(entries=entries, x=x, y=y,
 				width=width, entryheight=entryheight,
 				title=title, titlesize=titlesize,
 				id=id, classes=classes,
-				titleid=titleid, titleclasses=titleclasses,
-				entryidprefix=entryidprefix, entryclasses=entryclasses,
-				entryshapeprefix=entryshapeprefix, entryshapeclasses=entryshapeclasses,
-				entrytextprefix=entrytextprefix, entrytextclasses=entrytextclasses)
+				titleid=titleid, titleclasses=titleclasses)
 		return self.__legend
 
 	def getMaxValues(self):
