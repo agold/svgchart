@@ -7,26 +7,28 @@ class InputLayer(object):
 	Makes them available through rawInput.
 	"""
 
-	def __init__(self,args):
-		"""Keyword arguments:
-		args -- Command-line option-value dictionary.
+	def __init__(self, input=None, settings=None, data=None, scripts=None):
 		"""
+		@param input: Filename for a unified input document
+		@param settings: Filename for the settings
+		@param data: Filename for the data
+		@param scripts: Filename for the scripts
+
+		"""
+
 		ri = self.rawInput = RawInput()
 
-		# Input from specified files
-		#FileInput(self.rawInput,args['-input'],args['-settings'],args['-data'],args['-scripts'])
-
 		# Input from general file
-		if ('-input' in args):
-			FileInput([ri.settings,ri.data,ri.scripts],args['-input'])
+		if input is not None:
+			FileInput([ri.settings,ri.data,ri.scripts], input)
 
 		# Input from specific files
-		if ('-settings' in args):
-			FileInput([ri.settings],args['-settings'])
-		if ('-data' in args):
-			FileInput([ri.data],args['-data'])
-		if ('-scripts' in args):
-			FileInput([ri.scripts],args['-scripts'])
+		if settings is not None:
+			FileInput([ri.settings], settings)
+		if data is not None:
+			FileInput([ri.data], data)
+		if scripts is not None:
+			FileInput([ri.scripts], scripts)
 
 		# Input from stdin
 		ConsoleInput(self.rawInput)

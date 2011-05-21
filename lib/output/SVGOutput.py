@@ -25,8 +25,11 @@ class SVGOutput(object):
 		
 		if self.pretty:
 			from xml.dom.minidom import parseString
-			with open(self.file, 'w') as f:
-				f.write(parseString(str(self.chart)).toprettyxml(encoding="utf-8"))
+			if isinstance(self.file, file):
+				self.file.write(parseString(str(self.chart)).toprettyxml(encoding="utf-8"))
+			else:
+				with open(self.file, 'w') as f:
+					f.write(parseString(str(self.chart)).toprettyxml(encoding="utf-8"))
 		else:
 			chart = etree.ElementTree(self.chart.svg())
 			chart.write(self.file, encoding="utf-8", default_namespace=False, xml_declaration=True, method="xml")
