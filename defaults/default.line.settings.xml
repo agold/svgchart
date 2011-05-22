@@ -1,5 +1,5 @@
 <settings>
-	<chart id="svgchart" class="chart" width="650" height="400" type="scatter" style="shape-rendering: crispEdges; text-rendering: optimizeLegibility;" />
+	<chart id="svgchart" class="chart" width="650" height="400" style="shape-rendering: crispEdges; text-rendering: optimizeLegibility;" />
 	
 	<title id="title" class="title" x="0" y="0" width="650" height="50" style="text-anchor: middle;">
 		<title id="title-text" class="title">The title</title>
@@ -33,7 +33,7 @@
 	<datasets id="data-sets" class="data-sets">
 		<set id="set1" class="set1 dataset" label="Set 1">
 			<symbol shape="circle" size="5" id-prefix="set1-datapoint" class="set1-datapoint" style="fill: green" />
-			<line id="set1-line" class="set1-dataline" style="stroke: black; stroke-width: 1px;" />
+			<line id="set1-line" class="set1-dataline" style="fill:none; stroke: green; stroke-width: 1px;" />
 			<legend-entry id="legend-entry-set1" class="legend-entry" >
 				<symbol id="legend-shape-set1" class="legend-shape" style="fill: green" />
 				<label id="legend-label-set1" class="legend-label" />

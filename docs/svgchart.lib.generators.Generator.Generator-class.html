@@ -77,6 +77,8 @@ object --+
 </dd></dl>
 
 <hr />
+<p>Base class for a chart generator.</p>
+
 <!-- ==================== INSTANCE METHODS ==================== -->
 <a name="section-InstanceMethods"></a>
 <table class="summary" border="1" cellpadding="3"
@@ -100,12 +102,141 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
+          <td><span class="summary-sig"><a name="CSSString"></a><span class="summary-sig-name">CSSString</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Collects all of the style strings.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.CSSString">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
           <td><span class="summary-sig"><a href="svgchart.lib.generators.Generator.Generator-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
         <span class="summary-sig-arg">data</span>,
         <span class="summary-sig-arg">settings</span>)</span><br />
       x.__init__(...) initializes x; see x.__class__.__doc__ for signature</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.__init__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="svgchart.lib.generators.Generator.Generator-class.html#__parseStyle" class="summary-sig-name" onclick="show_private();">__parseStyle</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">style</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
+      Parses a style string into its constituent key:value pairs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.__parseStyle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="svgchart.lib.generators.Generator.Generator-class.html#addStyleToClass" class="summary-sig-name">addStyleToClass</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">classname</span>=<span class="summary-sig-default"><code class="variable-quote">u'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">style</span>=<span class="summary-sig-default"><code class="variable-quote">u'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
+      Applies a style to a given class name.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.addStyleToClass">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="svgchart.lib.generators.Generator.Generator-class.html#addStyleToId" class="summary-sig-name">addStyleToId</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">id</span>=<span class="summary-sig-default"><code class="variable-quote">u'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">style</span>=<span class="summary-sig-default"><code class="variable-quote">u'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
+      Applies a style to a given ID tag.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.addStyleToId">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="svgchart.lib.generators.Generator.Generator-class.html#addStyleToTag" class="summary-sig-name">addStyleToTag</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">tag</span>,
+        <span class="summary-sig-arg">style</span>)</span><br />
+      Applies a style to a given tag name.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.addStyleToTag">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getCSS"></a><span class="summary-sig-name">getCSS</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns a style element containing the style rules given in the 
+      settings document.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getCSS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="svgchart.lib.generators.Generator.Generator-class.html#getStyles" class="summary-sig-name">getStyles</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">section</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Recursively retrieves the style information from a given section of 
+      the settings document.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getStyles">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -195,10 +326,141 @@ object --+
   <p>x.__init__(...) initializes x; see x.__class__.__doc__ for 
   signature</p>
   <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>data</code></strong> - The parsed data to create the chart from</li>
+        <li><strong class="pname"><code>settings</code></strong> - The settings used to format the chart</li>
+    </ul></dd>
     <dt>Overrides:
         object.__init__
-        <dd><em class="note">(inherited documentation)</em></dd>
     </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__parseStyle"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__parseStyle</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">style</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.__parseStyle">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Parses a style string into its constituent key:value pairs.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>style</code></strong> - The style string to parse</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="addStyleToClass"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">addStyleToClass</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">classname</span>=<span class="sig-default"><code class="variable-quote">u'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">style</span>=<span class="sig-default"><code class="variable-quote">u'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.addStyleToClass">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Applies a style to a given class name.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>classname</code></strong> - The classname to apply to</li>
+        <li><strong class="pname"><code>style</code></strong> - The style string</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="addStyleToId"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">addStyleToId</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">id</span>=<span class="sig-default"><code class="variable-quote">u'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">style</span>=<span class="sig-default"><code class="variable-quote">u'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.addStyleToId">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Applies a style to a given ID tag.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>id</code></strong> - The ID to apply to</li>
+        <li><strong class="pname"><code>style</code></strong> - The style string</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="addStyleToTag"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">addStyleToTag</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">tag</span>,
+        <span class="sig-arg">style</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.addStyleToTag">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Applies a style to a given tag name.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>tag</code></strong> - The tag name to apply to</li>
+        <li><strong class="pname"><code>style</code></strong> - The style string</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="getStyles"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getStyles</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">section</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getStyles">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Recursively retrieves the style information from a given section of 
+  the settings document.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>section</code></strong> - The section to search through</li>
+    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -234,7 +496,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Wed May 18 22:56:19 2011
+    Generated by Epydoc 3.0.1 on Sun May 22 01:06:00 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

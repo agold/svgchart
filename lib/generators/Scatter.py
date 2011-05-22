@@ -10,8 +10,13 @@ from lib.shapes.Coordinate import Coordinate
 from lib.shapes.Shape import Shape
 
 class Scatter(Generator):
+	"""Generates a scatter plot from the given data and settings."""
 
 	def __init__(self, data, settings):
+		"""
+		@param data: The parsed data to create the chart from
+		@param settings: The settings used to format the chart
+		"""
 
 		Generator.__init__(self, data, settings)
 		self.__title = None
@@ -20,12 +25,14 @@ class Scatter(Generator):
 		self.__xgrid = None
 		self.__ygrid = None
 		self.__legend = None
-		self.__datapoints = None
+		self.__datasets = None
 		self.__chart = None
 		self.__maxvalues = None
 		self.__minvalues = None
 
 	def getChart(self):
+		"""Assembles all of the elements and returns them in an svg tag."""
+
 		if self.__chart is not None:
 			# Cache the chart
 			return self.__chart
@@ -44,13 +51,15 @@ class Scatter(Generator):
 		subelements.append(self.getYGrid().getElement().svg())
 		subelements.append(self.getXAxis().getElement().svg())
 		subelements.append(self.getYAxis().getElement().svg())
-		subelements.append(self.getDataPoints().svg())
+		subelements.append(self.getDataSets().svg())
 		subelements.append(self.getLegend().getElement().svg())
 
 		self.__chart = Shape(tag='svg', id=id, classes=classes, subelements=subelements, attrs={'xmlns': xmlns, 'width': width, 'height': height, 'version': version})
 		return self.__chart
 
 	def getTitle(self):
+		"""Returns the title element of the chart."""
+
 		if self.__title is not None:
 			# Cache the title element
 			return self.__title
@@ -86,6 +95,8 @@ class Scatter(Generator):
 			return self.__title
 
 	def getXAxis(self):
+		"""Returns the x-axis element of the chart."""
+
 		if self.__xaxis is not None:
 			# Cache the x axis element
 			return self.__xaxis
@@ -140,6 +151,8 @@ class Scatter(Generator):
 		return self.__xaxis
 
 	def getYAxis(self):
+		"""Returns the y-axis element of the chart."""
+
 		if self.__yaxis is not None:
 			# Cache the y axis element
 			return self.__yaxis
@@ -198,6 +211,8 @@ class Scatter(Generator):
 		return [self.getXAxis().getElement(), self.getYAxis().getElement()]
 
 	def getXGrid(self):
+		"""Returns the x-axis grid for the chart."""
+
 		if self.__xgrid is not None:
 			# Cache the x grid element
 			return self.__xgrid
@@ -216,6 +231,8 @@ class Scatter(Generator):
 		return self.__xgrid
 
 	def getYGrid(self):
+		"""Returns the y-axis grid for the chart."""
+
 		if self.__ygrid is not None:
 			# Cache the y grid element
 			return self.__ygrid
@@ -234,9 +251,13 @@ class Scatter(Generator):
 		return self.__ygrid
 
 	def getGrid(self):
+		"""Returns a list of both grid elements."""
+
 		return [self.getXGrid().getElement(), self.getYGrid().getElement()]
 
 	def getLegend(self):
+		"""Returns the chart's legend element."""
+
 		if self.__legend is not None:
 			# Cache the legend element
 			return self.__legend
@@ -263,6 +284,8 @@ class Scatter(Generator):
 		return self.__legend
 
 	def getMaxValues(self):
+		"""Returns the maximum x and y values of the chart's data."""
+
 		if self.__maxvalues is not None:
 			# Cache the max value
 			return self.__maxvalues
@@ -279,6 +302,8 @@ class Scatter(Generator):
 		return self.__maxvalues
 
 	def getMinValues(self):
+		"""Returns the minimum x and y values of the chart's data."""
+
 		if self.__minvalues is not None:
 			# Cache the min value
 			return self.__minvalues
@@ -294,14 +319,12 @@ class Scatter(Generator):
 		self.__minvalues = (minx, miny)
 		return self.__minvalues
 
-	def getDataPoints(self):
-		if self.__datapoints is not None:
-			# Cache the datapoints element
-			return self.__datapoints
+	def getDataSets(self):
+		"""Returns the element containing all datasets of the chart."""
 
-		def valueToCoord(x, y):
-			return Coordinate(self.getXAxis().valueToCoord(x),
-							  self.getYAxis().valueToCoord(y))
+		if self.__datasets is not None:
+			# Cache the datasets element
+			return self.__datasets
 
 		id = self.settings["datasets"]["id"]
 		classes = self.settings["datasets"]["class"]
@@ -314,31 +337,62 @@ class Scatter(Generator):
 					break
 
 			setclasses = setting["class"]
-			symbolsize = float(setting["symbol"]["size"])
-			shapename = setting["symbol"]["shape"].capitalize()
-			shapemodule = __import__('lib.shapes.' + shapename, globals(), locals(), [shapename])
-			symbol = getattr(shapemodule, shapename)
 
-			symbolidprefix = setting["symbol"]["id-prefix"]
-			symbolclasses = setting["symbol"]["class"]
+			datasetelements = self.getDataSetElements(dataset, setting)
 
-			datapoints = []
-			count = 0
-			for value in dataset["value"]:
-				count += 1
-
-				x = float(value["x"])
-				y = float(value["y"])
-				coord = valueToCoord(x, y)
-				point = symbol(id=u'{}-{:d}'.format(symbolidprefix, count), classes=symbolclasses)
-				point.fit(symbolsize, symbolsize)
-				point.translateTo(coord)
-				datapoints.append(point)
-
-			datasetgroup = ShapeGroup(datapoints, id=setid, classes=setclasses)
+			datasetgroup = ShapeGroup(datasetelements, id=setid, classes=setclasses)
 			datasets.append(datasetgroup)
 
-		self.__datapoints = ShapeGroup(datasets, id=id, classes=classes)
-		return self.__datapoints
+		self.__datasets = ShapeGroup(datasets, id=id, classes=classes)
+		return self.__datasets
+
+	def valueToCoord(self, x, y):
+		"""Returns a Coordinate from the given x and y values.
+
+		@param x: The x value
+		@param y: The y value
+		"""
+
+		return Coordinate(self.getXAxis().valueToCoord(x),
+						  self.getYAxis().valueToCoord(y))
+
+	def getDataSetElements(self, dataset, setting):
+		"""Returns the elements which make up a particular dataset.
+
+		@param dataset: The set of data
+		@param setting: The settings of the dataset
+		"""
+
+		return self.getDataPoints(dataset, setting)
+
+	def getDataPoints(self, dataset, setting):
+		"""Returns the datapoints for a particular dataset.
+
+		@param dataset: The set of data
+		@param setting: The settings of the dataset
+		"""
 
 
+		symbolsize = float(setting["symbol"]["size"])
+		shapename = setting["symbol"]["shape"].capitalize()
+		shapemodule = __import__('lib.shapes.' + shapename, globals(), locals(), [shapename])
+		symbol = getattr(shapemodule, shapename)
+
+		symbolidprefix = setting["symbol"]["id-prefix"]
+		symbolclasses = setting["symbol"]["class"]
+
+		datapoints = []
+		count = 0
+		for value in dataset["value"]:
+			count += 1
+
+			x = float(value["x"])
+			y = float(value["y"])
+			coord = self.valueToCoord(x, y)
+			point = symbol(id=u'{}-{:d}'.format(symbolidprefix, count), classes=symbolclasses)
+			point.fit(symbolsize, symbolsize)
+			point.translateTo(coord)
+			point.translate(-symbolsize / 2, -symbolsize / 2)
+			datapoints.append(point)
+
+		return datapoints
