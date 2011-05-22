@@ -6,6 +6,7 @@ from lib.shapes.ShapeGroup import ShapeGroup
 class HorizontalGrid(Grid):
 
 	def __init__(self, points=(), left=0.0, right=1.0,
+				start=0.0, end=1.0,
 				id=u'', classes=(),
 				lineidprefix=u'', lineclasses=()):
 		"""
@@ -13,6 +14,9 @@ class HorizontalGrid(Grid):
 		@param left: The leftmost coordinate to begin drawing grid lines at
 		@param right: The rightmost coordinate to stop drawing grid lines at
 
+		@param start: The starting coordinate of the axis
+		@param end: The ending coordinate of the axis
+		
 		@param id: The unique ID to be used in the SVG document
 		@type id: string
 		@param classes: Classnames to be used in the SVG document
@@ -24,7 +28,7 @@ class HorizontalGrid(Grid):
 		@type lineclasses: string or sequence of strings
 		"""
 
-		Grid.__init__(self, points, id, classes, lineidprefix, lineclasses)
+		Grid.__init__(self, points, start, end, id, classes, lineidprefix, lineclasses)
 
 		self.left = left
 		self.right = right
@@ -35,11 +39,12 @@ class HorizontalGrid(Grid):
 		lines = []
 		linecount = 0
 		for point in self.points:
-			linecount += 1
-			lines.append(Line(start=Coordinate(self.left, point),
-						end=Coordinate(self.right, point),
-						id=u'{}-{:d}'.format(self.lineidprefix, linecount),
-						classes=self.lineclasses))
+			if point != self.start and point != self.end:
+				linecount += 1
+				lines.append(Line(start=Coordinate(self.left, point),
+							end=Coordinate(self.right, point),
+							id=u'{}-{:d}'.format(self.lineidprefix, linecount),
+							classes=self.lineclasses))
 
 		return ShapeGroup(shapes=lines, id=self.id, classes=self.classes)
 

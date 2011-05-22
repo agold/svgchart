@@ -1,6 +1,7 @@
 from lib.shapes.Text import Text
 from lib.shapes.ShapeGroup import ShapeGroup
 from lib.shapes.Coordinate import Coordinate
+from lib.shapes.Rectangle import Rectangle
 from Element import Element
 
 class Title(Element):
@@ -10,7 +11,8 @@ class Title(Element):
 				x=0.0, y=0.0, width=100.0, height=50.0,
 				id=u'', classes=(),
 				titleid=u'', titleclasses=(),
-				subtitleid=u'', subtitleclasses=()):
+				subtitleid=u'', subtitleclasses=(),
+				border=False, borderid=u'', borderclasses=()):
 		"""
 		@param title: The text of the title
 		@type title: string
@@ -35,6 +37,13 @@ class Title(Element):
 		@type subtitleid: string
 		@param subtitleclasses: Classnames to be applied to the subtitle text
 		@type subtitleclasses: string or sequence of strings
+
+		@param border: Flag designating whether or not to draw a border
+		@type border: boolean
+		@param borderid: The SVG document ID of the title element's border
+		@type borderid: string
+		@param borderclasses: Classnames to be applied to the title element's border
+		@type borderclasses: string or sequence of strings
 		"""
 
 		Element.__init__(self)
@@ -51,24 +60,32 @@ class Title(Element):
 		self.titleclasses = titleclasses
 		self.subtitleid = subtitleid
 		self.subtitleclasses = subtitleclasses
+		self.border = border
+		self.borderid = borderid
+		self.borderclasses = borderclasses
 
 
 	def getElement(self):
 		"""Returns the shapes of the y axis."""
 		
 		elements = []
+
+		if self.border:
+			border = Rectangle(position=Coordinate(self.x, self.y), width=self.width, height=self.height, id=self.borderid, classes=self.borderclasses)
+			elements.append(border)
+
 		if not self.subtitle:
 			titleelem = Text(text=self.title, id=self.titleid, classes=self.titleclasses)
-			vcenter = self.y + (self.height - self.y) / 2
-			hcenter = self.x + (self.width - self.x) / 2
+			vcenter = self.y + self.height / 2
+			hcenter = self.x + self.width / 2
 			titleelem.position = Coordinate(hcenter, vcenter)
 			elements.append(titleelem)
 		else:
 			titleelem = Text(text=self.title, id=self.titleid, classes=self.titleclasses)
 			subtitleelem = Text(text=self.subtitle, id=self.subtitleid, classes=self.subtitleclasses)
 			totalheight = titleelem.height + subtitleelem.height
-			vcenter = self.y + (self.height - self.y) / 2
-			hcenter = self.x + (self.width - self.x) / 2
+			vcenter = self.y + self.height / 2
+			hcenter = self.x + self.width / 2
 			titleelem.position = Coordinate(hcenter, vcenter - totalheight / 2)
 			subtitleelem.position = Coordinate(hcenter, vcenter + totalheight / 2)
 			elements += [titleelem, subtitleelem]

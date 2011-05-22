@@ -1,7 +1,9 @@
 <settings>
-	<chart id="svgchart" class="chart" width="650" height="400" style="shape-rendering: crispEdges; text-rendering: optimizeLegibility;" />
+	<chart id="svgchart" class="chart" width="650" height="400" style="shape-rendering: crispEdges; text-rendering: optimizeLegibility;">
+		<border class="border" style="fill: none; stroke: black; stroke-width: 1px;" />
+	</chart>
 	
-	<title id="title" class="title" x="0" y="0" width="650" height="50" style="text-anchor: middle;">
+	<title id="title" class="title" x="150" y="0" width="480" height="50" style="text-anchor: middle;">
 		<title id="title-text" class="title">The title</title>
 		<subtitle id="subtitle-text" class="subtitle" /> <!-- The text is blank in the default so I can check for None to determine whether or not to include a title -->
 	</title>
@@ -28,7 +30,9 @@
 		<range min="auto" max="auto" />
 	</y-axis>
 	
-	<datafield x="150" y="50" width="480" height="300" id="data-field" class="data-field" />
+	<datafield x="150" y="50" width="480" height="300" id="data-field" class="data-field">
+		<border class="border" />
+	</datafield>
 	
 	<datasets id="data-sets" class="data-sets">
 		<set id="set1" class="set1 dataset" label="Set 1">
@@ -41,8 +45,9 @@
 		</set>
 	</datasets>
 	
-	<legend id="legend" class="legend" x="5" y="15" width="100">
+	<legend id="legend" class="legend" x="0" y="0" width="150" height="400">
 		<title size="12" id="legend-title" class="legend-title" style="text-anchor: middle; stroke: none;">Legend</title>
 		<entries height="12" />
+		<border class="border" />
 	</legend>
 </settings>

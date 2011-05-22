@@ -8,6 +8,7 @@ from lib.elements.Title import Title
 from lib.shapes.ShapeGroup import ShapeGroup
 from lib.shapes.Coordinate import Coordinate
 from lib.shapes.Shape import Shape
+from lib.shapes.Rectangle import Rectangle
 
 class Scatter(Generator):
 	"""Generates a scatter plot from the given data and settings."""
@@ -39,19 +40,35 @@ class Scatter(Generator):
 
 		id = self.settings["chart"]["id"]
 		classes = self.settings["chart"]["class"]
-		width = self.settings["chart"]["width"]
-		height = self.settings["chart"]["height"]
+		width = float(self.settings["chart"]["width"])
+		height = float(self.settings["chart"]["height"])
 		xmlns = u'http://www.w3.org/2000/svg'
 		version = u'1.1'
 
 		subelements = []
 		subelements.append(self.getCSS().svg())
+		try:
+			border = self.settings["chart"]["border"]
+			try:
+				borderid = border["id"]
+			except:
+				borderid = None
+			try:
+				borderclasses = border["class"]
+			except:
+				borderclasses = None
+			subelements.append(Rectangle(Coordinate(0, 0), width=width - 1,
+									height=height - 1, id=borderid,
+									classes=borderclasses).svg())
+		except:
+			pass
+
 		subelements.append(self.getTitle().getElement().svg())
 		subelements.append(self.getXGrid().getElement().svg())
 		subelements.append(self.getYGrid().getElement().svg())
 		subelements.append(self.getXAxis().getElement().svg())
 		subelements.append(self.getYAxis().getElement().svg())
-		subelements.append(self.getDataSets().svg())
+		subelements.append(self.getDataField().svg())
 		subelements.append(self.getLegend().getElement().svg())
 
 		self.__chart = Shape(tag='svg', id=id, classes=classes, subelements=subelements, attrs={'xmlns': xmlns, 'width': width, 'height': height, 'version': version})
@@ -87,11 +104,29 @@ class Scatter(Generator):
 			id = self.settings["title"]["id"]
 			classes = self.settings["title"]["class"]
 
+			try:
+				border = self.settings["title"]["border"]
+				enableborder = True
+				try:
+					borderid = border["id"]
+				except:
+					borderid = None
+				try:
+					borderclasses = border["class"]
+				except:
+					borderclasses = None
+			except:
+				enableborder = False
+				borderid = None
+				borderclasses = None
+
+
 			self.__title = Title(title=title, subtitle=subtitle,
 					x=x, y=y, width=width, height=height,
 					id=id, classes=classes,
 					titleid=titleid, titleclasses=titleclasses,
-					subtitleid=subtitleid, subtitleclasses=subtitleclasses)
+					subtitleid=subtitleid, subtitleclasses=subtitleclasses,
+					border=enableborder, borderid=None, borderclasses=borderclasses)
 			return self.__title
 
 	def getXAxis(self):
@@ -218,6 +253,8 @@ class Scatter(Generator):
 			return self.__xgrid
 
 		points = self.getXAxis().majorTicks()
+		start = self.getXAxis().start
+		end = self.getXAxis().end
 		top = float(self.settings["datafield"]["y"])
 		bottom = float(self.settings["datafield"]["height"]) + top
 		id = self.settings["x-axis"]["grid"]["id"]
@@ -226,6 +263,7 @@ class Scatter(Generator):
 		lineclasses = self.settings["x-axis"]["grid"]["lines"]["class"]
 
 		self.__xgrid = VerticalGrid(points=points, top=top, bottom=bottom,
+				start=start, end=end,
 				id=id, classes=classes,
 				lineidprefix=lineidprefix, lineclasses=lineclasses)
 		return self.__xgrid
@@ -238,6 +276,8 @@ class Scatter(Generator):
 			return self.__ygrid
 
 		points = self.getYAxis().majorTicks()
+		start = self.getYAxis().start
+		end = self.getYAxis().end
 		left = float(self.settings["datafield"]["x"])
 		right = float(self.settings["datafield"]["width"]) + left
 		id = self.settings["y-axis"]["grid"]["id"]
@@ -246,6 +286,7 @@ class Scatter(Generator):
 		lineclasses = self.settings["y-axis"]["grid"]["lines"]["class"]
 
 		self.__ygrid = HorizontalGrid(points=points, left=left, right=right,
+				start=start, end=end,
 				id=id, classes=classes,
 				lineidprefix=lineidprefix, lineclasses=lineclasses)
 		return self.__ygrid
@@ -268,6 +309,7 @@ class Scatter(Generator):
 		x = float(self.settings["legend"]["x"])
 		y = float(self.settings["legend"]["y"])
 		width = float(self.settings["legend"]["width"])
+		height = float(self.settings["legend"]["height"])
 		entryheight = float(self.settings["legend"]["entries"]["height"])
 		title = self.settings["legend"]["title"].text
 		titlesize = float(self.settings["legend"]["title"]["size"])
@@ -275,12 +317,29 @@ class Scatter(Generator):
 		classes = self.settings["legend"]["class"]
 		titleid = self.settings["legend"]["title"]["id"]
 		titleclasses = self.settings["legend"]["title"]["class"]
+
+		try:
+			border = self.settings["legend"]["border"]
+			enableborder = True
+			try:
+				borderid = border["id"]
+			except:
+				borderid = None
+			try:
+				borderclasses = border["class"]
+			except:
+				borderclasses = None
+		except:
+			enableborder = False
+			borderid = None
+			borderclasses = None
 		
 		self.__legend = Legend(entries=entries, x=x, y=y,
-				width=width, entryheight=entryheight,
+				width=width, height=height, entryheight=entryheight,
 				title=title, titlesize=titlesize,
 				id=id, classes=classes,
-				titleid=titleid, titleclasses=titleclasses)
+				titleid=titleid, titleclasses=titleclasses,
+				border=enableborder, borderid=borderid, borderclasses=borderclasses)
 		return self.__legend
 
 	def getMaxValues(self):
@@ -318,6 +377,37 @@ class Scatter(Generator):
 					miny = float(value["y"])
 		self.__minvalues = (minx, miny)
 		return self.__minvalues
+
+	def getDataField(self):
+		"""Returns the datafield element."""
+
+		id = self.settings["datafield"]["id"]
+		classes = self.settings["datafield"]["class"]
+		width = float(self.settings["datafield"]["width"])
+		height = float(self.settings["datafield"]["height"])
+		x = float(self.settings["datafield"]["x"])
+		y = float(self.settings["datafield"]["y"])
+
+		shapes = []
+		try:
+			border = self.settings["datafield"]["border"]
+			try:
+				borderid = border["id"]
+			except:
+				borderid = None
+			try:
+				borderclasses = border["class"]
+			except:
+				borderclasses = None
+			shapes.append(Rectangle(Coordinate(x, y), width=width,
+									height=height, id=borderid,
+									classes=borderclasses))
+		except:
+			pass
+
+		shapes.append(self.getDataSets())
+		return ShapeGroup(shapes, id=id, classes=classes)
+
 
 	def getDataSets(self):
 		"""Returns the element containing all datasets of the chart."""
