@@ -20,33 +20,39 @@ optional arguments:
 from lib.input.InputLayer import InputLayer
 from lib.parse.ParsingLayer import ParsingLayer
 from lib.output.SVGOutput import SVGOutput
-import argparse
 
-parser = argparse.ArgumentParser(description='Generate an interactive SVG chart',
-								 version="0.1")
-parser.add_argument('--infile', '-i', action="store", dest="infile")
-parser.add_argument('--settings', '-s', action="store", dest="settings")
-parser.add_argument('--data', '-d', action="store", dest="data")
-parser.add_argument('--scripts', '-c', action="store", dest="scripts")
-parser.add_argument('--outfile', '-o', action="store", dest="outfile")
-parser.add_argument('--type', '-t', action="store", dest="type", default='scatter')
-parser.add_argument('--pretty', '-p', action="store_true", dest="pretty", default=False)
+def getChart(infile, settings, data, scripts, outfile, type, pretty):
+	input = InputLayer(input=infile,
+					settings=settings,
+					data=data,
+					scripts=scripts)
 
-args = parser.parse_args()
+	parsed = ParsingLayer(input.rawInput).parsedInput
 
-input = InputLayer(input=args.infile,
-					settings=args.settings,
-					data=args.data,
-					scripts=args.scripts)
+	generatorname = type.capitalize()
+	genmod = __import__('lib.generators.' + generatorname, globals(), locals(), [generatorname])
+	generator = getattr(genmod, generatorname)
 
-parsed = ParsingLayer(input.rawInput).parsedInput
+	chart = generator(data=parsed.data, settings=parsed.settings)
 
-generatorname = args.type.capitalize()
-genmod = __import__('lib.generators.' + generatorname, globals(), locals(), [generatorname])
-generator = getattr(genmod, generatorname)
+	output = SVGOutput(chart=chart.getChart(), file=outfile, pretty=pretty)
+	output.output()
 
-chart = generator(data=parsed.data, settings=parsed.settings)
+if __name__ == "__main__":
+	import argparse
 
-output = SVGOutput(chart=chart.getChart(), file=args.outfile, pretty=args.pretty)
-output.output()
+	parser = argparse.ArgumentParser(description='Generate an interactive SVG chart',
+									 version="0.1")
+	parser.add_argument('-i', '--infile', action="store", dest="infile", help="File containing settings, data, and scripts")
+	parser.add_argument('-s', '--settings', action="store", dest="settings", help="File containing the chart settings")
+	parser.add_argument('-d', '--data', action="store", dest="data", help="File containing the chart data")
+	parser.add_argument('-c', '--scripts', action="store", dest="scripts", help="File containing the chart scripts")
+	parser.add_argument('-o', '--outfile', action="store", dest="outfile", help="Output file")
+	parser.add_argument('-t', '--type', action="store", dest="type", default="scatter", help="Type of chart to generate")
+	parser.add_argument('-p', '--pretty', action="store_true", dest="pretty", default=False, help="Pretty print the XML output")
+
+	args = parser.parse_args()
+
+	getChart(args.infile, args.settings, args.data, args.scripts,
+			 args.outfile, args.type, args.pretty)
 
