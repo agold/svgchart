@@ -1,8 +1,5 @@
 import sys
-try:
-	import xml.etree.cElementTree as etree
-except:
-	import xml.etree.ElementTree as etree
+import lib.ElementTreeCDATA as etree
 
 class SVGOutput(object):
 	"""Outputs a chart to the given file or standard output."""

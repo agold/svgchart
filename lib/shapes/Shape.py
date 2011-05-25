@@ -1,9 +1,7 @@
-try:
-	import xml.etree.cElementTree as etree
-except:
-	import xml.etree.ElementTree as etree
+import lib.ElementTreeCDATA as etree
 
 from Coordinate import Coordinate
+
 
 class Shape(object):
 	"""Base class of a generic shape.
@@ -20,7 +18,7 @@ class Shape(object):
 
 	"""
 
-	def __init__(self, tag=u'', id=None, classes=None, text=None, subelements=None, precision=4, attrs={}, **kwargs):
+	def __init__(self, tag=u'', id=None, classes=None, text=None, cdata=None, subelements=None, precision=4, attrs={}, **kwargs):
 		"""
 		@param tag: the SVG tag name
 		@type tag: string
@@ -30,6 +28,8 @@ class Shape(object):
 		@type classes: string or sequence of strings
 		@param text: inner text of the SVG element
 		@type text: string
+		@param cdata: Inner text of the SVG element that will be rendered in a CDATA section
+		@type cdata: string
 		@param subelements: a list of subelements of this shape
 		@param precision: the decimal precision for numbers in SVG output
 		@type precision: integer
@@ -39,6 +39,7 @@ class Shape(object):
 
 		self.tag = tag
 		self.text = text
+		self.cdata = cdata
 		self.subelements = subelements
 		self.precision = precision
 		self.attrs = dict(attrs, **kwargs)
@@ -112,6 +113,11 @@ class Shape(object):
 		svg = etree.Element(self.tag, svgattrs)
 		if self.text is not None:
 			svg.text = self.text
+
+		if self.cdata is not None:
+			# CDATA has to be added as a comment due to a
+			# particularly dirty hack required by the output layer
+			svg.append(etree.Comment(self.cdata))
 
 		if type(self.subelements) == type(etree.Element('blank')):
 			svg.append(self.subelements)

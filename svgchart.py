@@ -33,7 +33,7 @@ def getChart(infile, settings, data, scripts, outfile, type, pretty):
 	genmod = __import__('lib.generators.' + generatorname, globals(), locals(), [generatorname])
 	generator = getattr(genmod, generatorname)
 
-	chart = generator(data=parsed.data, settings=parsed.settings)
+	chart = generator(data=parsed.data, settings=parsed.settings, scripts=parsed.scripts)
 
 	output = SVGOutput(chart=chart.getChart(), file=outfile, pretty=pretty)
 	output.output()
