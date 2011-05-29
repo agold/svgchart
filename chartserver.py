@@ -57,6 +57,11 @@ class ChartHandler(BaseHTTPRequestHandler):
 			else:
 				type = 'scatter'
 			
+			if "range" in form:
+				range = form["range"][0]
+			else:
+				range = ',,,'
+			
 			pretty = "pretty" in form
 			
 			# Send success headers and the SVG MIME type
@@ -65,7 +70,7 @@ class ChartHandler(BaseHTTPRequestHandler):
 			self.end_headers()
 			
 			# Gets the chart and writes directly to the client
-			getChart(infile, settings, data, scripts, self.wfile, type, pretty)
+			getChart(infile, settings, data, scripts, self.wfile, type, pretty, range)
 			
 if __name__ == '__main__':
 	try:

@@ -29,7 +29,8 @@ class Line(Scatter):
 		for value in dataset["value"]:
 			x = float(value["x"])
 			y = float(value["y"])
-			coord = self.valueToCoord(x, y)
-			vertices.append(coord)
+			if x >= self.xmin and x <= self.xmax and y >= self.ymin and y <= self.ymax:
+				coord = self.valueToCoord(x, y)
+				vertices.append(coord)
 
 		return Path(coordinates=vertices, id=id, classes=classes)

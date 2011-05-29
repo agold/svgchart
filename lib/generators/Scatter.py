@@ -87,15 +87,16 @@ class Scatter(Generator):
 		datapoints = []
 		count = 0
 		for value in dataset["value"]:
-			count += 1
-
 			x = float(value["x"])
 			y = float(value["y"])
-			coord = self.valueToCoord(x, y)
-			point = symbol(id=u'{}-{:d}'.format(symbolidprefix, count), classes=symbolclasses)
-			point.fit(symbolsize, symbolsize)
-			point.translateTo(coord)
-			point.translate(-symbolsize / 2, -symbolsize / 2)
-			datapoints.append(point)
+			if x >= self.xmin and x <= self.xmax and y >= self.ymin and y <= self.ymax:
+				count += 1
+
+				coord = self.valueToCoord(x, y)
+				point = symbol(id=u'{}-{:d}'.format(symbolidprefix, count), classes=symbolclasses)
+				point.fit(symbolsize, symbolsize)
+				point.translateTo(coord)
+				point.translate(-symbolsize / 2, -symbolsize / 2)
+				datapoints.append(point)
 
 		return datapoints

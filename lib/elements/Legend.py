@@ -57,6 +57,7 @@ class Legend(Element):
 		self.border = border
 		self.borderid = borderid
 		self.borderclasses = borderclasses
+		self.entrymargin = 2.0
 
 	def getElement(self):
 		"""Returns the shapes of the legend."""
@@ -87,7 +88,7 @@ class Legend(Element):
 			shape.id = entry["legend-entry"]["symbol"]["id"]
 			shape.classes = entry["legend-entry"]["symbol"]["class"]
 			shape.fit(height=self.entryheight)
-			shape.translateTo(Coordinate(startx, starty + self.titlesize + (entrycount - 1) * self.entryheight))
+			shape.translateTo(Coordinate(startx, starty + self.titlesize + (entrycount - 1) * (self.entryheight + self.entrymargin)))
 
 			textelem = Text(position=Coordinate(startx + shape.width, shape.position.y + self.entryheight - 1),
 							text=text,

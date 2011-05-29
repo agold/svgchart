@@ -21,7 +21,7 @@ from lib.input.InputLayer import InputLayer
 from lib.parse.ParsingLayer import ParsingLayer
 from lib.output.SVGOutput import SVGOutput
 
-def getChart(infile, settings, data, scripts, outfile, type, pretty):
+def getChart(infile, settings, data, scripts, outfile, type, pretty, datarange):
 	input = InputLayer(input=infile,
 					settings=settings,
 					data=data,
@@ -33,14 +33,25 @@ def getChart(infile, settings, data, scripts, outfile, type, pretty):
 	genmod = __import__('lib.generators.' + generatorname, globals(), locals(), [generatorname])
 	generator = getattr(genmod, generatorname)
 
-	chart = generator(data=parsed.data, settings=parsed.settings, scripts=parsed.scripts)
 
-	output = SVGOutput(chart=chart.getChart(), file=outfile, pretty=pretty)
+	input_documents = {"infile": infile if isinstance(infile, basestring) else None,
+					   "settings": settings if isinstance(settings, basestring) else None,
+					   "data": data if isinstance(data, basestring) else None,
+					   "scripts": scripts if isinstance(scripts, basestring) else None
+					  }
+
+	datarange = tuple([float(i) if i else None for i in datarange.split(',')])
+
+	chart = generator(data=parsed.data, settings=parsed.settings, scripts=parsed.scripts, documents=input_documents, datarange=datarange)
+
+	output = SVGOutput(chart=chart.getChart(), outfile=outfile, pretty=pretty)
 	output.output()
 
 if __name__ == "__main__":
 	import argparse
+	import time
 
+	time.clock()
 	parser = argparse.ArgumentParser(description='Generate an interactive SVG chart',
 									 version="0.1")
 	parser.add_argument('-i', '--infile', action="store", dest="infile", help="File containing settings, data, and scripts")
@@ -50,9 +61,11 @@ if __name__ == "__main__":
 	parser.add_argument('-o', '--outfile', action="store", dest="outfile", help="Output file")
 	parser.add_argument('-t', '--type', action="store", dest="type", default="scatter", help="Type of chart to generate")
 	parser.add_argument('-p', '--pretty', action="store_true", dest="pretty", default=False, help="Pretty print the XML output")
+	parser.add_argument('-r', '--range', action="store", dest="range", default=",,,", help="Range of values to output in the form x,x,y,y")
 
 	args = parser.parse_args()
 
 	getChart(args.infile, args.settings, args.data, args.scripts,
-			 args.outfile, args.type, args.pretty)
+			 args.outfile, args.type, args.pretty, args.range)
 
+	print time.clock()

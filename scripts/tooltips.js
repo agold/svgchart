@@ -20,7 +20,7 @@ if (typeof tooltips == "undefined") {
 			rect.setAttributeNS(null, "id", tooltips.ids.rect);
 			rect.setAttributeNS(null, "rx", 4);
 			rect.setAttributeNS(null, "ry", 4);
-			rect.setAttributeNS(null, "style", "fill:#FFFFFF; fill-opacity:0.3; stroke: #000000; stroke-opacity:0.7;stroke-width: 2px;");
+			rect.setAttributeNS(null, "style", "fill:#FFFFFF; fill-opacity:0.7; stroke: #000000; stroke-opacity:0.7;stroke-width: 2px;");
 
 			var contents = document.createElementNS(tooltips.svgns, "g");
 			contents.setAttributeNS(null, "id", tooltips.ids.contents);
@@ -52,23 +52,23 @@ if (typeof tooltips == "undefined") {
 		convertPoints: function() {
 			var result = [];
 			for (setid in tooltips.datasets) {
-				var l = tooltips.datasets[setid].length;
+				var l = tooltips.datasets[setid].values.length;
 				var setcolor = null;
 				for (var i = 0; i < l; i++) {
 					if (setcolor == null) {
-						var point = document.getElementById(tooltips.datasets[setid][i].id);
+						var point = document.getElementById(tooltips.datasets[setid].values[i].id);
 						if (point.currentStyle)
 							setcolor = x.currentStyle["fill"];
 						else if (window.getComputedStyle)
 							setcolor = document.defaultView.getComputedStyle(point, null).getPropertyValue("fill");
 						else setcolor = "#000000";
 					}
-					x = tooltips.datasets[setid][i].coord.x;
+					x = tooltips.datasets[setid].values[i].coord.x;
 					var floored = Math.floor(x);
 					if (typeof result[floored] == 'undefined') {
 						result[floored] = [];
 					}
-					var newpoint = tooltips.datasets[setid][i];
+					var newpoint = tooltips.datasets[setid].values[i];
 					newpoint.setid = setid;
 					newpoint.color = setcolor;
 					result[floored].push(newpoint);
@@ -148,13 +148,6 @@ if (typeof tooltips == "undefined") {
 			}
 		},
 		ttNode: function(xpos) {
-			if (navigator.oscpu) {
-				// Gecko browsers set tooltips property
-				// Gecko based browsers can't handle nested tspans or some nonsense.
-				// They get a less pretty tooltip.
-				var is_lame = true;
-			}
-
 			var points = tooltips.points[xpos];
 
 			var container = document.createElementNS(tooltips.svgns, 'text');
@@ -168,7 +161,7 @@ if (typeof tooltips == "undefined") {
 				var dataset = point.setid;
 				var dataid = point.id;
 				var color = point.color;
-				var setName = point.setid; //tooltips should be the set name as given in the legend instead
+				var setName = tooltips.datasets[point.setid].label; //tooltips should be the set name as given in the legend instead
 				var yvalue = point.val.y;
 
 				if (document.getElementById(setid).getAttribute('visibility') != 'hidden') {
@@ -180,33 +173,22 @@ if (typeof tooltips == "undefined") {
 						xelem.appendChild(document.createTextNode("X: " + point.val.x));
 						container.appendChild(xelem);
 					}
-					if (is_lame == true) {
-						currentY = currentY + ((i == 0) ? 20 : 15);
-						var setelem = document.createElementNS(tooltips.svgns, 'tspan');
-						setelem.setAttributeNS(null, 'x', 2);
-						setelem.setAttributeNS(null, 'y', currentY);
-						var datastring = setName + ': ' + yvalue;
-						setelem.appendChild(document.createTextNode(datastring));
+					currentY = currentY + ((i == 0) ? 20 : 15);
+					var setelem = document.createElementNS(tooltips.svgns, 'tspan');
+					setelem.setAttributeNS(null, 'x', 2);
+					setelem.setAttributeNS(null, 'y', currentY);
 
-						container.appendChild(setelem);
-					} else {
-						currentY = currentY + ((i == 0) ? 20 : 15);
-						var setelem = document.createElementNS(tooltips.svgns, 'tspan');
-						setelem.setAttributeNS(null, 'x', 2);
-						setelem.setAttributeNS(null, 'y', currentY);
+					var settitle = document.createElementNS(tooltips.svgns, 'tspan');
+					settitle.setAttributeNS(null, 'style', 'font-weight: bold; fill: ' + color + ';');
+					settitle.appendChild(document.createTextNode(setName + ': '));
+					setelem.appendChild(settitle);
 
-						var settitle = document.createElementNS(tooltips.svgns, 'tspan');
-						settitle.setAttributeNS(null, 'style', 'font-weight: bold; fill: ' + color + ';');
-						settitle.appendChild(document.createTextNode(setName + ': '));
-						setelem.appendChild(settitle);
+					var setdata = document.createElementNS(tooltips.svgns, 'tspan');
+					var datastring = yvalue;
+					setdata.appendChild(document.createTextNode(datastring));
+					setelem.appendChild(setdata);
 
-						var setdata = document.createElementNS(tooltips.svgns, 'tspan');
-						var datastring = yvalue;
-						setdata.appendChild(document.createTextNode(datastring));
-						setelem.appendChild(setdata);
-
-						container.appendChild(setelem);
-					}
+					container.appendChild(setelem);
 				}
 			}
 			return container;
@@ -224,7 +206,7 @@ if (typeof tooltips == "undefined") {
 
 			var bbox = ttcontents.getBBox();
 			var ttwidth = bbox.width + 6;
-			var ttheight = bbox.height + 8;
+			var ttheight = bbox.height + 2;
 			var ttypos = y - (ttheight / 2);
 			var ttxpos = x + 10;
 			if (max_x) {
@@ -249,16 +231,5 @@ if (typeof tooltips == "undefined") {
 			}
 		}
 	};
-	var init = null;
-	if (document.rootElement.onload) {
-		init = function() {
-			document.rootElement.onload();
-			tooltips.init();
-		}
-	} else {
-		init = function() {
-			tooltips.init();
-		}
-	}
-	document.rootElement.onload = init;
+	window.addEventListener("load", tooltips.init, false);
 }
