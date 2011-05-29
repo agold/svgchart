@@ -13,16 +13,23 @@ import json
 class Generator(object):
 	"""Base class for a chart generator."""
 
-	def __init__(self, data, settings, scripts):
+	def __init__(self, data=None, settings=None, scripts=None, documents=None, datarange=(None, None, None, None)):
 		"""
 		@param data: The parsed data to create the chart from
 		@param settings: The settings used to format the chart
 		@param scripts: The scripts to be included in the chart
+		@param documents: The input file names used to generate this chart, if they exist
 		"""
 
 		self.data = data
 		self.settings = settings
 		self.scripts = scripts
+		self.documents = documents or {"infile": None, "settings": None, "data": None, "scripts": None}
+
+		self.xmin = datarange[0] or float("-inf")
+		self.xmax = datarange[1] or float("inf")
+		self.ymin = datarange[2] or float("-inf")
+		self.ymax = datarange[3] or float("inf")
 		self.styles = {}
 
 		self.__title = None
@@ -51,7 +58,12 @@ class Generator(object):
 
 		subelements = []
 		subelements.append(self.getCSS().svg())
-		subelements.extend(self.getScripts())
+		
+		try:
+			subelements.extend(self.getScripts())
+		except:
+			pass
+
 		try:
 			border = self.settings["chart"]["border"]
 			try:
@@ -472,19 +484,39 @@ class Generator(object):
 					break
 
 			idprefix = setting["symbol"]["id-prefix"]
+			label = setting["label"]
 			values = []
 			count = 0
 			for value in dataset["value"]:
-				count += 1
 				valx = float(value["x"])
 				valy = float(value["y"])
-				coord = self.valueToCoord(valx, valy)
-				valuedict = {"val": {"x": valx, "y": valy},
-							 "coord": {"x": coord.x, "y": coord.y},
-							 "id": "{}-{:d}".format(idprefix, count)}
-				values.append(valuedict)
-			datasets[setid] = values
+				if valx >= self.xmin and valx <= self.xmax and valy >= self.ymin and valy <= self.ymax:
+					count += 1
+					coord = self.valueToCoord(valx, valy)
+					valuedict = {"val": {"x": valx, "y": valy},
+								 "coord": {"x": coord.x, "y": coord.y},
+								 "id": "{}-{:d}".format(idprefix, count)}
+					values.append(valuedict)
+			datasets[setid] = {"label": label}
+			datasets[setid]["values"] = values
 		return json.dumps(datasets, separators=(', ', ': '))
+
+	def getQueryString(self):
+		if not self.documents["infile"] and not self.documents["settings"] and not self.documents["data"]:
+			return ''
+
+		from urllib import quote
+		qs = []
+		if self.documents["infile"]:
+			qs.append('infile=' + quote(self.documents["infile"]))
+		if self.documents["settings"]:
+			qs.append('settings=' + quote(self.documents["settings"]))
+		if self.documents["data"]:
+			qs.append('data=' + quote(self.documents["data"]))
+		if self.documents["scripts"]:
+			qs.append('scripts=' + quote(self.documents["scripts"]))
+
+		return '?' + '&'.join(qs)
 
 	def parseScript(self, script=u''):
 		script = unicode(script)
@@ -492,7 +524,18 @@ class Generator(object):
 		script = re.sub(u"\}", u"%#%", script)
 		script = re.sub(u"%%([^%]+)%%", u"{\\1}", script)
 
-		parsed = script.format(settings=self.settings, datasets=self.getJSONDataSets())
+		truemax = self.getTrueMaxValues()
+		truemin = self.getTrueMinValues()
+		max = self.getMaxValues()
+		min = self.getMinValues()
+
+		data = {"x": {"max": {"real": truemax[0], "current": max[0]},
+					  "min": {"real": truemin[0], "current": min[0]}},
+				"y": {"max": {"real": truemax[1], "current": max[1]},
+					  "min": {"real": truemin[1], "current": min[1]}}
+			   }
+
+		parsed = script.format(settings=self.settings, data=data, datasets=self.getJSONDataSets(), querystring=self.getQueryString())
 
 		parsed = re.sub(u"%!%", u"{", parsed)
 		parsed = re.sub(u"%#%", u"}", parsed)
@@ -509,12 +552,30 @@ class Generator(object):
 		maxy = None
 		for dataset in self.data["set"]:
 			for value in dataset["value"]:
-				if float(value["x"]) > maxx:
-					maxx = float(value["x"])
-				if float(value["y"]) > maxy:
-					maxy = float(value["y"])
+				valx = float(value["x"])
+				valy = float(value["y"])
+				if valx >= self.xmin and valx <= self.xmax and valy >= self.ymin and valy <= self.ymax:
+					if valx > maxx:
+						maxx = valx
+					if valy > maxy:
+						maxy = valy
 		self.__maxvalues = (maxx, maxy)
 		return self.__maxvalues
+
+	def getTrueMaxValues(self):
+		"""Returns the maximum x and y values of the chart's data."""
+
+		maxx = None
+		maxy = None
+		for dataset in self.data["set"]:
+			for value in dataset["value"]:
+				valx = float(value["x"])
+				valy = float(value["y"])
+				if valx > maxx:
+					maxx = valx
+				if valy > maxy:
+					maxy = valy
+		return (maxx, maxy)
 
 	def getMinValues(self):
 		"""Returns the minimum x and y values of the chart's data."""
@@ -527,12 +588,30 @@ class Generator(object):
 		miny = self.getMaxValues()[1]
 		for dataset in self.data["set"]:
 			for value in dataset["value"]:
-				if float(value["x"]) < minx:
-					minx = float(value["x"])
-				if float(value["y"]) < miny:
-					miny = float(value["y"])
+				valx = float(value["x"])
+				valy = float(value["y"])
+				if valx >= self.xmin and valx <= self.xmax and valy >= self.ymin and valy <= self.ymax:
+					if valx < minx:
+						minx = valx
+					if valy < miny:
+						miny = valy
 		self.__minvalues = (minx, miny)
 		return self.__minvalues
+
+	def getTrueMinValues(self):
+		"""Returns the minimum x and y values of the chart's data."""
+
+		minx = self.getTrueMaxValues()[0]
+		miny = self.getTrueMaxValues()[1]
+		for dataset in self.data["set"]:
+			for value in dataset["value"]:
+				valx = float(value["x"])
+				valy = float(value["y"])
+				if valx < minx:
+					minx = valx
+				if valy < miny:
+					miny = valy
+		return (minx, miny)
 
 	def valueToCoord(self, x, y):
 		"""Returns a Coordinate from the given x and y values.
