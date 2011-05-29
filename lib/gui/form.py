@@ -1,16 +1,22 @@
+from lib.input.InputSet import InputSet
+from lib.input.FileInput import FileInput
+import lib.parse.ParsedInput as ParsedInput
+from lib.parse.IndexedDict import IndexedDict
+
 def getGUI(f):
 	header(f)
 	initColors(f,['red','green','blue'])
 	initTabs(f,['settings','data','scripts'])
-	openPage(f,'settings')
-	f.write("Some settings")
-	closePage(f,'settings')
-	openPage(f,'data')
-	f.write("Some data")
-	closePage(f,'data')
+	openForm(f)
+
+	settingsPage(f)
+	dataPage(f)
+
 	openPage(f,'scripts')
 	f.write("Some scripts")
 	closePage(f,'scripts')
+
+	closeForm(f)
 	footer(f)
 
 def header(f):
@@ -22,24 +28,33 @@ def header(f):
 	style(f)
 #	<link rel='stylesheet' type='text/css' href='lib/gui/style.css' />
 	f.write("""<script type='text/javascript'>
+		if (!Array.indexOf) {
+			Array.prototype.indexOf = function (obj) {
+				for (var i = 0;i < this.length;i++)
+					if (this[i] == obj)
+						return i;
+				return -1;
+			}
+		}
 		var colors = new Array()
 		var tabs = new Array()
 		var pages = new Array()
 		function init_tabs() {
 			for (var i = 0;i < pages.length;i++)
-				pages[i].setAttribute('class',colors[i] + ' page')
+				pages[i].className = colors[i] + ' page'
 			select_tab(tabs[0])
 		}
 		function reset_tabs() {
 			for (var i = 0;i < tabs.length;i++) {
-				tabs[i].setAttribute('class',colors[i] + ' tab')
+				tabs[i].className = colors[i] + ' tab'
 				pages[i].style.display = 'none'
 			}
 		}
 		function select_tab(tab) {
 			reset_tabs()
-			page = pages[tabs.indexOf(tab)]
-			tab.setAttribute('class',tab.getAttribute('class') + ' selected')
+			var index = tabs.indexOf(tab)
+			var page = pages[index]
+			tab.className = tab.className + ' selected'
 			page.style.display = 'block'
 		}
 	</script>
@@ -55,7 +70,7 @@ body {
 
 .tab {
 	width: 200px;
-	height: 20px;
+	height: 22px;
 	display: inline-block;
 
 	text-align: center;
@@ -73,7 +88,6 @@ body {
 }
 
 .page {
-	height: 70%;
 	border: 1px solid #111188;
 	border-top-right-radius: 7px;
 	border-bottom-left-radius: 7px;
@@ -111,6 +125,41 @@ def initTabs(f,labels):
 		f.write("tabs.push(document.getElementById('" + label + "tab'))")
 		closeScript(f)
 
+def openForm(f):
+	f.write("<form enctype='multipart/form-data' action='.' method='post' style='display:inline;'><input type='submit' value='Submit' />")
+
+def settingsPage(f):
+	openPage(f,'settings')
+
+	# Parse default file for basic structure
+	defFile = "defaults/default.line.settings.xml"
+	defText = InputSet('settings')
+	FileInput([defText],defFile)
+	defSettings = ParsedInput.parseXml(defText.textlist[0])
+
+	inputTree(f,defSettings)
+
+	closePage(f,'settings')
+
+def inputTree(f,input,tag = "",path = ""):
+	f.write(tag.capitalize() + ": ")
+	if (isinstance(input[key],IndexedDict)):
+		f.write("<input type='text' name='" + path + "/" + tag + "' value='" + str(input.text) + "' />")
+		f.write("<ul>")
+		for key in input.keys():
+			if (key not in ["id","class"]):
+				f.write("<li>")
+				inputTree(f,input[key],key,path + "/" + tag)
+			f.write("</li>")
+		f.write("</ul>")
+	else:
+		f.write("<input type='text' name='" + path + "@" + tag + "' value='" + input + "' />")
+
+def dataPage(f):
+	openPage(f,'data')
+	f.write("<input type='file' name='files' />")
+	closePage(f,'data')
+
 def openPage(f,label):
 	f.write("<div id='" + label + "page'>")
 
@@ -119,6 +168,9 @@ def closePage(f,label):
 	openScript(f)
 	f.write("pages.push(document.getElementById('" + label + "page'))")
 	closeScript(f)
+
+def closeForm(f):
+	f.write("</form>")
 
 def footer(f):
 	f.write("""

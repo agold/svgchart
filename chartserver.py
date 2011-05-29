@@ -1,3 +1,4 @@
+import cgi
 import urlparse
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 from svgchart import getChart
@@ -5,6 +6,16 @@ from lib.gui.form import getGUI
 import webbrowser
 
 class ChartHandler(BaseHTTPRequestHandler):
+
+	def do_POST(self):
+		self.send_response(200)
+		self.send_header('Content-type','text/html')
+		self.end_headers()
+
+		form = cgi.FieldStorage(fp=self.rfile,headers=self.headers,
+								environ={'REQUEST_METHOD':'POST','CONTENT_TYPE':self.headers['Content-Type']})
+
+		self.wfile.write(form)
 
 	def do_GET(self):
 		
@@ -62,7 +73,8 @@ if __name__ == '__main__':
 		server = HTTPServer(('', 35782), ChartHandler)
 		print 'Started chart server...'
 		webbrowser.open('http://localhost:35782/',2)
-		server.serve_forever()
+		server.handle_request()
+		server.handle_request()
 	
 	# Triggers when you type ctrl+c at the command line
 	except KeyboardInterrupt:
