@@ -25,7 +25,8 @@ def getChart(infile, settings, data, scripts, outfile, type, pretty, datarange):
 	input = InputLayer(input=infile,
 					settings=settings,
 					data=data,
-					scripts=scripts)
+					scripts=scripts,
+					type=type)
 
 	parsed = ParsingLayer(input.rawInput).parsedInput
 

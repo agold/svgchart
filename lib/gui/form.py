@@ -1,32 +1,37 @@
-from lib.input.InputSet import InputSet
-from lib.input.FileInput import FileInput
-import lib.parse.ParsedInput as ParsedInput
-from lib.parse.IndexedDict import IndexedDict
-
 def getGUI(f):
 	header(f)
-	initColors(f,['red','green','blue'])
-	initTabs(f,['settings','data','scripts'])
+	initColors(f,['red','green','blue','yellow'])
+	initTabs(f,['settings','data','scripts','submission'])
 	openForm(f)
 
 	settingsPage(f)
 	dataPage(f)
-
-	openPage(f,'scripts')
-	f.write("Some scripts")
-	closePage(f,'scripts')
+	scriptsPage(f)
+	submissionPage(f)
 
 	closeForm(f)
 	footer(f)
 
 def header(f):
 	f.write("""
-<html>
-<head>
-	<title>GUI</title>
+		<html>
+		<head>
+			<title>GUI</title>
 	""")
 	style(f)
-#	<link rel='stylesheet' type='text/css' href='lib/gui/style.css' />
+	tabScript(f)
+	f.write("""
+		</head>
+		<body onload='init_tabs()'>
+	""")
+
+def style(f):
+	f.write("<style type='text/css'>")
+	with open('lib/gui/style.css','r') as stylesheet:
+		f.write(stylesheet.read())
+	f.write("</style>")
+
+def tabScript(f):
 	f.write("""<script type='text/javascript'>
 		if (!Array.indexOf) {
 			Array.prototype.indexOf = function (obj) {
@@ -58,59 +63,7 @@ def header(f):
 			page.style.display = 'block'
 		}
 	</script>
-</head>
-<body onload='init_tabs()'>
 	""")
-
-def style(f):
-	f.write("""<style type='text/css'>
-body {
-	font-family: Arial;
-}
-
-.tab {
-	width: 200px;
-	height: 22px;
-	display: inline-block;
-
-	text-align: center;
-
-	border: 1px solid #111188;
-	border-bottom: 0px;
-	border-top-left-radius: 7px;
-	border-top-right-radius: 7px;
-
-	cursor: pointer;
-}
-
-.selected {
-	font-weight: bold;
-}
-
-.page {
-	border: 1px solid #111188;
-	border-top-right-radius: 7px;
-	border-bottom-left-radius: 7px;
-	border-bottom-right-radius: 7px;
-	padding: 5px;
-	background-color: #EEEEFF;
-}
-
-.red {
-	background-color: #FFEEEE;
-	border-color: #881111;
-}
-
-.green {
-	background-color: #EEFFEE;
-	border-color: #118811;
-}
-
-.blue {
-	background-color: #EEEEFF;
-	border-color: #111188;
-}
-</style>""")
 
 def initColors(f,colors):
 	openScript(f)
@@ -126,39 +79,201 @@ def initTabs(f,labels):
 		closeScript(f)
 
 def openForm(f):
-	f.write("<form enctype='multipart/form-data' action='.' method='post' style='display:inline;'><input type='submit' value='Submit' />")
+	f.write("<form enctype='multipart/form-data' action='.' method='post' style='display:inline;'>")
 
 def settingsPage(f):
 	openPage(f,'settings')
-
-	# Parse default file for basic structure
-	defFile = "defaults/default.line.settings.xml"
-	defText = InputSet('settings')
-	FileInput([defText],defFile)
-	defSettings = ParsedInput.parseXml(defText.textlist[0])
-
-	inputTree(f,defSettings)
-
+	f.write("""
+		<fieldset><legend>Type</legend>
+			<input type='radio' name='type' value='scatter' checked='checked' /> Scatter
+			<input type='radio' name='type' value='line' /> Line
+		</fieldset>
+		<fieldset><legend>Chart Area</legend>
+			<table>
+				<tr>
+					<td>Size:</td>
+					<td><input type='text' name='/chart@width' value='650' /> x <input type='text' name='/chart@height' value='400' /></td>
+				</tr><tr>
+					<td>Background:</td>
+					<td><input type='text' name='/chart/border@style$fill' value='none' /></td>
+				</tr><tr>
+					<td>Border Color:</td>
+					<td><input type='text' name='/chart/border@style$stroke' value='black' /></td>
+				</tr><tr>
+					<td>Border Width:</td>
+					<td><input type='text' name='/chart/border@style$stroke-width' value='1px' /></td>
+				</tr>
+			</table>
+		</fieldset>
+		<fieldset><legend>Title</legend>
+			<table>
+				<tr>
+					<td>Title:</td>
+					<td><input type='text' name='/title/title' value='The title' /></td>
+				</tr><tr>
+					<td>Subtitle:</td>
+					<td><input type='text' name='/title/subtitle' /></td>
+				</tr><tr>
+					<td>Size:</td>
+					<td><input type='text' name='/title@width' /> x <input type='text' name='/title@height' /></td>
+				</tr><tr>
+					<td>Location:</td>
+					<td><input type='text' name='/title@x' /> , <input type='text' name='/title@y' /> (top left corner coordinates)</td>
+				</tr>
+			</table>
+		</fieldset>
+		<fieldset><legend>X-Axis</legend>
+			<table>
+				<tr>
+					<td>Major Tick Number:</td>
+					<td><input type='text' name='/x-axis/majors@count' /></td>
+				</tr><tr>
+					<td>Major Tick Size:</td>
+					<td><input type='text' name='/x-axis/majors@size' /></td>
+				</tr><tr>
+					<td>Minor Tick Number:</td>
+					<td><input type='text' name='/x-axis/minors@count' /></td>
+				</tr><tr>
+					<td>Minor Tick Size:</td>
+					<td><input type='text' name='/x-axis/minors@size' /></td>
+				</tr><tr>
+					<td>Label Format:</td>
+					<td><input type='text' name='/x-axis/labels@format' /> (e.g. %d for integer, %.2f for 2 decimal places)</td>
+				</tr><tr>
+					<td>Range Min:</td>
+					<td><input type='text' name='/x-axis/range@min' value='auto' /></td>
+				</tr><tr>
+					<td>Range Max:</td>
+					<td><input type='text' name='/x-axis/range@max' value='auto' /></td>
+				</tr>
+			</table>
+		</fieldset>
+		<fieldset><legend>Y-Axis</legend>
+			<table>
+				<tr>
+					<td>Major Tick Number:</td>
+					<td><input type='text' name='/y-axis/majors@count' /></td>
+				</tr><tr>
+					<td>Major Tick Size:</td>
+					<td><input type='text' name='/y-axis/majors@size' /></td>
+				</tr><tr>
+					<td>Minor Tick Number:</td>
+					<td><input type='text' name='/y-axis/minors@count' /></td>
+				</tr><tr>
+					<td>Minor Tick Size:</td>
+					<td><input type='text' name='/y-axis/minors@size' /></td>
+				</tr><tr>
+					<td>Label Format:</td>
+					<td><input type='text' name='/y-axis/labels@format' /> (e.g. %d for integer, %.2f for 2 decimal places)</td>
+				</tr><tr>
+					<td>Range Min:</td>
+					<td><input type='text' name='/y-axis/range@min' value='auto' /></td>
+				</tr><tr>
+					<td>Range Max:</td>
+					<td><input type='text' name='/y-axis/range@max' value='auto' /></td>
+				</tr>
+			</table>
+		</fieldset>
+		<fieldset><legend>Data Area</legend>
+			<table>
+				<tr>
+					<td>Size:</td>
+					<td><input type='text' name='/datafield@width' /> x <input type='text' name='/datafield@height' /></td>
+				</tr><tr>
+					<td>Location:</td>
+					<td><input type='text' name='/datafield@x' /> , <input type='text' name='/datafield@y' /> (top left corner coordinates)</td>
+				</tr>
+			</table>
+		</fieldset>
+		<fieldset><legend>Dataset</legend>
+			<table>
+				<tr>
+					<td>Symbol:</td>
+					<td>Shape:</td>
+					<td><input type='text' name='/datasets/set/symbol@shape' /></td>
+				</tr><tr>
+					<td></td>
+					<td>Size:</td>
+					<td><input type='text' name='/datasets/set/symbol@size' /></td>
+				</tr><tr>
+					<td></td>
+					<td>Color:</td>
+					<td><input type='text' name='/datasets/set/symbol@style$fill' /></td>
+				</tr><tr>
+					<td>Line:</td>
+					<td>Color:</td>
+					<td><input type='text' name='/datasets/set/line@style$stroke' /></td>
+				</tr><tr>
+					<td></td>
+					<td>Width:</td>
+					<td><input type='text' name='/datasets/set/line@style$stroke-width' /> (pixels--please end with "px", e.g. 1px)</td>
+				</tr>
+			</table>
+		</fieldset>
+		<fieldset><legend>Legend</legend>
+			<table>
+				<tr>
+					<td>Size:</td>
+					<td><input type='text' name='/legend@width' /> x <input type='text' name='/legend@height' /></td>
+				</tr><tr>
+					<td>Location:</td>
+					<td><input type='text' name='/legend@x' /> , <input type='text' name='/legend@y' /> (top left corner coordinates)</td>
+				</tr><tr>
+					<td>Title:</td>
+					<td><input type='text' name='/legend/title' /></td>
+				</tr><tr>
+					<td>Title Size:</td>
+					<td><input type='text' name='/legend/title@size' /></td>
+				</tr><tr>
+					<td>Entry Size:</td>
+					<td><input type='text' name='/legend/entries@height' /></td>
+				</tr>
+			</table>
+		</fieldset>
+	""")
 	closePage(f,'settings')
-
-def inputTree(f,input,tag = "",path = ""):
-	f.write(tag.capitalize() + ": ")
-	if (isinstance(input[key],IndexedDict)):
-		f.write("<input type='text' name='" + path + "/" + tag + "' value='" + str(input.text) + "' />")
-		f.write("<ul>")
-		for key in input.keys():
-			if (key not in ["id","class"]):
-				f.write("<li>")
-				inputTree(f,input[key],key,path + "/" + tag)
-			f.write("</li>")
-		f.write("</ul>")
-	else:
-		f.write("<input type='text' name='" + path + "@" + tag + "' value='" + input + "' />")
 
 def dataPage(f):
 	openPage(f,'data')
-	f.write("<input type='file' name='files' />")
+	f.write("""
+		File Format:<br />
+		<input type="radio" name="data_file_type" value="csv" checked="checked" /> CSV<br />
+		<input type="radio" name="data_file_type" value="xml" /> XML<br />
+		<br />
+		File:
+		<input type="file" name="data_files" multiple="multiple" /><br />
+		<br />
+		Please follow the following guidelines for CSV files:
+		<ul>
+			<li>Each line must represent exactly one data point.</li>
+			<li>The first value is the x coordinate. The second is the y coordinate.</li>
+			<li>Do not include a header line.</li>
+		</ul>
+		Please follow the following guidelines for XML files:
+		<ul>
+			<li>The root element must be &lt;data&gt;.</li>
+			<li>Each data set must be enclosed in a &lt;set&gt; element.</li>
+			<li>Each &lt;set&gt; element should have an id attribute; the first should be set1.</li>
+			<li>Each data point is represented by a &lt;value&gt; element with x and y attributes corresponding to its coordinates.</li>
+		</ul>
+	""")
 	closePage(f,'data')
+
+def scriptsPage(f):
+	openPage(f,'scripts')
+	f.write("""
+		Select built-in scripts:<br />
+		<input type='checkbox' name='script_tooltips' /> Tooltips<br />
+		<input type='checkbox' name='script_panandzoom' /> Pan and Zoom<br />
+	""")
+	closePage(f,'scripts')
+
+def submissionPage(f):
+	openPage(f,'submission')
+	f.write("""
+	<div style='text-align: center;'><input type="submit" value="Generate Chart" style='font-weight: bold;' /></div>
+	""")
+	closePage(f,'submission')
 
 def openPage(f,label):
 	f.write("<div id='" + label + "page'>")

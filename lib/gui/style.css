@@ -4,7 +4,7 @@ body {
 
 .tab {
 	width: 200px;
-	height: 25px;
+	height: 20px;
 	display: inline-block;
 
 	text-align: center;
@@ -22,7 +22,7 @@ body {
 }
 
 .page {
-	height: 70%;
+	/* height: 70%; */
 	border: 1px solid #111188;
 	border-top-right-radius: 7px;
 	border-bottom-left-radius: 7px;
@@ -44,4 +44,9 @@ body {
 .blue {
 	background-color: #EEEEFF;
 	border-color: #111188;
+}
+
+.yellow {
+	background-color: #FFFFEE;
+	border-color: #888811
 }

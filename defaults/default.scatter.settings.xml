@@ -1,0 +1,84 @@
+<settings>
+	<chart id="svgchart" class="chart" width="650" height="400" style="shape-rendering: crispEdges; text-rendering: optimizeLegibility;">
+		<border class="border" style="fill: none; stroke: black; stroke-width: 1px;" />
+	</chart>
+	
+	<title id="title" class="title" x="150" y="0" width="480" height="50" style="text-anchor: middle;">
+		<title id="title-text" class="title">The title</title>
+		<subtitle id="subtitle-text" class="subtitle" /> <!-- The text is blank in the default so I can check for None to determine whether or not to include a title -->
+	</title>
+	
+	<x-axis id="x-axis" class="axis" style="stroke: black; stroke-width: 1px;">
+		<majors count="5" size="10" id-prefix="x-axis-major" class="major tick" />
+		<minors count="25" size="5" id-prefix="x-axis-minor" class="minor tick" />
+		<base id="x-axis-base" class="axis-base" />
+		<labels id-prefix="x-axis-label" class="axis-label" format="%d" style="text-anchor: middle; stroke: none;" />
+		<grid id="x-grid" class="grid">
+			<lines id-prefix="x-grid-line" class="grid-line" style="stroke: gray; stroke-width: 1px;" />
+		</grid>
+		<range min="auto" max="auto" />
+	</x-axis>
+	
+	<y-axis id="y-axis" class="axis" baseid="y-axis-base" baseclass="axis-base" style="stroke: black; stroke-width: 1px;">
+		<majors count="5" size="10" id-prefix="y-axis-major" class="major tick" />
+		<minors count="25" size="5" id-prefix="y-axis-minor" class="minor tick" />
+		<base id="y-axis-base" class="axis-base" />
+		<labels id-prefix="y-axis-label" class="y-axis-label" format="%d" style="text-anchor: end; stroke: none;" />
+		<grid id="y-grid" class="grid">
+			<lines id-prefix="y-grid-line" class="grid-line" />
+		</grid>
+		<range min="auto" max="auto" />
+	</y-axis>
+	
+	<datafield x="150" y="50" width="480" height="300" id="data-field" class="data-field">
+		<border class="border" />
+	</datafield>
+	
+	<datasets id="data-sets" class="data-sets" style="shape-rendering: geometricPrecision;">
+		<set id="set1" class="set1 dataset" label="Set 1">
+			<symbol shape="circle" size="5" id-prefix="set1-datapoint" class="set1-datapoint" style="fill: green" />
+			<line id="set1-line" class="set1-dataline" style="fill:none; stroke: green; stroke-width: 1px;" />
+			<legend-entry id="legend-entry-set1" class="legend-entry" >
+				<symbol id="legend-shape-set1" class="legend-shape" style="fill: green" />
+				<label id="legend-label-set1" class="legend-label" />
+			</legend-entry>
+		</set>
+		<set id="set2" class="set2 dataset" label="Set 2">
+			<symbol shape="square" size="5" id-prefix="set2-datapoint" class="set2-datapoint" style="fill: red" />
+			<line id="set2-line" class="set2-dataline" style="fill:none; stroke: red; stroke-width: 1px;" />
+			<legend-entry id="legend-entry-set2" class="legend-entry" >
+				<symbol id="legend-shape-set2" class="legend-shape" style="fill: red" />
+				<label id="legend-label-set2" class="legend-label" />
+			</legend-entry>
+		</set>
+		<set id="set3" class="set3 dataset" label="Set 3">
+			<symbol shape="circle" size="5" id-prefix="set3-datapoint" class="set3-datapoint" style="fill: blue" />
+			<line id="set3-line" class="set3-dataline" style="fill:none; stroke: blue; stroke-width: 1px;" />
+			<legend-entry id="legend-entry-set3" class="legend-entry" >
+				<symbol id="legend-shape-set3" class="legend-shape" style="fill: blue" />
+				<label id="legend-label-set3" class="legend-label" />
+			</legend-entry>
+		</set>
+		<set id="set4" class="set4 dataset" label="Set 4">
+			<symbol shape="circle" size="5" id-prefix="set4-datapoint" class="set4-datapoint" style="fill: cyan" />
+			<line id="set4-line" class="set4-dataline" style="fill:none; stroke: cyan; stroke-width: 1px;" />
+			<legend-entry id="legend-entry-set4" class="legend-entry" >
+				<symbol id="legend-shape-set4" class="legend-shape" style="fill: cyan" />
+				<label id="legend-label-set4" class="legend-label" />
+			</legend-entry>
+		</set>
+		<set id="set5" class="set5 dataset" label="Set 5">
+			<symbol shape="circle" size="5" id-prefix="set5-datapoint" class="set5-datapoint" style="fill: orange" />
+			<line id="set5-line" class="set5-dataline" style="fill:none; stroke: orange; stroke-width: 1px;" />
+			<legend-entry id="legend-entry-set5" class="legend-entry" >
+				<symbol id="legend-shape-set5" class="legend-shape" style="fill: orange" />
+				<label id="legend-label-set5" class="legend-label" />
+			</legend-entry>
+		</set>
+	</datasets>
+	
+	<legend id="legend" class="legend" x="0" y="0" width="150" height="400">
+		<title size="12" id="legend-title" class="legend-title" style="text-anchor: middle; stroke: none;">Legend</title>
+		<entries height="12" />
+	</legend>
+</settings>

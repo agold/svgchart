@@ -5,17 +5,56 @@ from svgchart import getChart
 from lib.gui.form import getGUI
 import webbrowser
 
+import xml.etree.ElementTree as ETree
+import re
+
+def addXml(root,path,value):
+	if (value != ""):
+		elem = root
+		while path.startswith('/'):
+			parts = re.split('([/@$])',path[1:],1)
+			if (len(parts) > 2):
+				path = parts[1] + parts[2]
+			else:
+				path = ""
+			for child in list(elem):
+				if (child.tag == parts[0]):
+					break
+			if (len(elem) > 0 and child.tag == parts[0]):
+				elem = child
+			else:
+				elem = ETree.SubElement(elem,parts[0])
+		if (path == ""):
+			elem.text = value
+		elif (path.startswith('@')):
+			path = path[1:]
+			if (path.startswith('style$')):
+				path = path[6:]
+				elem.set('style',elem.get('style',"") + path + ": " + value + ";")
+			else:
+				elem.set(path,value)
+
 class ChartHandler(BaseHTTPRequestHandler):
 
 	def do_POST(self):
-		self.send_response(200)
-		self.send_header('Content-type','text/html')
-		self.end_headers()
-
 		form = cgi.FieldStorage(fp=self.rfile,headers=self.headers,
 								environ={'REQUEST_METHOD':'POST','CONTENT_TYPE':self.headers['Content-Type']})
 
-		self.wfile.write(form)
+		# Settings
+		sroot = ETree.Element('settings')
+		for key in form:
+			if (key.startswith('/')):
+				addXml(sroot,key,form.getfirst(key))
+				#del form[key]
+
+		stree = ETree.ElementTree(element=sroot)
+		with open('tempsettings.xml','w') as sfile:
+			stree.write(sfile,encoding='utf-8',xml_declaration=True)
+
+		self.send_response(200)
+		self.send_header('Content-type','image/svg+xml')
+		self.end_headers()
+		getChart(None, 'tempsettings.xml', 'data-sample.xml', None, self.wfile, form.getfirst('type'), False, ',,,')
 
 	def do_GET(self):
 		
@@ -78,8 +117,7 @@ if __name__ == '__main__':
 		server = HTTPServer(('', 35782), ChartHandler)
 		print 'Started chart server...'
 		webbrowser.open('http://localhost:35782/',2)
-		server.handle_request()
-		server.handle_request()
+		server.serve_forever()
 	
 	# Triggers when you type ctrl+c at the command line
 	except KeyboardInterrupt:

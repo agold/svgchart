@@ -38,10 +38,10 @@ def parseTree(dest,elem):
 	for child in list(elem):
 		if (child.tag not in taglist):
 			taglist.append(child.tag)
-			if (child.tag not in dest.keys() or not append):
+			if (child.tag not in dest.keys()):
 				dest[child.tag] = IndexedDict()
-		"""if (child.tag not in taglist and not append):
-			dest[child.tag] = IndexedDict()
-			taglist.append(child.tag)"""
-		dest[child.tag].append(IndexedDict())
+			if (len(dest[child.tag]) == 0 or append):
+				dest[child.tag].append(IndexedDict())
+		else:
+			dest[child.tag].append(IndexedDict())
 		parseTree(dest[child.tag][-1],child)

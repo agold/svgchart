@@ -7,16 +7,20 @@ class InputLayer(object):
 	Makes them available through rawInput.
 	"""
 
-	def __init__(self, input=None, settings=None, data=None, scripts=None):
+	def __init__(self, input=None, settings=None, data=None, scripts=None, type='scatter'):
 		"""
 		@param input: Filename for a unified input document
 		@param settings: Filename for the settings
 		@param data: Filename for the data
 		@param scripts: Filename for the scripts
+		@param type: Chart type name to specify default settings
 
 		"""
 
 		ri = self.rawInput = RawInput()
+
+		# Default settings input
+		FileInput([ri.settings],'defaults/default.' + type + '.settings.xml')
 
 		# Input from general file
 		if input is not None:
