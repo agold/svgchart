@@ -34,27 +34,99 @@ def addXml(root,path,value):
 			else:
 				elem.set(path,value)
 
+def csvLineToXmlValue(line):
+	line = line.strip()
+	coords = line.split(',')
+	if (len(coords) >= 2):
+		coords[0] = coords[0].strip("\" \t\r\n")
+		coords[1] = coords[1].strip("\" \t\r\n")
+		return "<value x='" + coords[0] + "' y='" + coords[1] + "' />"
+	else:
+		return ""
+
+def csvToXmlData(infiles,outfile):
+	outfile.write("<?xml version='1.0' encoding='UTF-8' ?>")
+	outfile.write("<data>")
+	i = 1
+	for infile in infiles:
+		outfile.write("<set id='set" + str(i) + "'>")
+		i += 1
+		for line in infile:
+			outfile.write(csvLineToXmlValue(line))
+		outfile.write("</set>")
+	outfile.write("</data>")
+
+def combineXmlData(infiles,outfile):
+	outfile.write("<?xml version='1.0' encoding='UTF-8' ?>")
+	outfile.write("<data>")
+	for infile in infiles:
+		text = infile.read()
+		match = re.search(r'<data(?: [^>]+)? *>(.*)<\/data>',text,re.DOTALL)
+		if (match):
+			outfile.write(match.group(1))
+	outfile.write("</data>")
+
+def builtinScripts(scriptnames,outfile):
+	outfile.write("<?xml version='1.0' encoding='UTF-8' ?>")
+	outfile.write("<scripts>")
+	i = 1
+	for scriptname in scriptnames:
+		outfile.write("<script id='script" + str(i) + "' file='scripts/" + scriptname + ".js' />")
+	outfile.write("</scripts>")
+
 class ChartHandler(BaseHTTPRequestHandler):
 
 	def do_POST(self):
 		form = cgi.FieldStorage(fp=self.rfile,headers=self.headers,
 								environ={'REQUEST_METHOD':'POST','CONTENT_TYPE':self.headers['Content-Type']})
 
+		outfiles = dict()
+		for key in ['outfile_settings','outfile_data','outfile_scripts']:
+			outfiles[key[8:]] = "genxml/" + form.getfirst(key)
+
 		# Settings
 		sroot = ETree.Element('settings')
 		for key in form:
 			if (key.startswith('/')):
-				addXml(sroot,key,form.getfirst(key))
-				#del form[key]
-
+				for path in key.split(','):
+					addXml(sroot,path,form.getfirst(key))
 		stree = ETree.ElementTree(element=sroot)
-		with open('tempsettings.xml','w') as sfile:
+		with open(outfiles['settings'],'w') as sfile:
 			stree.write(sfile,encoding='utf-8',xml_declaration=True)
 
-		self.send_response(200)
-		self.send_header('Content-type','image/svg+xml')
-		self.end_headers()
-		getChart(None, 'tempsettings.xml', 'data-sample.xml', None, self.wfile, form.getfirst('type'), False, ',,,')
+		# Data
+		with open(outfiles['data'],'w') as dfile:
+			fileitemlist = form['data_files']
+			if (not isinstance(fileitemlist,list)):
+				fileitemlist = [fileitemlist]
+			filelist = []
+			for fileitem in fileitemlist:
+				filelist.append(fileitem.file)
+			if (form.getfirst('data_file_type') == 'csv'):
+				csvToXmlData(filelist,dfile)
+			elif (form.getfirst('data_file_type') == 'xml'):
+				combineXmlData(filelist,dfile)
+
+		# Scripts
+		with open(outfiles['scripts'],'w') as cfile:
+			scriptnames = []
+			for key in form:
+				if (key.startswith('script_')):
+					scriptnames.append(key[7:])
+			builtinScripts(scriptnames,cfile)
+
+		try:
+			self.send_response(200)
+			self.send_header('Content-type','image/svg+xml')
+			self.end_headers()
+			getChart(None, outfiles['settings'], outfiles['data'], outfiles['scripts'], self.wfile, form.getfirst('type'), False, ',,,')
+		except:
+			self.wfile.write("""<?xml version='1.0' encoding='utf-8'?>
+			<svg verson='1.1' xmlns='http://www.w3.org/2000/svg'>
+				<text x='10' y='25'>An error occured during chart generation. Please use your browser's Back
+				button to return to the previous page and make sure that all input is valid.</text>
+			</svg>
+			""")
 
 	def do_GET(self):
 		

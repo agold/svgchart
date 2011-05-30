@@ -34,14 +34,17 @@ def parseTree(dest,elem):
 		dest.text = None
 
 	append = ('append' in attrib and attrib['append'] == 'append')
-	taglist = []
+	tagcount = dict()
 	for child in list(elem):
-		if (child.tag not in taglist):
-			taglist.append(child.tag)
+		if (child.tag not in tagcount):
+			tagcount[child.tag] = 0
 			if (child.tag not in dest.keys()):
 				dest[child.tag] = IndexedDict()
 			if (len(dest[child.tag]) == 0 or append):
+				tagcount[child.tag] = len(dest[child.tag])
 				dest[child.tag].append(IndexedDict())
 		else:
-			dest[child.tag].append(IndexedDict())
-		parseTree(dest[child.tag][-1],child)
+			tagcount[child.tag] += 1
+			if (tagcount[child.tag] >= len(dest[child.tag])):
+				dest[child.tag].append(IndexedDict())
+		parseTree(dest[child.tag][tagcount[child.tag]],child)

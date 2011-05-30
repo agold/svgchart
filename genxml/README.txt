@@ -1,0 +1,1 @@
+This directory is for XML files generated during use of the graphical interface.

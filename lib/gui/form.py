@@ -1,3 +1,8 @@
+from lib.input.InputSet import InputSet
+from lib.input.FileInput import FileInput
+import lib.parse.ParsedInput as ParsedInput
+from lib.parse.IndexedDict import IndexedDict
+
 def getGUI(f):
 	header(f)
 	initColors(f,['red','green','blue','yellow'])
@@ -14,6 +19,7 @@ def getGUI(f):
 
 def header(f):
 	f.write("""
+	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 		<html>
 		<head>
 			<title>GUI</title>
@@ -83,6 +89,13 @@ def openForm(f):
 
 def settingsPage(f):
 	openPage(f,'settings')
+
+	# Obtain defaults
+	settingsinput = InputSet('settings')
+	FileInput([settingsinput],'defaults/default.scatter.settings.xml')
+	settings = IndexedDict()
+	ParsedInput.parseXml(settingsinput.textlist[0],settings)
+
 	f.write("""
 		<fieldset><legend>Type</legend>
 			<input type='radio' name='type' value='scatter' checked='checked' /> Scatter
@@ -92,7 +105,8 @@ def settingsPage(f):
 			<table>
 				<tr>
 					<td>Size:</td>
-					<td><input type='text' name='/chart@width' value='650' /> x <input type='text' name='/chart@height' value='400' /></td>
+					<td><input type='text' name='/chart@width' value='""" + settings['chart']['width'] + """' /> x
+						<input type='text' name='/chart@height' value='""" + settings['chart']['height'] + """' /></td>
 				</tr><tr>
 					<td>Background:</td>
 					<td><input type='text' name='/chart/border@style$fill' value='none' /></td>
@@ -109,16 +123,18 @@ def settingsPage(f):
 			<table>
 				<tr>
 					<td>Title:</td>
-					<td><input type='text' name='/title/title' value='The title' /></td>
+					<td><input type='text' name='/title/title' value='""" + (settings['title']['title'].text or "") + """' /></td>
 				</tr><tr>
 					<td>Subtitle:</td>
-					<td><input type='text' name='/title/subtitle' /></td>
+					<td><input type='text' name='/title/subtitle' value='""" + (settings['title']['subtitle'].text or "") + """' /></td>
 				</tr><tr>
 					<td>Size:</td>
-					<td><input type='text' name='/title@width' /> x <input type='text' name='/title@height' /></td>
+					<td><input type='text' name='/title@width' value='""" + settings['title']['width'] + """' /> x
+						<input type='text' name='/title@height' value='""" + settings['title']['height'] + """' /></td>
 				</tr><tr>
 					<td>Location:</td>
-					<td><input type='text' name='/title@x' /> , <input type='text' name='/title@y' /> (top left corner coordinates)</td>
+					<td><input type='text' name='/title@x' value='""" + settings['title']['x'] + """' /> ,
+						<input type='text' name='/title@y' value='""" + settings['title']['y'] + """' /> (top left corner coordinates)</td>
 				</tr>
 			</table>
 		</fieldset>
@@ -126,25 +142,25 @@ def settingsPage(f):
 			<table>
 				<tr>
 					<td>Major Tick Number:</td>
-					<td><input type='text' name='/x-axis/majors@count' /></td>
+					<td><input type='text' name='/x-axis/majors@count' value='""" + settings['x-axis']['majors']['count'] + """' /></td>
 				</tr><tr>
 					<td>Major Tick Size:</td>
-					<td><input type='text' name='/x-axis/majors@size' /></td>
+					<td><input type='text' name='/x-axis/majors@size' value='""" + settings['x-axis']['majors']['size'] + """' /></td>
 				</tr><tr>
 					<td>Minor Tick Number:</td>
-					<td><input type='text' name='/x-axis/minors@count' /></td>
+					<td><input type='text' name='/x-axis/minors@count' value='""" + settings['x-axis']['minors']['count'] + """' /></td>
 				</tr><tr>
 					<td>Minor Tick Size:</td>
-					<td><input type='text' name='/x-axis/minors@size' /></td>
+					<td><input type='text' name='/x-axis/minors@size' value='""" + settings['x-axis']['minors']['size'] + """' /></td>
 				</tr><tr>
 					<td>Label Format:</td>
-					<td><input type='text' name='/x-axis/labels@format' /> (e.g. %d for integer, %.2f for 2 decimal places)</td>
+					<td><input type='text' name='/x-axis/labels@format' value='""" + settings['x-axis']['labels']['format'] + """' /> (e.g. %d for integer, %.2f for 2 decimal places)</td>
 				</tr><tr>
 					<td>Range Min:</td>
-					<td><input type='text' name='/x-axis/range@min' value='auto' /></td>
+					<td><input type='text' name='/x-axis/range@min' value='""" + settings['x-axis']['range']['min'] + """' /></td>
 				</tr><tr>
 					<td>Range Max:</td>
-					<td><input type='text' name='/x-axis/range@max' value='auto' /></td>
+					<td><input type='text' name='/x-axis/range@max' value='""" + settings['x-axis']['range']['max'] + """' /></td>
 				</tr>
 			</table>
 		</fieldset>
@@ -152,25 +168,25 @@ def settingsPage(f):
 			<table>
 				<tr>
 					<td>Major Tick Number:</td>
-					<td><input type='text' name='/y-axis/majors@count' /></td>
+					<td><input type='text' name='/y-axis/majors@count' value='""" + settings['y-axis']['majors']['count'] + """' /></td>
 				</tr><tr>
 					<td>Major Tick Size:</td>
-					<td><input type='text' name='/y-axis/majors@size' /></td>
+					<td><input type='text' name='/y-axis/majors@size' value='""" + settings['y-axis']['majors']['size'] + """' /></td>
 				</tr><tr>
 					<td>Minor Tick Number:</td>
-					<td><input type='text' name='/y-axis/minors@count' /></td>
+					<td><input type='text' name='/y-axis/minors@count' value='""" + settings['y-axis']['minors']['count'] + """' /></td>
 				</tr><tr>
 					<td>Minor Tick Size:</td>
-					<td><input type='text' name='/y-axis/minors@size' /></td>
+					<td><input type='text' name='/y-axis/minors@size' value='""" + settings['y-axis']['minors']['size'] + """' /></td>
 				</tr><tr>
 					<td>Label Format:</td>
-					<td><input type='text' name='/y-axis/labels@format' /> (e.g. %d for integer, %.2f for 2 decimal places)</td>
+					<td><input type='text' name='/y-axis/labels@format' value='""" + settings['y-axis']['labels']['format'] + """' /> (e.g. %d for integer, %.2f for 2 decimal places)</td>
 				</tr><tr>
 					<td>Range Min:</td>
-					<td><input type='text' name='/y-axis/range@min' value='auto' /></td>
+					<td><input type='text' name='/y-axis/range@min' value='""" + settings['y-axis']['range']['min'] + """' /></td>
 				</tr><tr>
 					<td>Range Max:</td>
-					<td><input type='text' name='/y-axis/range@max' value='auto' /></td>
+					<td><input type='text' name='/y-axis/range@max' value='""" + settings['y-axis']['range']['max'] + """' /></td>
 				</tr>
 			</table>
 		</fieldset>
@@ -178,10 +194,12 @@ def settingsPage(f):
 			<table>
 				<tr>
 					<td>Size:</td>
-					<td><input type='text' name='/datafield@width' /> x <input type='text' name='/datafield@height' /></td>
+					<td><input type='text' name='/datafield@width' value='""" + settings['datafield']['width'] + """' /> x
+						<input type='text' name='/datafield@height' value='""" + settings['datafield']['height'] + """' /></td>
 				</tr><tr>
 					<td>Location:</td>
-					<td><input type='text' name='/datafield@x' /> , <input type='text' name='/datafield@y' /> (top left corner coordinates)</td>
+					<td><input type='text' name='/datafield@x' value='""" + settings['datafield']['x'] + """' /> ,
+						<input type='text' name='/datafield@y' value='""" + settings['datafield']['y'] + """' /> (top left corner coordinates)</td>
 				</tr>
 			</table>
 		</fieldset>
@@ -190,43 +208,47 @@ def settingsPage(f):
 				<tr>
 					<td>Symbol:</td>
 					<td>Shape:</td>
-					<td><input type='text' name='/datasets/set/symbol@shape' /></td>
+					<td><input type='radio' name='/datasets/set/symbol@shape' value='circle' checked='checked' /> Circle
+						<input type='radio' name='/datasets/set/symbol@shape' value='square' /> Square</td>
 				</tr><tr>
 					<td></td>
 					<td>Size:</td>
-					<td><input type='text' name='/datasets/set/symbol@size' /></td>
+					<td><input type='text' name='/datasets/set/symbol@size' value='""" + settings['datasets']['set']['symbol']['size'] + """' /></td>
 				</tr><tr>
 					<td></td>
 					<td>Color:</td>
-					<td><input type='text' name='/datasets/set/symbol@style$fill' /></td>
+					<td><input type='text' name='/datasets/set/symbol@style$fill,/datasets/set/legend-entry/symbol@style$fill' value='green' /></td>
 				</tr><tr>
 					<td>Line:</td>
 					<td>Color:</td>
-					<td><input type='text' name='/datasets/set/line@style$stroke' /></td>
+					<td><input type='text' name='/datasets/set/line@style$stroke' value='green' /></td>
 				</tr><tr>
 					<td></td>
 					<td>Width:</td>
-					<td><input type='text' name='/datasets/set/line@style$stroke-width' /> (pixels--please end with "px", e.g. 1px)</td>
+					<td><input type='text' name='/datasets/set/line@style$stroke-width' value='1px' /> (pixels--please end with "px")</td>
 				</tr>
 			</table>
+			<input type='hidden' name='/datasets/set/line@style$fill' value='none' />
 		</fieldset>
 		<fieldset><legend>Legend</legend>
 			<table>
 				<tr>
 					<td>Size:</td>
-					<td><input type='text' name='/legend@width' /> x <input type='text' name='/legend@height' /></td>
+					<td><input type='text' name='/legend@width' value='""" + settings['legend']['width'] + """' /> x
+						<input type='text' name='/legend@height' value='""" + settings['legend']['height'] + """' /></td>
 				</tr><tr>
 					<td>Location:</td>
-					<td><input type='text' name='/legend@x' /> , <input type='text' name='/legend@y' /> (top left corner coordinates)</td>
+					<td><input type='text' name='/legend@x' value='""" + settings['legend']['x'] + """' /> ,
+						<input type='text' name='/legend@y' value='""" + settings['legend']['y'] + """' /> (top left corner coordinates)</td>
 				</tr><tr>
 					<td>Title:</td>
-					<td><input type='text' name='/legend/title' /></td>
+					<td><input type='text' name='/legend/title' value='""" + (settings['legend']['title'].text or "") + """' /></td>
 				</tr><tr>
 					<td>Title Size:</td>
-					<td><input type='text' name='/legend/title@size' /></td>
+					<td><input type='text' name='/legend/title@size' value='""" + settings['legend']['title']['size'] + """' /></td>
 				</tr><tr>
 					<td>Entry Size:</td>
-					<td><input type='text' name='/legend/entries@height' /></td>
+					<td><input type='text' name='/legend/entries@height' value='""" + settings['legend']['entries']['height'] + """' /></td>
 				</tr>
 			</table>
 		</fieldset>
@@ -271,7 +293,24 @@ def scriptsPage(f):
 def submissionPage(f):
 	openPage(f,'submission')
 	f.write("""
+	Please specify output file names for the settings, data and scripts used to generate the chart.
+	These will remain in the svgchart/genxml/ directory after chart generation so that you may use
+	them in the future to generate this chart or modify them to produce a new chart.<br />
+	WARNING: These will overwrite any files with the same names in the svgchart/genxml/ directory!
+	<table>
+		<tr>
+			<td>Settings File:</td>
+			<td><input type='text' name='outfile_settings' value='settings.xml' /></td>
+		</tr><tr>
+			<td>Data File:</td>
+			<td><input type='text' name='outfile_data' value='data.xml' /></td>
+		</tr><tr>
+			<td>Scripts File:</td>
+			<td><input type='text' name='outfile_scripts' value='scripts.xml' /></td>
+		</tr>
+	</table>
 	<div style='text-align: center;'><input type="submit" value="Generate Chart" style='font-weight: bold;' /></div>
+	To save the chart once it has been generated, please use your browser's Save function.
 	""")
 	closePage(f,'submission')
 
