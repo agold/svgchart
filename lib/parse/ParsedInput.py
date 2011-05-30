@@ -17,6 +17,10 @@ class ParsedInput(object):
 				parseXml(str,dest)
 
 def parseXml(xml,dest = None):
+	"""Parses an XML string into an IndexedDict tree.
+	@param xml: The XML string
+	@param dest: Target IndexedDict; if nonempty, it will be extended
+	"""
 	if (dest == None):
 		dest = IndexedDict()
 	elem = ETree.fromstring(xml)
@@ -24,6 +28,10 @@ def parseXml(xml,dest = None):
 	return dest
 	
 def parseTree(dest,elem):
+	"""Parses a tree of Elements into an IndexedDict tree.
+	@param dest: Target IndexedDict; if nonempty, it will be extended
+	@param elem: Root of the tree of Elements to be parsed
+	"""
 	attrib = dict(elem.items())
 	for key in attrib:
 		dest[key] = attrib[key]

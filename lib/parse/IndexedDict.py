@@ -55,7 +55,7 @@ class IndexedDict(list):
 			raise AttributeError("No attribute " + name)
 
 	def __str__(self):
-		"""Returns a string representation of the data structure."""
+		"""Returns a string representation of the IndexedDict."""
 
 		s = "InD{"
 		if (len(self.keys()) == 0):
@@ -68,6 +68,6 @@ class IndexedDict(list):
 		return s
 
 	def keys(self):
-		"""Returns the dictionary keys of the data structure."""
+		"""Returns the dictionary keys of the IndexedDict."""
 
 		return self.__map.keys()

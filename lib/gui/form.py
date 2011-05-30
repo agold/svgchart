@@ -4,25 +4,29 @@ import lib.parse.ParsedInput as ParsedInput
 from lib.parse.IndexedDict import IndexedDict
 
 def getGUI(f):
+	"""Writes an HTML GUI to f.
+	@param f: File to write to
+	"""
 	header(f)
 	initColors(f,['red','green','blue','yellow'])
 	initTabs(f,['settings','data','scripts','submission'])
 	openForm(f)
-
 	settingsPage(f)
 	dataPage(f)
 	scriptsPage(f)
 	submissionPage(f)
-
 	closeForm(f)
 	footer(f)
 
 def header(f):
+	"""Writes the opening section of the GUI.
+	@param f: File to write to
+	"""
 	f.write("""
 	<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 		<html>
 		<head>
-			<title>GUI</title>
+			<title>SVGChart GUI</title>
 	""")
 	style(f)
 	tabScript(f)
@@ -32,13 +36,20 @@ def header(f):
 	""")
 
 def style(f):
+	"""Writes the CSS style section of the GUI.
+	@param f: File to write to
+	"""
 	f.write("<style type='text/css'>")
 	with open('lib/gui/style.css','r') as stylesheet:
 		f.write(stylesheet.read())
 	f.write("</style>")
 
 def tabScript(f):
-	f.write("""<script type='text/javascript'>
+	"""Writes the tabbing script for the GUI.
+	@param f: File to write to
+	"""
+	openScript(f)
+	f.write("""
 		if (!Array.indexOf) {
 			Array.prototype.indexOf = function (obj) {
 				for (var i = 0;i < this.length;i++)
@@ -68,26 +79,40 @@ def tabScript(f):
 			tab.className = tab.className + ' selected'
 			page.style.display = 'block'
 		}
-	</script>
 	""")
+	closeScript(f)
 
 def initColors(f,colors):
+	"""Writes a script section to initialize the tab colors for the GUI.
+	@param f: File to write to
+	@param colors: List of color names
+	"""
 	openScript(f)
 	for color in colors:
 		f.write("colors.push('" + color + "')\n")
 	closeScript(f)
 
 def initTabs(f,labels):
+	"""Initializes the tabs for the GUI.
+	@param f: File to write to
+	@param labels: List of tab labels
+	"""
 	for label in labels:
-		f.write("<div id='" + label + "tab' onclick='select_tab(this)'>" + label.capitalize() + "</div>")
+		f.write("<span id='" + label + "tab' onclick='select_tab(this)'>" + label.capitalize() + "</span>")
 		openScript(f)
 		f.write("tabs.push(document.getElementById('" + label + "tab'))")
 		closeScript(f)
 
 def openForm(f):
+	"""Initializes the form for the GUI.
+	@param f: File to write to
+	"""
 	f.write("<form enctype='multipart/form-data' action='.' method='post' style='display:inline;'>")
 
 def settingsPage(f):
+	"""Writes the settings page for the GUI.
+	@param f: File to write to
+	"""
 	openPage(f,'settings')
 
 	# Obtain defaults
@@ -115,7 +140,7 @@ def settingsPage(f):
 					<td><input type='text' name='/chart/border@style$stroke' value='black' /></td>
 				</tr><tr>
 					<td>Border Width:</td>
-					<td><input type='text' name='/chart/border@style$stroke-width' value='1px' /></td>
+					<td><input type='text' name='/chart/border@style$stroke-width' value='1px' /> (pixels--please end with "px")</td>
 				</tr>
 			</table>
 		</fieldset>
@@ -256,6 +281,9 @@ def settingsPage(f):
 	closePage(f,'settings')
 
 def dataPage(f):
+	"""Writes the data page for the GUI.
+	@param f: File to write to
+	"""
 	openPage(f,'data')
 	f.write("""
 		File Format:<br />
@@ -282,6 +310,9 @@ def dataPage(f):
 	closePage(f,'data')
 
 def scriptsPage(f):
+	"""Writes the scripts page for the GUI.
+	@param f: File to write to
+	"""
 	openPage(f,'scripts')
 	f.write("""
 		Select built-in scripts:<br />
@@ -291,6 +322,9 @@ def scriptsPage(f):
 	closePage(f,'scripts')
 
 def submissionPage(f):
+	"""Writes the submission page for the GUI.
+	@param f: File to write to
+	"""
 	openPage(f,'submission')
 	f.write("""
 	Please specify output file names for the settings, data and scripts used to generate the chart.
@@ -315,25 +349,45 @@ def submissionPage(f):
 	closePage(f,'submission')
 
 def openPage(f,label):
+	"""Initializes a tabbed page section.
+	@param f: File to write to
+	@param label: Label for the page
+	"""
 	f.write("<div id='" + label + "page'>")
 
 def closePage(f,label):
+	"""Closes a tabbed page section.
+	@param f: File to write to
+	@param label: Label for the page
+	"""
 	f.write("</div>")
 	openScript(f)
 	f.write("pages.push(document.getElementById('" + label + "page'))")
 	closeScript(f)
 
 def closeForm(f):
+	"""Closes the form for the GUI.
+	@param f: File to write to
+	"""
 	f.write("</form>")
 
 def footer(f):
+	"""Writes the closing section of the GUI.
+	@param f: File to write to
+	"""
 	f.write("""
 </body>
 </html>
 	""")
 
 def openScript(f):
-	f.write("\n<script type='text/javascript'>\n<!--\n")
+	"""Opens a script section.
+	@param f: File to write to
+	"""
+	f.write("\n<script type='text/ecmascript'>\n<!--\n")
 
 def closeScript(f):
+	"""Closes a script section.
+	@param f: File to write to
+	"""
 	f.write("\n// -->\n</script>\n")
