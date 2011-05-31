@@ -51,9 +51,7 @@ def getChart(infile, settings, data, scripts, outfile, type, pretty, datarange):
 
 if __name__ == "__main__":
 	import argparse
-	import time
 
-	time.clock()
 	parser = argparse.ArgumentParser(description='Generate an interactive SVG chart',
 									 version="0.1")
 	parser.add_argument('-i', '--infile', action="store", dest="infile", help="File containing settings, data, and scripts")
@@ -69,5 +67,3 @@ if __name__ == "__main__":
 
 	getChart(args.infile, args.settings, args.data, args.scripts,
 			 args.outfile, args.type, args.pretty, args.range)
-
-	print time.clock()

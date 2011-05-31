@@ -43,38 +43,6 @@
 				<label id="legend-label-set1" class="legend-label" />
 			</legend-entry>
 		</set>
-		<set id="set2" class="set2 dataset" label="Set 2">
-			<symbol shape="square" size="5" id-prefix="set2-datapoint" class="set2-datapoint" style="fill: red" />
-			<line id="set2-line" class="set2-dataline" style="fill:none; stroke: red; stroke-width: 1px;" />
-			<legend-entry id="legend-entry-set2" class="legend-entry" >
-				<symbol id="legend-shape-set2" class="legend-shape" style="fill: red" />
-				<label id="legend-label-set2" class="legend-label" />
-			</legend-entry>
-		</set>
-		<set id="set3" class="set3 dataset" label="Set 3">
-			<symbol shape="circle" size="5" id-prefix="set3-datapoint" class="set3-datapoint" style="fill: blue" />
-			<line id="set3-line" class="set3-dataline" style="fill:none; stroke: blue; stroke-width: 1px;" />
-			<legend-entry id="legend-entry-set3" class="legend-entry" >
-				<symbol id="legend-shape-set3" class="legend-shape" style="fill: blue" />
-				<label id="legend-label-set3" class="legend-label" />
-			</legend-entry>
-		</set>
-		<set id="set4" class="set4 dataset" label="Set 4">
-			<symbol shape="circle" size="5" id-prefix="set4-datapoint" class="set4-datapoint" style="fill: cyan" />
-			<line id="set4-line" class="set4-dataline" style="fill:none; stroke: cyan; stroke-width: 1px;" />
-			<legend-entry id="legend-entry-set4" class="legend-entry" >
-				<symbol id="legend-shape-set4" class="legend-shape" style="fill: cyan" />
-				<label id="legend-label-set4" class="legend-label" />
-			</legend-entry>
-		</set>
-		<set id="set5" class="set5 dataset" label="Set 5">
-			<symbol shape="circle" size="5" id-prefix="set5-datapoint" class="set5-datapoint" style="fill: orange" />
-			<line id="set5-line" class="set5-dataline" style="fill:none; stroke: orange; stroke-width: 1px;" />
-			<legend-entry id="legend-entry-set5" class="legend-entry" >
-				<symbol id="legend-shape-set5" class="legend-shape" style="fill: orange" />
-				<label id="legend-label-set5" class="legend-label" />
-			</legend-entry>
-		</set>
 	</datasets>
 	
 	<legend id="legend" class="legend" x="0" y="0" width="150" height="400">
