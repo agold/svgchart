@@ -3,9 +3,7 @@ from FileInput import FileInput
 from ConsoleInput import ConsoleInput
 
 class InputLayer(object):
-	"""Receives input XML documents.
-	Makes them available through rawInput.
-	"""
+	"""Receives input XML documents and makes them available through the rawInput member."""
 
 	def __init__(self, input=None, settings=None, data=None, scripts=None, type='scatter'):
 		"""
@@ -14,7 +12,6 @@ class InputLayer(object):
 		@param data: Filename for the data
 		@param scripts: Filename for the scripts
 		@param type: Chart type name to specify default settings
-
 		"""
 
 		ri = self.rawInput = RawInput()
@@ -35,4 +32,4 @@ class InputLayer(object):
 			FileInput([ri.scripts], scripts)
 
 		# Input from stdin
-		ConsoleInput(self.rawInput)
+		ConsoleInput([ri.settings,ri.data,ri.scripts])

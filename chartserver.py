@@ -5,10 +5,18 @@ from svgchart import getChart
 from lib.gui.form import getGUI
 import webbrowser
 
-import xml.etree.ElementTree as ETree
+try:
+	import xml.etree.cElementTree as ETree
+except:
+	import xml.etree.ElementTree as ETree
 import re
 
 def addXml(root,path,value):
+	"""Adds an XML node or attribute to a tree of Elements.
+	@param root: The root of the tree of Elements
+	@param path: The path to the node or attribute. /elem/elem, /elem@attr, /elem@style$sty, etc.
+	@param value: The value to be stored at path. May be inner text, attribute value, or style value depending on path.
+	"""
 	if (value != ""):
 		elem = root
 		while path.startswith('/'):
@@ -35,6 +43,9 @@ def addXml(root,path,value):
 				elem.set(path,value)
 
 def csvLineToXmlValue(line):
+	"""Converts a CSV line to an XML data point.
+	@param line: CSV line containing x and y coordinates
+	"""
 	line = line.strip()
 	coords = line.split(',')
 	if (len(coords) >= 2):
@@ -45,6 +56,10 @@ def csvLineToXmlValue(line):
 		return ""
 
 def csvToXmlData(infiles,outfile):
+	"""Converts one or more CSV input files to a single XML data file.
+	@param infiles: List of CSV input files
+	@param outfile: File to write XML output to. Should be empty.
+	"""
 	outfile.write("<?xml version='1.0' encoding='UTF-8' ?>")
 	outfile.write("<data>")
 	i = 1
@@ -57,6 +72,10 @@ def csvToXmlData(infiles,outfile):
 	outfile.write("</data>")
 
 def combineXmlData(infiles,outfile):
+	"""Converts XML data input files into a single XML data file.
+	@param infiles: List of XML data input files
+	@param outfile: File to write XML output to. Should be empty.
+	"""
 	outfile.write("<?xml version='1.0' encoding='UTF-8' ?>")
 	outfile.write("<data>")
 	for infile in infiles:
@@ -67,6 +86,10 @@ def combineXmlData(infiles,outfile):
 	outfile.write("</data>")
 
 def builtinScripts(scriptnames,outfile):
+	"""Generates XML script file for specified built-in scripts.
+	@param scriptnames: List of names of built-in scripts to include.
+	@param outfile: File to write XML output to. Should be empty.
+	"""
 	outfile.write("<?xml version='1.0' encoding='UTF-8' ?>")
 	outfile.write("<scripts>")
 	i = 1
@@ -77,6 +100,7 @@ def builtinScripts(scriptnames,outfile):
 class ChartHandler(BaseHTTPRequestHandler):
 
 	def do_POST(self):
+		"""Handles a POST request, which is assumed to be from the GUI."""
 		form = cgi.FieldStorage(fp=self.rfile,headers=self.headers,
 								environ={'REQUEST_METHOD':'POST','CONTENT_TYPE':self.headers['Content-Type']})
 
