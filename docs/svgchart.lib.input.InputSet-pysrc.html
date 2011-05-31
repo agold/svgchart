@@ -66,27 +66,23 @@
 </div><div id="InputSet-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="InputSet-expanded"><a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line">        <tt class="py-docstring">"""Base class for types of data input."""</tt> </tt>
 <a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line">         </tt>
 <a name="InputSet.__init__"></a><div id="InputSet.__init__-def"><a name="L6"></a><tt class="py-lineno"> 6</tt> <a class="py-toggle" href="#" id="InputSet.__init__-toggle" onclick="return toggle('InputSet.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="svgchart.lib.input.InputSet.InputSet-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">tagName</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="InputSet.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="InputSet.__init__-expanded"><a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">                <tt class="py-docstring">"""Keyword arguments:</tt> </tt>
-<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">                tagName -- Name of the tag that delimits the pertinent input set(s).</tt> </tt>
-<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
-<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tagName</tt> <tt class="py-op">=</tt> <tt class="py-name">tagName</tt> </tt>
-<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">textlist</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
-</div><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt>
-<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line">        <tt class="py-comment"># Process string and extract first pertinent section</tt> </tt>
-<a name="InputSet.input"></a><div id="InputSet.input-def"><a name="L15"></a><tt class="py-lineno">15</tt> <a class="py-toggle" href="#" id="InputSet.input-toggle" onclick="return toggle('InputSet.input');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="svgchart.lib.input.InputSet.InputSet-class.html#input">input</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">string</tt> <tt class="py-op">=</tt> <tt class="py-string">u''</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="InputSet.input-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="InputSet.input-expanded"><a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line">                <tt class="py-docstring">"""Processes string and extracts the first pertinent section as</tt> </tt>
-<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">                a new entry in textlist.</tt> </tt>
-<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">                Keyword arguments:</tt> </tt>
-<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">                string -- string containing material to be searched for</tt> </tt>
-<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">                                        pertinent information</tt> </tt>
-<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
-<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">                <tt class="py-name">match</tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">search</tt><tt class="py-op">(</tt><tt class="py-string">r'&lt;'</tt><tt class="py-op">+</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tagName</tt><tt class="py-op">+</tt><tt class="py-string">r'(?: [^&gt;]+)? *(?:\/&gt;|&gt;.*&lt;\/'</tt><tt class="py-op">+</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tagName</tt><tt class="py-op">+</tt><tt class="py-string">r'&gt;)'</tt><tt class="py-op">,</tt><tt class="py-name">string</tt><tt class="py-op">,</tt><tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">DOTALL</tt><tt class="py-op">)</tt> </tt>
-<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">match</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">textlist</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">match</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
-</div></div><a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+</div><div id="InputSet.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="InputSet.__init__-expanded"><a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">                <tt class="py-docstring">"""</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">                @param tagName: Name of the tag that delimits the pertinent input set(s)</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tagName</tt> <tt class="py-op">=</tt> <tt class="py-name">tagName</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">textlist</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-op">]</tt> </tt>
+</div><a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line">        <tt class="py-comment"># Process string and extract first pertinent section</tt> </tt>
+<a name="InputSet.input"></a><div id="InputSet.input-def"><a name="L14"></a><tt class="py-lineno">14</tt> <a class="py-toggle" href="#" id="InputSet.input-toggle" onclick="return toggle('InputSet.input');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="svgchart.lib.input.InputSet.InputSet-class.html#input">input</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">string</tt> <tt class="py-op">=</tt> <tt class="py-string">u''</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="InputSet.input-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="InputSet.input-expanded"><a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line">                <tt class="py-docstring">"""Processes string and extracts the first pertinent section as</tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">                a new entry in textlist.</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">                @param string: String containing material to be searched for pertinent information</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line">                <tt class="py-name">match</tt> <tt class="py-op">=</tt> <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">search</tt><tt class="py-op">(</tt><tt class="py-string">r'&lt;'</tt><tt class="py-op">+</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tagName</tt><tt class="py-op">+</tt><tt class="py-string">r'(?: [^&gt;]+)? *(?:\/&gt;|&gt;.*&lt;\/'</tt><tt class="py-op">+</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">tagName</tt><tt class="py-op">+</tt><tt class="py-string">r'&gt;)'</tt><tt class="py-op">,</tt><tt class="py-name">string</tt><tt class="py-op">,</tt><tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">DOTALL</tt><tt class="py-op">)</tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-op">(</tt><tt class="py-name">match</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">textlist</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">match</tt><tt class="py-op">.</tt><tt class="py-name">group</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+</div></div><a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -121,7 +117,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon May 30 21:49:56 2011
+    Generated by Epydoc 3.0.1 on Mon May 30 21:53:41 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

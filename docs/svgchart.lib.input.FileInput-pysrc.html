@@ -61,48 +61,19 @@
 <h1 class="epydoc">Source Code for <a href="svgchart.lib.input.FileInput-module.html">Module svgchart.lib.input.FileInput</a></h1>
 <pre class="py-src">
 <a name="FileInput"></a><div id="FileInput-def"><a name="L1"></a><tt class="py-lineno"> 1</tt> <a class="py-toggle" href="#" id="FileInput-toggle" onclick="return toggle('FileInput');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="svgchart.lib.input.FileInput.FileInput-class.html">FileInput</a><tt class="py-op">:</tt> </tt>
-</div><div id="FileInput-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="FileInput-expanded"><a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line">        <tt class="py-docstring">"""Retrieves the contents of a file as a string."""</tt> </tt>
+</div><div id="FileInput-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="FileInput-expanded"><a name="L2"></a><tt class="py-lineno"> 2</tt>  <tt class="py-line">        <tt class="py-docstring">"""Retrieves the contents of a file and passes them to InputSets."""</tt> </tt>
 <a name="L3"></a><tt class="py-lineno"> 3</tt>  <tt class="py-line"> </tt>
-<a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line">        <tt class="py-string">"""def __init__(self,rawInput,input = '',settings = '',data = '',scripts = ''):</tt> </tt>
-<a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"><tt class="py-string">                Keyword arguments:</tt> </tt>
-<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-string">                rawInput -- The target RawInput.</tt> </tt>
-<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-string">                input -- Filename containing input for any/all of the categories.</tt> </tt>
-<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-string">                settings -- Filename containing settings input.</tt> </tt>
-<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line"><tt class="py-string">                data -- Filename containing data input.</tt> </tt>
-<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-string">                scripts -- Filename containing scripts input.</tt> </tt>
-<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-string"></tt> </tt>
-<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-string">                </tt> </tt>
-<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-string">                if (input):</tt> </tt>
-<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-string">                        f = open(input,'rU')</tt> </tt>
-<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-string">                        text = f.read()</tt> </tt>
-<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-string">                        f.close()</tt> </tt>
-<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-string">                        rawInput.settings.input(text)</tt> </tt>
-<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-string">                        rawInput.data.input(text)</tt> </tt>
-<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-string">                        rawInput.scripts.input(text)</tt> </tt>
-<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-string">                if (settings):</tt> </tt>
-<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-string">                        f = open(settings,'rU')</tt> </tt>
-<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-string">                        text = f.read()</tt> </tt>
-<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-string">                        f.close()</tt> </tt>
-<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-string">                        rawInput.settings.input(text)</tt> </tt>
-<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-string">                if (data):</tt> </tt>
-<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"><tt class="py-string">                        f = open(data,'rU')</tt> </tt>
-<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line"><tt class="py-string">                        text = f.read()</tt> </tt>
-<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"><tt class="py-string">                        f.close()</tt> </tt>
-<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line"><tt class="py-string">                        rawInput.data.input(text)</tt> </tt>
-<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line"><tt class="py-string">                if (scripts):</tt> </tt>
-<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line"><tt class="py-string">                        f = open(scripts,'rU')</tt> </tt>
-<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line"><tt class="py-string">                        text = f.read()</tt> </tt>
-<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line"><tt class="py-string">                        f.close()</tt> </tt>
-<a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"><tt class="py-string">                        rawInput.scripts.input(text)</tt> </tt>
-<a name="L35"></a><tt class="py-lineno">35</tt>  <tt class="py-line"><tt class="py-string">        """</tt> </tt>
-<a name="FileInput.__init__"></a><div id="FileInput.__init__-def"><a name="L36"></a><tt class="py-lineno">36</tt> <a class="py-toggle" href="#" id="FileInput.__init__-toggle" onclick="return toggle('FileInput.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="svgchart.lib.input.FileInput.FileInput-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">inputSets</tt><tt class="py-op">,</tt><tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="FileInput.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="FileInput.__init__-expanded"><a name="L37"></a><tt class="py-lineno">37</tt>  <tt class="py-line">                <tt class="py-name">f</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt><tt class="py-string">'rU'</tt><tt class="py-op">)</tt> </tt>
-<a name="L38"></a><tt class="py-lineno">38</tt>  <tt class="py-line">                <tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">f</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L39"></a><tt class="py-lineno">39</tt>  <tt class="py-line">                <tt class="py-name">f</tt><tt class="py-op">.</tt><tt class="py-name">close</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
-<a name="L40"></a><tt class="py-lineno">40</tt>  <tt class="py-line">                <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">inputSets</tt><tt class="py-op">:</tt> </tt>
-<a name="L41"></a><tt class="py-lineno">41</tt>  <tt class="py-line">                        <tt class="py-name">i</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Package svgchart.lib.input=svgchart.lib.input-module.html,Method svgchart.lib.input.InputSet.InputSet.input()=svgchart.lib.input.InputSet.InputSet-class.html#input"><a title="svgchart.lib.input
+<a name="FileInput.__init__"></a><div id="FileInput.__init__-def"><a name="L4"></a><tt class="py-lineno"> 4</tt> <a class="py-toggle" href="#" id="FileInput.__init__-toggle" onclick="return toggle('FileInput.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="svgchart.lib.input.FileInput.FileInput-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt><tt class="py-param">inputSets</tt><tt class="py-op">,</tt><tt class="py-param">filename</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="FileInput.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="FileInput.__init__-expanded"><a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line">                <tt class="py-docstring">"""</tt> </tt>
+<a name="L6"></a><tt class="py-lineno"> 6</tt>  <tt class="py-line"><tt class="py-docstring">                @param inputSets: List of target InputSets</tt> </tt>
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line"><tt class="py-docstring">                @param filename: Name of file to be scanned for input</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">                <tt class="py-keyword">with</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt><tt class="py-string">'rU'</tt><tt class="py-op">)</tt> <tt class="py-keyword">as</tt> <tt class="py-name">f</tt><tt class="py-op">:</tt> </tt>
+<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">                        <tt class="py-name">text</tt> <tt class="py-op">=</tt> <tt class="py-name">f</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line">                        <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">inputSets</tt><tt class="py-op">:</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line">                                <tt class="py-name">i</tt><tt class="py-op">.</tt><tt id="link-0" class="py-name" targets="Package svgchart.lib.input=svgchart.lib.input-module.html,Method svgchart.lib.input.InputSet.InputSet.input()=svgchart.lib.input.InputSet.InputSet-class.html#input"><a title="svgchart.lib.input
 svgchart.lib.input.InputSet.InputSet.input" class="py-name" href="#" onclick="return doclink('link-0', 'input', 'link-0');">input</a></tt><tt class="py-op">(</tt><tt class="py-name">text</tt><tt class="py-op">)</tt> </tt>
-</div></div><a name="L42"></a><tt class="py-lineno">42</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+</div></div><a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -137,7 +108,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Mon May 30 21:49:56 2011
+    Generated by Epydoc 3.0.1 on Mon May 30 21:53:41 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"
