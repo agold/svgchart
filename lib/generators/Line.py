@@ -11,7 +11,9 @@ class Line(Scatter):
 		"""
 
 		elements = Scatter.getDataSetElements(self, dataset, setting)
-		elements.insert(0, self.getDataLine(dataset, setting))
+		line = self.getDataLine(dataset, setting)
+		if line:
+			elements.insert(0, self.getDataLine(dataset, setting))
 
 		return elements
 
@@ -33,4 +35,7 @@ class Line(Scatter):
 				coord = self.valueToCoord(x, y)
 				vertices.append(coord)
 
-		return Path(coordinates=vertices, id=id, classes=classes)
+		if len(vertices) > 0:
+			return Path(coordinates=vertices, id=id, classes=classes)
+		else:
+			return None

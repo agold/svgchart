@@ -85,25 +85,25 @@ if (typeof panandzoom == 'undefined') {
 		},
 		drawYAxisControls: function() {
 			var bottom = document.createElementNS(panandzoom.svgns, "line");
-			bottom.setAttributeNS(null, "x1", panandzoom.coords.x.begin - 20);
-			bottom.setAttributeNS(null, "x2", panandzoom.coords.x.begin - 30);
+			bottom.setAttributeNS(null, "x1", panandzoom.coords.x.begin - 25);
+			bottom.setAttributeNS(null, "x2", panandzoom.coords.x.begin - 35);
 			bottom.setAttributeNS(null, "y1", panandzoom.coords.y.begin);
 			bottom.setAttributeNS(null, "y2", panandzoom.coords.y.begin);
 			bottom.setAttributeNS(null, "style", "stroke: black; stroke-width: 1px;");
 			var top = document.createElementNS(panandzoom.svgns, "line");
-			top.setAttributeNS(null, "x1", panandzoom.coords.x.begin - 20);
-			top.setAttributeNS(null, "x2", panandzoom.coords.x.begin - 30);
+			top.setAttributeNS(null, "x1", panandzoom.coords.x.begin - 25);
+			top.setAttributeNS(null, "x2", panandzoom.coords.x.begin - 35);
 			top.setAttributeNS(null, "y1", panandzoom.coords.y.end);
 			top.setAttributeNS(null, "y2", panandzoom.coords.y.end);
 			top.setAttributeNS(null, "style", "stroke: black; stroke-width: 1px;");
 			var track = document.createElementNS(panandzoom.svgns, "line");
-			track.setAttributeNS(null, "x1", panandzoom.coords.x.begin - 25);
-			track.setAttributeNS(null, "x2", panandzoom.coords.x.begin - 25);
+			track.setAttributeNS(null, "x1", panandzoom.coords.x.begin - 30);
+			track.setAttributeNS(null, "x2", panandzoom.coords.x.begin - 30);
 			track.setAttributeNS(null, "y1", panandzoom.coords.y.begin);
 			track.setAttributeNS(null, "y2", panandzoom.coords.y.end);
 			track.setAttributeNS(null, "style", "stroke: black; stroke-width: 1px;");
-			var bottomControl = panandzoom.createControl(panandzoom.coords.x.begin - 35, panandzoom.coords.y.begin - 5, 0, "y", panandzoom.values.y.min);
-			var topControl = panandzoom.createControl(panandzoom.coords.x.begin - 35, panandzoom.coords.y.end - 5, 0, "y", panandzoom.values.y.max);
+			var bottomControl = panandzoom.createControl(panandzoom.coords.x.begin - 40, panandzoom.coords.y.begin - 5, 0, "y", panandzoom.values.y.min);
+			var topControl = panandzoom.createControl(panandzoom.coords.x.begin - 40, panandzoom.coords.y.end - 5, 0, "y", panandzoom.values.y.max);
 
 			var yaxis = document.createElementNS(panandzoom.svgns, "g");
 			yaxis.appendChild(bottom);

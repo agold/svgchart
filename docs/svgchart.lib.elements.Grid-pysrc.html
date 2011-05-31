@@ -14,9 +14,6 @@
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th>&nbsp;&nbsp;&nbsp;<a
-        href="svgchart.lib-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th>&nbsp;&nbsp;&nbsp;<a
@@ -71,28 +68,34 @@ svgchart.lib.elements.Element.Element" class="py-name" href="#" onclick="return 
 </div><div id="Grid-collapsed" style="display:none;" pad="++" indent="++++"></div><div id="Grid-expanded"><a name="L4"></a><tt class="py-lineno"> 4</tt>  <tt class="py-line">        <tt class="py-docstring">"""Base class for a grid element."""</tt> </tt>
 <a name="L5"></a><tt class="py-lineno"> 5</tt>  <tt class="py-line"> </tt>
 <a name="Grid.__init__"></a><div id="Grid.__init__-def"><a name="L6"></a><tt class="py-lineno"> 6</tt> <a class="py-toggle" href="#" id="Grid.__init__-toggle" onclick="return toggle('Grid.__init__');">-</a><tt class="py-line">        <tt class="py-keyword">def</tt> <a class="py-def-name" href="svgchart.lib.elements.Grid.Grid-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">points</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
-<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">                                 <tt class="py-param">id</tt><tt class="py-op">=</tt><tt class="py-string">u''</tt><tt class="py-op">,</tt> <tt class="py-param">classes</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
-<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">                                 <tt class="py-param">lineidprefix</tt><tt class="py-op">=</tt><tt class="py-string">u''</tt><tt class="py-op">,</tt> <tt class="py-param">lineclasses</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
-</div><div id="Grid.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Grid.__init__-expanded"><a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">                <tt class="py-docstring">"""</tt> </tt>
-<a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line"><tt class="py-docstring">                @param points: A sequence of points to draw grid lines at</tt> </tt>
-<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring">                @param id: The unique ID to be used in the SVG document</tt> </tt>
-<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring">                @type id: string</tt> </tt>
-<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring">                @param classes: Classnames to be used in the SVG document</tt> </tt>
-<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring">                @type classes: string or sequence of strings</tt> </tt>
-<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
-<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">                @param lineidprefix: The prefix for each grid line's ID</tt> </tt>
-<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">                @type lineidprefix: string</tt> </tt>
-<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">                @param lineclasses: Classnames to be applied to each grid line</tt> </tt>
-<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring">                @type lineclasses: string or sequence of strings</tt> </tt>
-<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
-<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"> </tt>
-<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">points</tt> <tt class="py-op">=</tt> <tt class="py-name">tuple</tt><tt class="py-op">(</tt><tt class="py-name">points</tt><tt class="py-op">)</tt> </tt>
-<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">id</tt> <tt class="py-op">=</tt> <tt class="py-name">id</tt> </tt>
-<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">classes</tt> <tt class="py-op">=</tt> <tt class="py-name">classes</tt> </tt>
-<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lineidprefix</tt> <tt class="py-op">=</tt> <tt class="py-name">lineidprefix</tt> </tt>
-<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lineclasses</tt> <tt class="py-op">=</tt> <tt class="py-name">lineclasses</tt> </tt>
-</div></div><a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<a name="L7"></a><tt class="py-lineno"> 7</tt>  <tt class="py-line">                                 <tt class="py-param">start</tt><tt class="py-op">=</tt><tt class="py-number">0.0</tt><tt class="py-op">,</tt> <tt class="py-param">end</tt><tt class="py-op">=</tt><tt class="py-number">1.0</tt><tt class="py-op">,</tt> </tt>
+<a name="L8"></a><tt class="py-lineno"> 8</tt>  <tt class="py-line">                                 <tt class="py-param">id</tt><tt class="py-op">=</tt><tt class="py-string">u''</tt><tt class="py-op">,</tt> <tt class="py-param">classes</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L9"></a><tt class="py-lineno"> 9</tt>  <tt class="py-line">                                 <tt class="py-param">lineidprefix</tt><tt class="py-op">=</tt><tt class="py-string">u''</tt><tt class="py-op">,</tt> <tt class="py-param">lineclasses</tt><tt class="py-op">=</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Grid.__init__-collapsed" style="display:none;" pad="++" indent="++++++++++++"></div><div id="Grid.__init__-expanded"><a name="L10"></a><tt class="py-lineno">10</tt>  <tt class="py-line">                <tt class="py-docstring">"""</tt> </tt>
+<a name="L11"></a><tt class="py-lineno">11</tt>  <tt class="py-line"><tt class="py-docstring">                @param points: A sequence of points to draw grid lines at</tt> </tt>
+<a name="L12"></a><tt class="py-lineno">12</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L13"></a><tt class="py-lineno">13</tt>  <tt class="py-line"><tt class="py-docstring">                @param start: The starting coordinate of the axis</tt> </tt>
+<a name="L14"></a><tt class="py-lineno">14</tt>  <tt class="py-line"><tt class="py-docstring">                @param end: The ending coordinate of the axis</tt> </tt>
+<a name="L15"></a><tt class="py-lineno">15</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L16"></a><tt class="py-lineno">16</tt>  <tt class="py-line"><tt class="py-docstring">                @param id: The unique ID to be used in the SVG document</tt> </tt>
+<a name="L17"></a><tt class="py-lineno">17</tt>  <tt class="py-line"><tt class="py-docstring">                @type id: string</tt> </tt>
+<a name="L18"></a><tt class="py-lineno">18</tt>  <tt class="py-line"><tt class="py-docstring">                @param classes: Classnames to be used in the SVG document</tt> </tt>
+<a name="L19"></a><tt class="py-lineno">19</tt>  <tt class="py-line"><tt class="py-docstring">                @type classes: string or sequence of strings</tt> </tt>
+<a name="L20"></a><tt class="py-lineno">20</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L21"></a><tt class="py-lineno">21</tt>  <tt class="py-line"><tt class="py-docstring">                @param lineidprefix: The prefix for each grid line's ID</tt> </tt>
+<a name="L22"></a><tt class="py-lineno">22</tt>  <tt class="py-line"><tt class="py-docstring">                @type lineidprefix: string</tt> </tt>
+<a name="L23"></a><tt class="py-lineno">23</tt>  <tt class="py-line"><tt class="py-docstring">                @param lineclasses: Classnames to be applied to each grid line</tt> </tt>
+<a name="L24"></a><tt class="py-lineno">24</tt>  <tt class="py-line"><tt class="py-docstring">                @type lineclasses: string or sequence of strings</tt> </tt>
+<a name="L25"></a><tt class="py-lineno">25</tt>  <tt class="py-line"><tt class="py-docstring">                """</tt> </tt>
+<a name="L26"></a><tt class="py-lineno">26</tt>  <tt class="py-line"> </tt>
+<a name="L27"></a><tt class="py-lineno">27</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">points</tt> <tt class="py-op">=</tt> <tt class="py-name">tuple</tt><tt class="py-op">(</tt><tt class="py-name">points</tt><tt class="py-op">)</tt> </tt>
+<a name="L28"></a><tt class="py-lineno">28</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Variable svgchart.lib.shapes.Line.Line.start=svgchart.lib.shapes.Line.Line-class.html#start"><a title="svgchart.lib.shapes.Line.Line.start" class="py-name" href="#" onclick="return doclink('link-2', 'start', 'link-2');">start</a></tt> <tt class="py-op">=</tt> <tt id="link-3" class="py-name"><a title="svgchart.lib.shapes.Line.Line.start" class="py-name" href="#" onclick="return doclink('link-3', 'start', 'link-2');">start</a></tt> </tt>
+<a name="L29"></a><tt class="py-lineno">29</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-4" class="py-name" targets="Variable svgchart.lib.shapes.Line.Line.end=svgchart.lib.shapes.Line.Line-class.html#end"><a title="svgchart.lib.shapes.Line.Line.end" class="py-name" href="#" onclick="return doclink('link-4', 'end', 'link-4');">end</a></tt> <tt class="py-op">=</tt> <tt id="link-5" class="py-name"><a title="svgchart.lib.shapes.Line.Line.end" class="py-name" href="#" onclick="return doclink('link-5', 'end', 'link-4');">end</a></tt> </tt>
+<a name="L30"></a><tt class="py-lineno">30</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">id</tt> <tt class="py-op">=</tt> <tt class="py-name">id</tt> </tt>
+<a name="L31"></a><tt class="py-lineno">31</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">classes</tt> <tt class="py-op">=</tt> <tt class="py-name">classes</tt> </tt>
+<a name="L32"></a><tt class="py-lineno">32</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lineidprefix</tt> <tt class="py-op">=</tt> <tt class="py-name">lineidprefix</tt> </tt>
+<a name="L33"></a><tt class="py-lineno">33</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">lineclasses</tt> <tt class="py-op">=</tt> <tt class="py-name">lineclasses</tt> </tt>
+</div></div><a name="L34"></a><tt class="py-lineno">34</tt>  <tt class="py-line"> </tt><script type="text/javascript">
 <!--
 expandto(location.href);
 // -->
@@ -103,9 +106,6 @@ expandto(location.href);
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th>&nbsp;&nbsp;&nbsp;<a
-        href="svgchart.lib-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th>&nbsp;&nbsp;&nbsp;<a
@@ -130,7 +130,7 @@ expandto(location.href);
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sun May 22 01:06:01 2011
+    Generated by Epydoc 3.0.1 on Mon May 30 21:49:56 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

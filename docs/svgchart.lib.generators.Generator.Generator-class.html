@@ -14,9 +14,6 @@
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th>&nbsp;&nbsp;&nbsp;<a
-        href="svgchart.lib-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th>&nbsp;&nbsp;&nbsp;<a
@@ -120,29 +117,14 @@ object --+
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
           <td><span class="summary-sig"><a href="svgchart.lib.generators.Generator.Generator-class.html#__init__" class="summary-sig-name">__init__</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">data</span>,
-        <span class="summary-sig-arg">settings</span>)</span><br />
+        <span class="summary-sig-arg">data</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">settings</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">scripts</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">documents</span>=<span class="summary-sig-default">None</span>,
+        <span class="summary-sig-arg">datarange</span>=<span class="summary-sig-default"><code class="variable-group">(</code>None<code class="variable-op">, </code>None<code class="variable-op">, </code>None<code class="variable-op">, </code>None<code class="variable-group">)</code></span>)</span><br />
       x.__init__(...) initializes x; see x.__class__.__doc__ for signature</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.__init__">source&nbsp;code</a></span>
-            
-          </td>
-        </tr>
-      </table>
-      
-    </td>
-  </tr>
-<tr class="private">
-    <td width="15%" align="right" valign="top" class="summary">
-      <span class="summary-type">&nbsp;</span>
-    </td><td class="summary">
-      <table width="100%" cellpadding="0" cellspacing="0" border="0">
-        <tr>
-          <td><span class="summary-sig"><a href="svgchart.lib.generators.Generator.Generator-class.html#__parseStyle" class="summary-sig-name" onclick="show_private();">__parseStyle</a>(<span class="summary-sig-arg">self</span>,
-        <span class="summary-sig-arg">style</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
-      Parses a style string into its constituent key:value pairs.</td>
-          <td align="right" valign="top">
-            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.__parseStyle">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -213,11 +195,176 @@ object --+
     </td><td class="summary">
       <table width="100%" cellpadding="0" cellspacing="0" border="0">
         <tr>
+          <td><span class="summary-sig"><a name="getAxes"></a><span class="summary-sig-name">getAxes</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getAxes">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
           <td><span class="summary-sig"><a name="getCSS"></a><span class="summary-sig-name">getCSS</span>(<span class="summary-sig-arg">self</span>)</span><br />
       Returns a style element containing the style rules given in the 
       settings document.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getCSS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getChart"></a><span class="summary-sig-name">getChart</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Assembles all of the elements and returns them in an svg tag.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getChart">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getDataField"></a><span class="summary-sig-name">getDataField</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getDataField">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getGrid"></a><span class="summary-sig-name">getGrid</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns a list of both grid elements.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getGrid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getJSONDataSets"></a><span class="summary-sig-name">getJSONDataSets</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getJSONDataSets">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getLegend"></a><span class="summary-sig-name">getLegend</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns the chart's legend element.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getLegend">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getMaxValues"></a><span class="summary-sig-name">getMaxValues</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns the maximum x and y values of the chart's data.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getMaxValues">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getMinValues"></a><span class="summary-sig-name">getMinValues</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns the minimum x and y values of the chart's data.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getMinValues">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getQueryString"></a><span class="summary-sig-name">getQueryString</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getQueryString">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getScripts"></a><span class="summary-sig-name">getScripts</span>(<span class="summary-sig-arg">self</span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getScripts">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -237,6 +384,179 @@ object --+
       the settings document.</td>
           <td align="right" valign="top">
             <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getStyles">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getTitle"></a><span class="summary-sig-name">getTitle</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns the title element of the chart.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getTitle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getTrueMaxValues"></a><span class="summary-sig-name">getTrueMaxValues</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns the maximum x and y values of the chart's data.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getTrueMaxValues">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getTrueMinValues"></a><span class="summary-sig-name">getTrueMinValues</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns the minimum x and y values of the chart's data.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getTrueMinValues">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getXAxis"></a><span class="summary-sig-name">getXAxis</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns the x-axis element of the chart.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getXAxis">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getXGrid"></a><span class="summary-sig-name">getXGrid</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns the x-axis grid for the chart.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getXGrid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getYAxis"></a><span class="summary-sig-name">getYAxis</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns the y-axis element of the chart.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getYAxis">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="getYGrid"></a><span class="summary-sig-name">getYGrid</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns the y-axis grid for the chart.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.getYGrid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="parseScript"></a><span class="summary-sig-name">parseScript</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">script</span>=<span class="summary-sig-default"><code class="variable-quote">u'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span></td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.parseScript">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="svgchart.lib.generators.Generator.Generator-class.html#parseStyle" class="summary-sig-name">parseStyle</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">style</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
+      Parses a style string into its constituent key:value pairs.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.parseStyle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="svgchart.lib.generators.Generator.Generator-class.html#valueToCoord" class="summary-sig-name">valueToCoord</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x</span>,
+        <span class="summary-sig-arg">y</span>)</span><br />
+      Returns a Coordinate from the given x and y values.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.valueToCoord">source&nbsp;code</a></span>
             
           </td>
         </tr>
@@ -314,8 +634,11 @@ object --+
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
   <tr valign="top"><td>
   <h3 class="epydoc"><span class="sig"><span class="sig-name">__init__</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">data</span>,
-        <span class="sig-arg">settings</span>)</span>
+        <span class="sig-arg">data</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">settings</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">scripts</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">documents</span>=<span class="sig-default">None</span>,
+        <span class="sig-arg">datarange</span>=<span class="sig-default"><code class="variable-group">(</code>None<code class="variable-op">, </code>None<code class="variable-op">, </code>None<code class="variable-op">, </code>None<code class="variable-group">)</code></span>)</span>
     <br /><em class="fname">(Constructor)</em>
   </h3>
   </td><td align="right" valign="top"
@@ -330,34 +653,12 @@ object --+
     <dd><ul class="nomargin-top">
         <li><strong class="pname"><code>data</code></strong> - The parsed data to create the chart from</li>
         <li><strong class="pname"><code>settings</code></strong> - The settings used to format the chart</li>
+        <li><strong class="pname"><code>scripts</code></strong> - The scripts to be included in the chart</li>
+        <li><strong class="pname"><code>documents</code></strong> - The input file names used to generate this chart, if they exist</li>
     </ul></dd>
     <dt>Overrides:
         object.__init__
     </dt>
-  </dl>
-</td></tr></table>
-</div>
-<a name="__parseStyle"></a>
-<div class="private">
-<table class="details" border="1" cellpadding="3"
-       cellspacing="0" width="100%" bgcolor="white">
-<tr><td>
-  <table width="100%" cellpadding="0" cellspacing="0" border="0">
-  <tr valign="top"><td>
-  <h3 class="epydoc"><span class="sig"><span class="sig-name">__parseStyle</span>(<span class="sig-arg">self</span>,
-        <span class="sig-arg">style</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span>
-  </h3>
-  </td><td align="right" valign="top"
-    ><span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.__parseStyle">source&nbsp;code</a></span>&nbsp;
-    </td>
-  </tr></table>
-  
-  <p>Parses a style string into its constituent key:value pairs.</p>
-  <dl class="fields">
-    <dt>Parameters:</dt>
-    <dd><ul class="nomargin-top">
-        <li><strong class="pname"><code>style</code></strong> - The style string to parse</li>
-    </ul></dd>
   </dl>
 </td></tr></table>
 </div>
@@ -464,14 +765,61 @@ object --+
   </dl>
 </td></tr></table>
 </div>
+<a name="parseStyle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">parseStyle</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">style</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.parseStyle">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Parses a style string into its constituent key:value pairs.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>style</code></strong> - The style string to parse</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="valueToCoord"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">valueToCoord</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">x</span>,
+        <span class="sig-arg">y</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="svgchart.lib.generators.Generator-pysrc.html#Generator.valueToCoord">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns a Coordinate from the given x and y values.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>x</code></strong> - The x value</li>
+        <li><strong class="pname"><code>y</code></strong> - The y value</li>
+    </ul></dd>
+  </dl>
+</td></tr></table>
+</div>
 <br />
 <!-- ==================== NAVIGATION BAR ==================== -->
 <table class="navbar" border="0" width="100%" cellpadding="0"
        bgcolor="#a0c0ff" cellspacing="0">
   <tr valign="middle">
-  <!-- Home link -->
-      <th>&nbsp;&nbsp;&nbsp;<a
-        href="svgchart.lib-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
 
   <!-- Tree link -->
       <th>&nbsp;&nbsp;&nbsp;<a
@@ -496,7 +844,7 @@ object --+
 <table border="0" cellpadding="0" cellspacing="0" width="100%%">
   <tr>
     <td align="left" class="footer">
-    Generated by Epydoc 3.0.1 on Sun May 22 01:06:00 2011
+    Generated by Epydoc 3.0.1 on Mon May 30 21:49:55 2011
     </td>
     <td align="right" class="footer">
       <a target="mainFrame" href="http://epydoc.sourceforge.net"

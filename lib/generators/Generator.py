@@ -515,6 +515,8 @@ class Generator(object):
 			qs.append('data=' + quote(self.documents["data"]))
 		if self.documents["scripts"]:
 			qs.append('scripts=' + quote(self.documents["scripts"]))
+		if self.documents["type"]:
+			qs.append('type=' + quote(self.documents["type"]))
 
 		return '?' + '&'.join(qs)
 

@@ -38,7 +38,8 @@ def getChart(infile, settings, data, scripts, outfile, type, pretty, datarange):
 	input_documents = {"infile": infile if isinstance(infile, basestring) else None,
 					   "settings": settings if isinstance(settings, basestring) else None,
 					   "data": data if isinstance(data, basestring) else None,
-					   "scripts": scripts if isinstance(scripts, basestring) else None
+					   "scripts": scripts if isinstance(scripts, basestring) else None,
+					   "type": type if type else 'scatter'
 					  }
 
 	datarange = tuple([float(i) if i else None for i in datarange.split(',')])

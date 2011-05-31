@@ -186,9 +186,9 @@ class ChartHandler(BaseHTTPRequestHandler):
 if __name__ == '__main__':
 	try:
 		# Start listening on some port. It doesn't matter which one
-		server = HTTPServer(('', 35782), ChartHandler)
+		server = HTTPServer(('', 35785), ChartHandler)
 		print 'Started chart server...'
-		webbrowser.open('http://localhost:35782/',2)
+		webbrowser.open('http://localhost:35785/',2)
 		server.serve_forever()
 	
 	# Triggers when you type ctrl+c at the command line
